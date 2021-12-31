@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^1.0.4
   google_fonts: ^2.1.0
   flutter_lints: ^1.0.4
+  responsive_builder: ^0.4.1
 
 dev_dependencies:
   flutter_test:

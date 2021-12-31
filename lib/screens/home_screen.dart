@@ -8,6 +8,7 @@ import 'package:movie_ticket_app/components/red_rounded_action_button.dart';
 import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/model.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class MyHomePage extends StatefulWidget {
   int index = 1;
@@ -39,88 +40,91 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           SafeArea(
-            child: Column(
-              children: [
-                const Padding(padding: EdgeInsets.all(10.0)),
-                const MovieAppBar(),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 50.0)),
-                const Text(
-                  'NEW.MOVIE',
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Image.asset(movies[widget.index].logo),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    DarkBorderlessButton(
-                      text: 'Popular with Friends',
-                      callback: () {},
-                    ),
-                    DarkBorderlessButton(text: age, callback: () {}),
-                    PrimaryRoundedButton(
-                      text: rating,
-                      callback: () {},
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 20.0, horizontal: 10.0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Text(
-                          year,
-                          style: kSmallMainTextStyle,
-                        ),
-                        Text('•', style: kPromaryColorTextStyle),
-                        Text(
-                          categories,
-                          style: kSmallMainTextStyle,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text('•', style: kPromaryColorTextStyle),
-                        Text(technology, style: kSmallMainTextStyle),
-                      ],
+            child: ScreenTypeLayout(
+              mobile: Row(),
+              desktop: Column(
+                children: [
+                  const Padding(padding: EdgeInsets.all(10.0)),
+                  const MovieAppBar(),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 50.0)),
+                  const Text(
+                    'NEW.MOVIE',
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-                Image.asset('assets/images/divider.png'),
-                RedRoundedActionButton(
-                    text: 'BUY TICKET',
-                    callback: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              BuyTicket(movies[widget.index].title),
-                        ),
-                      );
-                    }),
-                Expanded(
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemCount: movies.length,
-                        itemBuilder: (context, index) {
-                          return MovieCard(
-                              title: movies[index].title,
-                              imageLink: movies[index].imageURL,
-                              active: index == widget.index ? true : false,
-                              callBack: () {
-                                setState(() {
-                                  widget.index = index;
+                  Image.asset(movies[widget.index].logo),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      DarkBorderlessButton(
+                        text: 'Popular with Friends',
+                        callback: () {},
+                      ),
+                      DarkBorderlessButton(text: age, callback: () {}),
+                      PrimaryRoundedButton(
+                        text: rating,
+                        callback: () {},
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 10.0),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(
+                            year,
+                            style: kSmallMainTextStyle,
+                          ),
+                          Text('•', style: kPromaryColorTextStyle),
+                          Text(
+                            categories,
+                            style: kSmallMainTextStyle,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text('•', style: kPromaryColorTextStyle),
+                          Text(technology, style: kSmallMainTextStyle),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Image.asset('assets/images/divider.png'),
+                  RedRoundedActionButton(
+                      text: 'BUY TICKET',
+                      callback: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                BuyTicket(movies[widget.index].title),
+                          ),
+                        );
+                      }),
+                  Expanded(
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: movies.length,
+                          itemBuilder: (context, index) {
+                            return MovieCard(
+                                title: movies[index].title,
+                                imageLink: movies[index].imageURL,
+                                active: index == widget.index ? true : false,
+                                callBack: () {
+                                  setState(() {
+                                    widget.index = index;
+                                  });
                                 });
-                              });
-                        })),
-              ],
+                          })),
+                ],
+              ),
             ),
           ),
         ],
