@@ -51,11 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     DarkBorderlessButton(
-                      text: 'Popular with Friends',
-                      callback: () {},
-                    ),
-                    DarkBorderlessButton(
-                      text: 'Screen: $screenRoom',
+                      text: 'Screen: #$screenRoom',
                       callback: () {},
                     ),
                     PrimaryRoundedButton(
