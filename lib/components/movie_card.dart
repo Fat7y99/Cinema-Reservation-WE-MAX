@@ -29,8 +29,8 @@ class MovieCard extends StatelessWidget {
         InkWell(
           onTap: callBack as void Function()?,
           child: SizedBox(
-            height: height * 2,
-            width: width * 2,
+            height: height,
+            width: width,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Image.network(imageLink),
