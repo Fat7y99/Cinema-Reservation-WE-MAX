@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/screens/SignupScreen.dart';
+import 'package:movie_ticket_app/screens/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -131,45 +132,53 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Container(
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: 50,
-                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: ElevatedButton(
-                    // style: ElevatedButton.styleFrom(
-                    //   primary: Colors.transparent, // background
-                    // ),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Color(0xff252129))),
-                    child: RichText(
-                      text: TextSpan(
-                        //   style: Theme.of(context).textTheme.body1,
-                        children: [
-                          WidgetSpan(
-                            child: Icon(
-                              Icons.arrow_circle_down,
-                              size: 15,
-                              color: Colors.white,
-                            ),
+                width: MediaQuery.of(context).size.width / 2,
+                height: 50,
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: ElevatedButton(
+                  // style: ElevatedButton.styleFrom(
+                  //   primary: Colors.transparent, // background
+                  // ),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Color(0xff252129))),
+                  child: RichText(
+                    text: TextSpan(
+                      //   style: Theme.of(context).textTheme.body1,
+                      children: [
+                        WidgetSpan(
+                          child: Icon(
+                            Icons.arrow_circle_down,
+                            size: 15,
+                            color: Colors.white,
                           ),
-                          TextSpan(
-                            text: ' Login ',
-                            style: GoogleFonts.bioRhyme(
-                                textStyle: TextStyle(
-                                    color: Colors.white,
-                                    // fontWeight: FontWeight.w500,
-                                    fontSize: 20)),
-                          ),
-                        ],
-                      ),
+                        ),
+                        TextSpan(
+                          text: ' Login ',
+                          style: GoogleFonts.bioRhyme(
+                              textStyle: TextStyle(
+                                  color: Colors.white,
+                                  // fontWeight: FontWeight.w500,
+                                  fontSize: 20)),
+                        ),
+                      ],
                     ),
+                  ),
 
-                    onPressed: () {
-                      print(nameController.text);
-                      print(passwordController.text);
-                      Navigator.pushNamed(context, 'Home');
-                    },
-                  )),
+                  onPressed: () {
+                    print(nameController.text);
+                    print(passwordController.text);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            MyHomePage(), //should take movies[widget.index].id
+                      ),
+                    );
+                    // Navigator.push();
+                  },
+                ),
+              ),
               Container(
                   child: Row(
                 children: <Widget>[

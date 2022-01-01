@@ -3,6 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_ticket_app/components/movie_card.dart';
+import 'package:movie_ticket_app/screens/home_screen.dart';
+import 'package:movie_ticket_app/screens/movie_details.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -232,15 +235,44 @@ class _SignupPageState extends State<SignupPage> {
                     keyboardType: TextInputType.visiblePassword,
                   ),
                 ),
-                FloatingActionButton.extended(
-                    //splashColor: Colors.grey,
-                    elevation: 0,
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'Login');
-                    },
-                    label: Text('Submit'),
-                    icon: Icon(Icons.check_circle, color: Colors.orange[100]),
-                    backgroundColor: Colors.white),
+                Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 50,
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: ElevatedButton(
+                      // style: ElevatedButton.styleFrom(
+                      //   primary: Colors.transparent, // background
+                      // ),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color(0xff252129))),
+                      child: RichText(
+                        text: TextSpan(
+                          //   style: Theme.of(context).textTheme.body1,
+                          children: [
+                            WidgetSpan(
+                              child: Icon(
+                                Icons.arrow_circle_down,
+                                size: 15,
+                                color: Colors.white,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' Sign Up ',
+                              style: GoogleFonts.bioRhyme(
+                                  textStyle: TextStyle(
+                                      color: Colors.white,
+                                      // fontWeight: FontWeight.w500,
+                                      fontSize: 20)),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      onPressed: () {
+                        // Navigator.push();
+                      },
+                    )),
               ],
             ),
           ),

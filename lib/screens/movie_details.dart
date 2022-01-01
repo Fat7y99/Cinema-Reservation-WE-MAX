@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_declarations
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
 
 class MovieDetails extends StatefulWidget {
@@ -144,13 +145,13 @@ class _MovieDetailsState extends State<MovieDetails> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        padding: const EdgeInsets.only(top: 40.0, bottom: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.5,
-                              height: 200.0,
+                              height: 100.0,
                               child: Text(
                                 descip,
                                 style: TextStyle(
@@ -163,6 +164,104 @@ class _MovieDetailsState extends State<MovieDetails> {
                             ),
                           ],
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20.0),
+                                child: Text(
+                                  "Start Time: 9:05 PM",
+                                  style: TextStyle(
+                                    fontFamily: 'Arial',
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                  // textAlign: TextAlign.left,
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20.0),
+                                child: Text(
+                                  "End Time: 9:05 PM",
+                                  style: TextStyle(
+                                    fontFamily: 'Arial',
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                  // textAlign: TextAlign.left,
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20.0),
+                                child: Text(
+                                  "Screen Room: #1",
+                                  style: TextStyle(
+                                    fontFamily: 'Arial',
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                  // textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                  width: MediaQuery.of(context).size.width / 4,
+                                  height: 50,
+                                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: ElevatedButton(
+                                    // style: ElevatedButton.styleFrom(
+                                    //   primary: Colors.transparent, // background
+                                    // ),
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color(0xFFD3A13B))),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        //   style: Theme.of(context).textTheme.body1,
+                                        children: [
+                                          WidgetSpan(
+                                            child: Icon(
+                                              Icons.airplane_ticket,
+                                              size: 25,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: ' Buy Ticket ',
+                                            style: GoogleFonts.bioRhyme(
+                                                textStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    // fontWeight: FontWeight.w500,
+                                                    fontSize: 20)),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    onPressed: () {
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) =>
+                                      //         MyHomePage(), //should take movies[widget.index].id
+                                      //   ),
+                                      // );
+                                      // Navigator.push();
+                                    },
+                                  )),
+                            ],
+                          )
+                        ],
                       ),
                     ],
                   ),
