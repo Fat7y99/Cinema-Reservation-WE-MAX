@@ -8,6 +8,7 @@ import 'package:movie_ticket_app/components/red_rounded_action_button.dart';
 import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/model.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
+import 'package:movie_ticket_app/screens/movie_details.dart';
 
 class MyHomePage extends StatefulWidget {
   int index = 1;
@@ -101,8 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BuyTicket(
-                              movies[widget.index].id), //should be movie screen
+                          builder: (context) =>
+                              MovieDetails(), //should take movies[widget.index].id
                         ),
                       );
                     }),

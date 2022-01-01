@@ -28,7 +28,7 @@ class _MovieDetailsState extends State<MovieDetails> {
     final deviceWidth = MediaQuery.of(context).size.width;
 
     final String descip =
-        'With Spider-Mans Spider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-ManSpider-Man identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.';
+        'With Spider-Man identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.';
 
     return Scaffold(
       body: Container(
@@ -76,6 +76,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                     ),
                   ),
                   Container(
+                    width: double.infinity,
                     color: fill,
                     child: Column(
                       children: [
