@@ -29,17 +29,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          BackgroundGradientImage(
-            image: Image.network(
-              backgroundImage,
-              fit: BoxFit.cover,
+      body: SafeArea(
+        child: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            BackgroundGradientImage(
+              image: Image.network(
+                backgroundImage,
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-          SafeArea(
-            child: Column(
+            Column(
               children: [
                 const Padding(padding: EdgeInsets.all(10.0)),
                 const MovieAppBar(),
@@ -105,25 +105,39 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     }),
                 Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 50.0),
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         itemCount: movies.length,
                         itemBuilder: (context, index) {
-                          return MovieCard(
-                              title: movies[index].title,
-                              imageLink: movies[index].imageURL,
-                              active: index == widget.index ? true : false,
-                              callBack: () {
-                                setState(() {
-                                  widget.index = index;
-                                });
-                              });
-                        })),
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20.0, horizontal: 20.0),
+                            child: MovieCard(
+                                title: movies[index].title,
+                                imageLink: movies[index].imageURL,
+                                active: index == widget.index ? true : false,
+                                height: MediaQuery.of(context).size.height *
+                                        (1 / movies.length) -
+                                    100.0,
+                                width: MediaQuery.of(context).size.height *
+                                        (1 / movies.length) -
+                                    50.0,
+                                callBack: () {
+                                  setState(() {
+                                    widget.index = index;
+                                  });
+                                }),
+                          );
+                        }),
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
