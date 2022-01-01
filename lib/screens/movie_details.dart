@@ -20,14 +20,14 @@ class MovieDetails extends StatefulWidget {
 
   const MovieDetails(
       {Key? key,
-      String? title,
-      String? age,
-      String? categories,
-      String? imageURL,
-      String? logo,
-      double? rating,
-      String? technology,
-      DateTime? date})
+      final String? title,
+      final String? age,
+      final String? categories,
+      final String? imageURL,
+      final String? logo,
+      final double? rating,
+      final String? technology,
+      final DateTime? date})
       : super(key: key);
 
   @override
