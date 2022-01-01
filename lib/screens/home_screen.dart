@@ -24,11 +24,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final String backgroundImage = movies[widget.index].imageURL;
     final String title = movies[widget.index].title;
-    final String age = movies[widget.index].age;
-    final String rating = movies[widget.index].rating.toString();
+    final String startTime = movies[widget.index].startTime;
+    final String endTime = movies[widget.index].endTime;
     final String year = movies[widget.index].date.year.toString();
-    final String categories = movies[widget.index].categorires;
-    final String technology = movies[widget.index].technology;
+    final String screenRoom = movies[widget.index].screenRoom.toString();
 
     return Scaffold(
       body: SafeArea(
@@ -46,15 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const Padding(padding: EdgeInsets.all(10.0)),
                 const MovieAppBar(),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 50.0)),
-                const Text(
-                  'NEW-MOVIE',
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Image.asset(movies[widget.index].logo),
+                DarkBorderlessButton(text: title, callback: () {}),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -64,11 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       callback: () {},
                     ),
                     DarkBorderlessButton(
-                      text: age,
+                      text: 'Screen: $screenRoom',
                       callback: () {},
                     ),
                     PrimaryRoundedButton(
-                      text: rating,
+                      text: 'From $startTime to $endTime',
                       callback: () {},
                     ),
                   ],
@@ -85,14 +76,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           year,
                           style: kSmallMainTextStyle,
                         ),
-                        Text('•', style: kPromaryColorTextStyle),
-                        Text(
-                          categories,
-                          style: kSmallMainTextStyle,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text('•', style: kPromaryColorTextStyle),
-                        Text(technology, style: kSmallMainTextStyle),
                       ],
                     ),
                   ),
