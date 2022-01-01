@@ -1,0 +1,251 @@
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class SignupPage extends StatefulWidget {
+  @override
+  _SignupPageState createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xff302b35),
+            Color(0xff302b35),
+          ],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Padding(
+          padding: EdgeInsets.all(10),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(30),
+                    child: RichText(
+                      text: TextSpan(
+                        //   style: Theme.of(context).textTheme.body1,
+                        children: [
+                          TextSpan(
+                            text: 'WeMAX ',
+                            style: GoogleFonts.pacifico(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 30)),
+                          ),
+                          WidgetSpan(
+                            child: Icon(
+                              Icons.movie,
+                              size: 40,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 4,
+                      child: Container(
+                        padding: EdgeInsets.only(right: 10),
+                        child: TextField(
+                          controller: firstNameController,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                              prefixIcon: Icon(Icons.accessibility_new,
+                                  color: Color(0xFF94ADEA)),
+                              hintText: 'First Name',
+                              hintStyle: TextStyle(
+                                color: Colors.white70,
+                              ),
+                              filled: true,
+                              fillColor: Color(0xD000000)),
+                          style: TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.visiblePassword,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 4,
+                      child: Container(
+                        child: TextField(
+                          controller: lastNameController,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                              prefixIcon: Icon(Icons.accessibility_new,
+                                  color: Color(0xFF94ADEA)),
+                              hintText: 'Last Name',
+                              hintStyle: TextStyle(
+                                color: Colors.white70,
+                              ),
+                              filled: true,
+                              fillColor: Color(0xD000000)),
+                          style: TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.visiblePassword,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        prefixIcon: Icon(Icons.mail, color: Color(0xFF94ADEA)),
+                        hintText: 'Email',
+                        hintStyle: TextStyle(
+                          color: Colors.white70,
+                        ),
+                        filled: true,
+                        fillColor: Color(0xD000000)),
+                    style: TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: phoneController,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        prefixIcon:
+                            Icon(Icons.phone_iphone, color: Color(0xFF94ADEA)),
+                        hintText: 'Phone',
+                        hintStyle: TextStyle(
+                          color: Colors.white70,
+                        ),
+                        filled: true,
+                        fillColor: Color(0xD000000)),
+                    style: TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        prefixIcon: Icon(Icons.lock, color: Color(0xFF94ADEA)),
+                        hintText: 'Password',
+                        hintStyle: TextStyle(
+                          color: Colors.white70,
+                        ),
+                        filled: true,
+                        fillColor: Color(0xD000000)),
+                    style: TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: confirmPasswordController,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        prefixIcon: Icon(Icons.lock, color: Color(0xFF94ADEA)),
+                        hintText: 'Confirm Password',
+                        hintStyle: TextStyle(
+                          color: Colors.white70,
+                        ),
+                        filled: true,
+                        fillColor: Color(0xD000000)),
+                    style: TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                ),
+                FloatingActionButton.extended(
+                    //splashColor: Colors.grey,
+                    elevation: 0,
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'Login');
+                    },
+                    label: Text('Submit'),
+                    icon: Icon(Icons.check_circle, color: Colors.orange[100]),
+                    backgroundColor: Colors.white),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
