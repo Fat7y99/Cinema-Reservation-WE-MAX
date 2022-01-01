@@ -66,12 +66,12 @@ final List<Movie> movies = [
       technology: 'DataSat, Dolby Digital '),
   Movie(
       id: 4,
-      title: 'Once upon a time in Hollywood',
+      title: 'Spider-Man: No Way Home',
       imageURL:
-          'https://posterposse.com/wp-content/uploads/2019/07/Once-upon-a-time-in-hollywood-Poster-Posse-Hughes.png',
-      logo: 'assets/images/logos/hollywood.png',
+          'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/11/Spider-Man-No-Way-Home-new-poster.jpeg?q=50&fit=contain&w=960&h=500&dpr=1.5 ',
+      logo: 'assets/images/logos/avengers.png',
       age: 'R',
-      rating: 7.7,
+      rating: 11,
       date: DateTime(2019),
       categorires: 'Drama, Comedy-drama',
       technology: 'DataSat, Dolby Digital '),
@@ -79,9 +79,7 @@ final List<Movie> movies = [
 
 Movie getMovieByID(int id) {
   for (Movie movie in movies) {
-    if (movie.id == id) {
-      return movie;
-    }
+    if (movie.id == id) {}
   }
   Movie dummyMovie = movies[0];
   dummyMovie.id = -1;

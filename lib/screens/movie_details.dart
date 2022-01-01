@@ -4,30 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
 
 class MovieDetails extends StatefulWidget {
-  // String age;
-
-  // String categorires;
-
-  // String imageURL;
-
-  // String logo;
-
-  // double rating;
-
-  // String technology;
-
-  // DateTime date;
+  final String title;
+  final String age;
+  final String categories;
+  final String imageURL;
+  final String logo;
+  final double rating;
+  final String technology;
+  final String date;
 
   const MovieDetails(
       {Key? key,
-      final String? title,
-      final String? age,
-      final String? categories,
-      final String? imageURL,
-      final String? logo,
-      final double? rating,
-      final String? technology,
-      final DateTime? date})
+      required this.title,
+      this.age = '',
+      this.categories = '',
+      required this.imageURL,
+      this.logo = '',
+      this.rating = 4,
+      this.technology = '',
+      this.date = '01/01/2021'})
       : super(key: key);
 
   @override
@@ -77,8 +72,8 @@ class _MovieDetailsState extends State<MovieDetails> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15.0),
-                        child: const Text(
-                          'Spider-Man: No Way Home',
+                        child: Text(
+                          widget.title,
                           style: TextStyle(
                             fontSize: 40.0,
                             color: Colors.white,
@@ -90,8 +85,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                         padding: EdgeInsets.only(bottom: 10),
                         height: deviceHeight / 2,
                         width: deviceWidth / 2,
-                        child: Image.network(
-                            'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/11/Spider-Man-No-Way-Home-new-poster.jpeg?q=50&fit=contain&w=960&h=500&dpr=1.5 ',
+                        child: Image.network(widget.imageURL,
                             // scale: 2,
                             fit: BoxFit.fill),
                       ),

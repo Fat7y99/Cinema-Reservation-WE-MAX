@@ -22,6 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final String backgroundImage = movies[widget.index].imageURL;
+    final String title = movies[widget.index].title;
     final String age = movies[widget.index].age;
     final String rating = movies[widget.index].rating.toString();
     final String year = movies[widget.index].date.year.toString();
@@ -102,8 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              MovieDetails(), //should take movies[widget.index].id
+                          builder: (context) => MovieDetails(
+                            title: title,
+                            imageURL: backgroundImage,
+                          ), //should take movies[widget.index].id
                         ),
                       );
                     }),
