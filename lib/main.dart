@@ -6,6 +6,8 @@ import 'package:movie_ticket_app/screens/LoginScreen.dart';
 import 'package:movie_ticket_app/screens/SignupScreen.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
+import 'package:movie_ticket_app/screens/buy_ticket.dart';
+import 'package:movie_ticket_app/screens/ex.dart';
 
 void main() => runApp(MyApp());
 
