@@ -3,78 +3,68 @@ class Movie {
 
   String title;
 
-  String age;
+  DateTime date;
 
-  String categorires;
+  String startTime;
+
+  String endTime;
+
+  int screenRoom;
 
   String imageURL;
-
-  String logo;
-
-  double rating;
-
-  String technology;
-
-  DateTime date;
 
   Movie({
     required this.id,
     required this.title,
-    required this.imageURL,
-    required this.logo,
-    required this.age,
-    required this.rating,
     required this.date,
-    required this.categorires,
-    required this.technology,
+    required this.startTime,
+    required this.endTime,
+    required this.screenRoom,
+    required this.imageURL,
   });
 }
 
 final List<Movie> movies = [
   Movie(
-      id: 1,
-      title: 'The Irishman',
-      imageURL:
-          'https://lh6.googleusercontent.com/proxy/Q7IxHgbc0KPJJXyz3iG4YtLoZ2tujvlF4_NOHJWj54bnD133PH4LJQb_vyrUSQ45rL8XHe-doyHDp9SY9vA3pn43e-iQA236PQ',
-      logo: 'assets/images/logos/irishman.png',
-      age: 'R',
-      rating: 8,
-      date: DateTime(2019),
-      categorires: 'Crime, Drama, Thriller',
-      technology: 'DataSat, Dolby Digital '),
+    id: 1,
+    title: 'The Irishman',
+    date: DateTime(2019),
+    startTime: '7:00 PM',
+    endTime: '9:00 PM',
+    screenRoom: 1,
+    imageURL:
+        'https://lh6.googleusercontent.com/proxy/Q7IxHgbc0KPJJXyz3iG4YtLoZ2tujvlF4_NOHJWj54bnD133PH4LJQb_vyrUSQ45rL8XHe-doyHDp9SY9vA3pn43e-iQA236PQ',
+  ),
   Movie(
-      id: 2,
-      title: 'JOKER',
-      imageURL:
-          'https://mir-s3-cdn-cf.behance.net/project_modules/1400/c58b4681277211.5cfa6e54a6d3d.jpg',
-      logo: 'assets/images/logos/joker.png',
-      age: '18+',
-      rating: 8.7,
-      date: DateTime(2019),
-      categorires: 'Crime, Drama, Thriller',
-      technology: 'DataSat, Dolby Digital '),
+    id: 2,
+    title: 'JOKER',
+    date: DateTime(2019),
+    startTime: '6:00 PM',
+    endTime: '8:00 PM',
+    screenRoom: 2,
+    imageURL:
+        'https://mir-s3-cdn-cf.behance.net/project_modules/1400/c58b4681277211.5cfa6e54a6d3d.jpg',
+  ),
   Movie(
-      id: 3,
-      title: 'Avengers: Endgame',
-      imageURL:
-          'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
-      logo: 'assets/images/logos/avengers.png',
-      age: 'PG-13',
-      rating: 8.5,
-      date: DateTime(2019),
-      categorires: ' Action, Adventure, Drama',
-      technology: 'DataSat, Dolby Digital '),
+    id: 3,
+    title: 'Avengers: Endgame',
+    date: DateTime(2019),
+    startTime: '5:00 PM',
+    endTime: '7:00 PM',
+    screenRoom: 3,
+    imageURL:
+        'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
+  ),
   Movie(
-      id: 4,
-      title: 'Spider-Man: No Way Home',
-      imageURL:
-          'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/11/Spider-Man-No-Way-Home-new-poster.jpeg?q=50&fit=contain&w=960&h=500&dpr=1.5 ',
-      logo: 'assets/images/logos/avengers.png',
-      age: 'R',
-      rating: 11,
-      date: DateTime(2019),
-      categorires: 'Drama, Comedy-drama',
-      technology: 'DataSat, Dolby Digital '),
+    id: 4,
+    title: 'Spider-Man: No Way Home',
+    date: DateTime(2021),
+    startTime: '5:00 PM',
+    endTime: '7:00 PM',
+    screenRoom: 1,
+    imageURL:
+        'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/11/Spider-Man-No-Way-Home-new-poster.jpeg?q=50&fit=contain&w=960&h=500&dpr=1.5 ',
+  ),
 ];
 
 Movie getMovieByID(int id) {
