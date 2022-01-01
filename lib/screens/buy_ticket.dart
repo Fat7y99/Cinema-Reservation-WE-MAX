@@ -15,6 +15,7 @@ class BuyTicket extends StatefulWidget {
 }
 
 class _BuyTicketState extends State<BuyTicket> {
+  List<int> seatsindex = [];
   List<CienmaSeat> seats = [
     CienmaSeat(id: 0),
     CienmaSeat(id: 1),
@@ -203,7 +204,18 @@ class _BuyTicketState extends State<BuyTicket> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          seats[0],
+                          GestureDetector(
+                            child: seats[0],
+                            onTap: () {
+                              setState(() {
+                                if (seatsindex.contains(seats[0].id)) {
+                                  seatsindex.remove(seats[0].id);
+                                } else {
+                                  seatsindex.add(seats[0].id);
+                                }
+                              });
+                            },
+                          ),
                           seats[1],
                           seats[2],
                           seats[3],
@@ -278,8 +290,14 @@ class _BuyTicketState extends State<BuyTicket> {
     for (CienmaSeat seat in seats) {
       if (seat.isSelected) {
         count++;
+        if (seatsindex.contains(seat.id)) {
+          seatsindex.remove(seat.id);
+        } else {
+          seatsindex.add(seat.id);
+        }
       }
     }
+    print(seatsindex);
     return count;
   }
 }
