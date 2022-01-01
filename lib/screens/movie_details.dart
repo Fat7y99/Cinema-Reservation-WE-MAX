@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_declarations
 
 import 'package:flutter/material.dart';
+import 'package:movie_ticket_app/components/cienma_seat.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
 
 class MovieDetails extends StatefulWidget {

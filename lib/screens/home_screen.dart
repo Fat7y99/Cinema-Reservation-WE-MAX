@@ -9,6 +9,7 @@ import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/model.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
+import 'package:http/http.dart' as http;
 
 class MyHomePage extends StatefulWidget {
   int index = 1;
@@ -99,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Image.asset('assets/images/divider.png'),
                 RedRoundedActionButton(
                     text: 'Movie Details',
-                    callback: () {
+                    callback: () async {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -147,4 +148,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+  // Future<String> ay7aga() async {
+  //   const String baseURL =
+  //       'https://a1a0f024-6781-4afc-99de-c0f6fbb5d73d.mock.pstmn.io/user/about/5';
+  //
+  //   var response = await http.get(
+  //     Uri.parse(baseURL),
+  //   );
+  //   print(response.body);
+  //
+  //   return response.body;
+  // }
 }
