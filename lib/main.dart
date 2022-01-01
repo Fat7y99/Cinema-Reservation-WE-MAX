@@ -1,7 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
-
+import 'package:movie_ticket_app/screens/movie_details.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,8 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Movie Ticket app ',
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: MyHomePage(),
+      home: MovieDetails(),
     );
   }
 }
-
