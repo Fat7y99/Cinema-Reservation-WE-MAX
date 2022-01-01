@@ -38,7 +38,7 @@ class MovieCard extends StatelessWidget {
           ),
         ),
         Text(
-          active ? title : '',
+          title,
           style: const TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
