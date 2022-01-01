@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/components/calendar_day.dart';
 import 'package:movie_ticket_app/components/cienma_seat.dart';
 import 'package:movie_ticket_app/components/show_time.dart';
+import 'package:movie_ticket_app/model.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../const.dart';
 
 class BuyTicket extends StatelessWidget {
-  final title;
+  final id;
 
-  const BuyTicket(this.title, {Key? key}) : super(key: key);
+  const BuyTicket(this.id, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,7 @@ class BuyTicket extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * .75,
                           child: Text(
-                            title,
+                            (getMovieByID(id)).title,
                             style: const TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w900,

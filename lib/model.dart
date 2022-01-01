@@ -1,4 +1,6 @@
 class Movie {
+  int id;
+
   String title;
 
   String age;
@@ -15,19 +17,22 @@ class Movie {
 
   DateTime date;
 
-  Movie(
-      {required this.title,
-      required this.imageURL,
-      required this.logo,
-      required this.age,
-      required this.rating,
-      required this.date,
-      required this.categorires,
-      required this.technology});
+  Movie({
+    required this.id,
+    required this.title,
+    required this.imageURL,
+    required this.logo,
+    required this.age,
+    required this.rating,
+    required this.date,
+    required this.categorires,
+    required this.technology,
+  });
 }
 
 final List<Movie> movies = [
   Movie(
+      id: 1,
       title: 'The Irishman',
       imageURL:
           'https://lh6.googleusercontent.com/proxy/Q7IxHgbc0KPJJXyz3iG4YtLoZ2tujvlF4_NOHJWj54bnD133PH4LJQb_vyrUSQ45rL8XHe-doyHDp9SY9vA3pn43e-iQA236PQ',
@@ -38,6 +43,7 @@ final List<Movie> movies = [
       categorires: 'Crime, Drama, Thriller',
       technology: 'DataSat, Dolby Digital '),
   Movie(
+      id: 2,
       title: 'JOKER',
       imageURL:
           'https://mir-s3-cdn-cf.behance.net/project_modules/1400/c58b4681277211.5cfa6e54a6d3d.jpg',
@@ -48,6 +54,7 @@ final List<Movie> movies = [
       categorires: 'Crime, Drama, Thriller',
       technology: 'DataSat, Dolby Digital '),
   Movie(
+      id: 3,
       title: 'Avengers: Endgame',
       imageURL:
           'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
@@ -58,6 +65,7 @@ final List<Movie> movies = [
       categorires: ' Action, Adventure, Drama',
       technology: 'DataSat, Dolby Digital '),
   Movie(
+      id: 4,
       title: 'Once upon a time in Hollywood',
       imageURL:
           'https://posterposse.com/wp-content/uploads/2019/07/Once-upon-a-time-in-hollywood-Poster-Posse-Hughes.png',
@@ -68,3 +76,15 @@ final List<Movie> movies = [
       categorires: 'Drama, Comedy-drama',
       technology: 'DataSat, Dolby Digital '),
 ];
+
+Movie getMovieByID(int id) {
+  for (Movie movie in movies) {
+    if (movie.id == id) {
+      return movie;
+    }
+  }
+  Movie dummyMovie = movies[0];
+  dummyMovie.id = -1;
+  dummyMovie.title = 'Movie not found';
+  return dummyMovie;
+}

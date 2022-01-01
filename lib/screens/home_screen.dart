@@ -28,7 +28,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final String technology = movies[widget.index].technology;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
@@ -45,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const MovieAppBar(),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 50.0)),
                 const Text(
-                  'NEW.MOVIE',
+                  'NEW-MOVIE',
                   style: TextStyle(
                     fontSize: 15.0,
                     color: Colors.white,
@@ -61,7 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       text: 'Popular with Friends',
                       callback: () {},
                     ),
-                    DarkBorderlessButton(text: age, callback: () {}),
+                    DarkBorderlessButton(
+                      text: age,
+                      callback: () {},
+                    ),
                     PrimaryRoundedButton(
                       text: rating,
                       callback: () {},
@@ -94,13 +96,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Image.asset('assets/images/divider.png'),
                 RedRoundedActionButton(
-                    text: 'BUY TICKET',
+                    text: 'Movie Details',
                     callback: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              BuyTicket(movies[widget.index].title),
+                          builder: (context) => BuyTicket(
+                              movies[widget.index].id), //should be movie screen
                         ),
                       );
                     }),
