@@ -79,7 +79,7 @@ List<MovieModel> movies = [
 ];
 
 bool insertMovies(MovieModel movie) {
-  if (movies.contains(movie)) {
+  if (movies.contains(movie) || getMovieByID(movie.id).id != -1) {
     return false;
   } else {
     movies.add(movie);
@@ -93,7 +93,9 @@ void updateMovies(List<MovieModel> m2) {
 
 MovieModel getMovieByID(int id) {
   for (MovieModel movie in movies) {
-    if (movie.id == id) {}
+    if (movie.id == id) {
+      return movie;
+    }
   }
   MovieModel dummyMovie = movies[0];
   dummyMovie.id = -1;
