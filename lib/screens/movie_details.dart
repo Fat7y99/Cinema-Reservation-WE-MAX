@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/components/cienma_seat.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
+import 'package:movie_ticket_app/screens/buy_ticket.dart';
 
 class MovieDetails extends StatefulWidget {
   final String title;
@@ -250,6 +251,13 @@ class _MovieDetailsState extends State<MovieDetails> {
                                     ),
 
                                     onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => BuyTicket(1)
+                                            //should take movies[widget.index].id
+                                            ),
+                                      );
                                       // Navigator.push(
                                       //   context,
                                       //   MaterialPageRoute(

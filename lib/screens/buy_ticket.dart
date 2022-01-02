@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/components/calendar_day.dart';
 import 'package:movie_ticket_app/components/cienma_seat.dart';
 import 'package:movie_ticket_app/components/show_time.dart';
-import 'package:movie_ticket_app/model.dart';
+import 'package:movie_ticket_app/movie_model.dart';
+import 'package:movie_ticket_app/screens/home_screen.dart';
 
 import '../const.dart';
 
@@ -268,6 +269,13 @@ class _BuyTicketState extends State<BuyTicket> {
                       child: InkWell(
                           onTap: () {
                             print(countR());
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyHomePage()
+                                  //should take movies[widget.index].id
+                                  ),
+                            );
                           },
                           child: Text('Pay',
                               style: TextStyle(

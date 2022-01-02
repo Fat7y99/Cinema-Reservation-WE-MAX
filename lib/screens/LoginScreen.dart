@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/screens/SignupScreen.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
+import 'package:movie_ticket_app/API/request_response.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -165,9 +166,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  onPressed: () {
+                  onPressed: () async {
                     print(nameController.text);
                     print(passwordController.text);
+                    await FlickrRequestsAndResponses.logIn(
+                      nameController,
+                      passwordController,
+                    );
                     Navigator.push(
                       context,
                       MaterialPageRoute(
