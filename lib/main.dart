@@ -8,6 +8,7 @@ import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
 import 'package:movie_ticket_app/screens/LoginScreen.dart';
+import 'package:movie_ticket_app/screens/movie_edit.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Movie Ticket app ',
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: LoginPage(),
+      home: MovieEditPage(id: 4),
     );
   }
 }
