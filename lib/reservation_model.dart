@@ -15,6 +15,7 @@ class ReservationModel {
       required this.userId,
       required this.seatCount,
       required this.roomNumber});
+
   factory ReservationModel.fromJson(Map<String, dynamic> json) {
     return ReservationModel(
         id: json['id'],
