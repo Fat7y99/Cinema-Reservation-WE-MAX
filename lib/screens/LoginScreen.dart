@@ -111,21 +111,21 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: true,
                 ),
               ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.blue,
-                  onSurface: Colors.white,
-                  shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                ),
-                onPressed: () {
-                  //forgot password screen
-                },
-                // textColor: Colors.blue,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 50.0, bottom: 20),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.blue,
+                    onSurface: Colors.white,
+                    shape: const BeveledRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                  ),
+                  onPressed: () {
+                    //forgot password screen
+                  },
+                  // textColor: Colors.blue,
                   child: Text(
-                    'Forgot Password',
+                    'Login as guest',
                     style: TextStyle(
                       color: Colors.white,
                     ),

@@ -22,7 +22,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final String backgroundImage = movies[widget.index].imageURL;
+    final int id = movies[widget.index].id;
+    final String imageURL = movies[widget.index].imageURL;
     final String title = movies[widget.index].title;
     final String startTime = movies[widget.index].startTime;
     final String endTime = movies[widget.index].endTime;
@@ -36,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             BackgroundGradientImage(
               image: Image.network(
-                backgroundImage,
+                imageURL,
                 fit: BoxFit.fill,
               ),
             ),
@@ -84,8 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => MovieDetails(
-                            title: title,
-                            imageURL: backgroundImage,
+                            id: id,
                           ), //should take movies[widget.index].id
                         ),
                       );
