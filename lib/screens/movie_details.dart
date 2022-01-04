@@ -5,28 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/components/cienma_seat.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
+import 'package:movie_ticket_app/movie_model.dart';
 
 class MovieDetails extends StatefulWidget {
-  final String title;
-  final String age;
-  final String categories;
-  final String imageURL;
-  final String logo;
-  final double rating;
-  final String technology;
-  final String date;
+  final int id;
 
-  const MovieDetails(
-      {Key? key,
-      required this.title,
-      this.age = '',
-      this.categories = '',
-      required this.imageURL,
-      this.logo = '',
-      this.rating = 4,
-      this.technology = '',
-      this.date = '01/01/2021'})
-      : super(key: key);
+  const MovieDetails({required this.id});
 
   @override
   _MovieDetailsState createState() => _MovieDetailsState();
@@ -35,6 +19,13 @@ class MovieDetails extends StatefulWidget {
 class _MovieDetailsState extends State<MovieDetails> {
   @override
   Widget build(BuildContext context) {
+    final String imageURL = getMovieByID(widget.id).imageURL;
+    final String title = getMovieByID(widget.id).title;
+    final String startTime = getMovieByID(widget.id).startTime;
+    final String endTime = getMovieByID(widget.id).endTime;
+    final String year = getMovieByID(widget.id).date.year.toString();
+    final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
+
     final Color background = Color(0xff302b35);
     final Color fill = Color(0xff252129);
     final List<Color> gradient = [
@@ -77,7 +68,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15.0),
                         child: Text(
-                          widget.title,
+                          title,
                           style: TextStyle(
                             fontSize: 40.0,
                             color: Colors.white,
@@ -89,7 +80,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                         padding: EdgeInsets.only(bottom: 10),
                         height: deviceHeight / 2,
                         width: deviceWidth / 2,
-                        child: Image.network(widget.imageURL,
+                        child: Image.network(imageURL,
                             // scale: 2,
                             fit: BoxFit.fill),
                       ),
@@ -99,52 +90,23 @@ class _MovieDetailsState extends State<MovieDetails> {
                 Container(
                   color: fill,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        //Center Row contents horizontally,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              const Text(
-                                'Release date: ',
-                                style: TextStyle(
-                                  fontSize: 40.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Text(
-                                'Dec. 17 2022',
-                                style: TextStyle(
-                                  fontSize: 30.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              const Text(
-                                'Running time: ',
-                                style: TextStyle(
-                                  fontSize: 40.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Text(
-                                '210 minutes',
-                                style: TextStyle(
-                                  fontSize: 30.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
+                      Text(
+                        'Release year: ',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        year,
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 40.0, bottom: 20),
@@ -176,7 +138,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Text(
-                                  "Start Time: 9:05 PM",
+                                  "Start Time: $startTime",
                                   style: TextStyle(
                                     fontFamily: 'Arial',
                                     fontSize: 18,
@@ -189,7 +151,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Text(
-                                  "End Time: 9:05 PM",
+                                  "End Time: $endTime",
                                   style: TextStyle(
                                     fontFamily: 'Arial',
                                     fontSize: 18,
@@ -202,7 +164,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Text(
-                                  "Screen Room: #1",
+                                  "Screen Room: #$screenRoom",
                                   style: TextStyle(
                                     fontFamily: 'Arial',
                                     fontSize: 18,
@@ -254,7 +216,8 @@ class _MovieDetailsState extends State<MovieDetails> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => BuyTicket(1)
+                                            builder: (context) =>
+                                                BuyTicket(widget.id)
                                             //should take movies[widget.index].id
                                             ),
                                       );
