@@ -121,6 +121,16 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.all(Radius.circular(5))),
                   ),
                   onPressed: () {
+                    print("Aywa");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyHomePage(
+                            isUser:
+                                false), //should take movies[widget.index].id
+                      ),
+                    );
+
                     //forgot password screen
                   },
                   // textColor: Colors.blue,
@@ -176,8 +186,8 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            MyHomePage(), //should take movies[widget.index].id
+                        builder: (context) => MyHomePage(
+                            isUser: true), //should take movies[widget.index].id
                       ),
                     );
                     // Navigator.push();

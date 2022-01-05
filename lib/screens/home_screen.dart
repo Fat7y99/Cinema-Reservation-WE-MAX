@@ -13,11 +13,12 @@ import 'package:movie_ticket_app/screens/buy_ticket.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_ticket_app/screens/movie_insert.dart';
+import 'LoginScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   int index = 1;
-
-  MyHomePage({Key? key}) : super(key: key);
+  bool isUser = false;
+  MyHomePage({required this.isUser});
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -30,10 +31,56 @@ class _MyHomePageState extends State<MyHomePage> {
     final String title = movies[widget.index].title;
     final String startTime = movies[widget.index].startTime;
     final String endTime = movies[widget.index].endTime;
-    final String year = movies[widget.index].date.year.toString();
+    final String year = movies[widget.index].date.toString();
     final String screenRoom = movies[widget.index].screenRoom.toString();
 
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        LoginPage(), //should take movies[widget.index].id
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.add,
+                color: kPimaryColor,
+              )),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        MovieInsertPage(), //should take movies[widget.index].id
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.tv,
+                color: kPimaryColor,
+              )),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        MovieInsertPage(), //should take movies[widget.index].id
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.logout,
+                color: kPimaryColor,
+              )),
+        ],
+      ),
       body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
@@ -47,32 +94,26 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               children: [
                 const Padding(padding: EdgeInsets.all(10.0)),
-                const MovieAppBar(),
+
                 const Padding(padding: EdgeInsets.symmetric(vertical: 50.0)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    DarkBorderlessButton(text: title, callback: () {}),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                MovieInsertPage(), //should take movies[widget.index].id
-                          ),
-                        );
-                      },
-                      child: Icon(Icons.add, color: Colors.white),
-                      style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(20),
-                        primary: Colors.blue, // <-- Button color
-                        onPrimary: Colors.white, // <-- Splash color
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     DarkBorderlessButton(text: title, callback: () {}),
+                //     // ElevatedButton(
+                //     //   onPressed: () {
+                //     //
+                //     //   },
+                //     //   child: Icon(Icons.add, color: Colors.white),
+                //     //   style: ElevatedButton.styleFrom(
+                //     //     shape: CircleBorder(),
+                //     //     padding: EdgeInsets.all(20),
+                //     //     primary: Colors.blue, // <-- Button color
+                //     //     onPrimary: Colors.white, // <-- Splash color
+                //     //   ),
+                //     // ),
+                //   ],
+                // ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

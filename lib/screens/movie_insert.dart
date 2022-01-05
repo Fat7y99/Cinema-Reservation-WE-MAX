@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
+import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
-
+import 'package:movie_ticket_app/movie_model.dart';
 import '../movie_model.dart';
 
 class MovieInsertPage extends StatefulWidget {
@@ -232,6 +233,17 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                         ),
                       ),
                       onPressed: () async {
+                        setState(() {
+                          MovieModel movie = new MovieModel(
+                              id: 7,
+                              title: titleController.text,
+                              date: dateController.text,
+                              startTime: startController.text,
+                              endTime: endController.text,
+                              screenRoom: int.parse(screenController.text),
+                              imageURL: imageController.text);
+                          insertMovies(movie);
+                        });
                         // await FlickrRequestsAndResponses.logIn(
                         //     titleController,
                         //     dateController,
@@ -242,9 +254,8 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MovieDetails(
-                              id: 4,
-                            ), //should take movies[widget.index].id
+                            builder: (context) =>
+                                MyHomePage(isUser: true), //should take movies[widget.index].id
                           ),
                         );
                         // Navigator.push();
