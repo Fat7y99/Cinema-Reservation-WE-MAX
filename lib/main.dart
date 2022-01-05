@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Movie Ticket app ',
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: MovieEditPage(id: 4),
+      home: MyHomePage(),
     );
   }
 }

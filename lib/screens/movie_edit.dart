@@ -249,7 +249,7 @@ class _MovieEditPageState extends State<MovieEditPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => MovieDetails(
-                              id: 4,
+                              id: widget.id,
                             ), //should take movies[widget.index].id
                           ),
                         );
