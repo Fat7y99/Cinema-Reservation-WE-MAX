@@ -24,6 +24,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
+          backgroundColor: Colors.transparent,
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
@@ -37,7 +38,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
           itemCount: reservations.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
-                color: Color(0xff302b35),
+                color: const Color(0xff302b35),
                 elevation: 10.0,
                 child: Column(
                   children: [

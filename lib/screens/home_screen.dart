@@ -11,6 +11,7 @@ import 'package:movie_ticket_app/movie_model.dart';
 import 'package:movie_ticket_app/screens/reservation_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/screens/movie_insert.dart';
+import 'package:movie_ticket_app/screens/managers_approval.dart';
 import 'LoginScreen.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        LoginPage(), //should take movies[widget.index].id
+                        ManagerApproval(), //should take movies[widget.index].id
                   ),
                 );
               },

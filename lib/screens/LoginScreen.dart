@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/screens/SignupScreen.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
+import 'package:movie_ticket_app/screens/home_screen.dart';
+import 'managers_approval.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -184,13 +186,23 @@ class _LoginPageState extends State<LoginPage> {
                       nameController,
                       passwordController,
                     );
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => MyHomePage(
-                            isUser: true), //should take movies[widget.index].id
+                          isUser: true,
+                        ), //should take movies[widget.index].id
                       ),
                     );
+
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => MyHomePage(
+                    //         isUser: true), //should take movies[widget.index].id
+                    //   ),
+                    // );
                     // Navigator.push();
                   },
                 ),

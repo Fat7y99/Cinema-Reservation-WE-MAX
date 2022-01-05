@@ -9,7 +9,7 @@ class UserModel {
 
   final String email;
 
-  final int role;
+  int role;
 
   UserModel({
     required this.id,

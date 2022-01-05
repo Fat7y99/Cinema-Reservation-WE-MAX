@@ -12,7 +12,8 @@ class RequestAndResponses {
       Uri.parse(u),
       headers: {"Content-Type": "application/json"},
     );
-    print(response.body);
+    print(response.body.runtimeType);
+    print(jsonEncode(response.body));
     return response;
   }
 
@@ -31,7 +32,9 @@ class RequestAndResponses {
       headers: {"Content-Type": "application/json"},
       body: jsonEncode(jso),
     );
-    print(response.body);
+    print(response.body.runtimeType);
+    print(jsonEncode(response.body));
+
     UserModel user = UserModel.fromJson(json.decode(response.body));
     print("hi");
     print(user.firstName);
