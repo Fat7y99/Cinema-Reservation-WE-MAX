@@ -4,6 +4,7 @@ import 'package:movie_ticket_app/components/cienma_seat.dart';
 import 'package:movie_ticket_app/components/show_time.dart';
 import 'package:movie_ticket_app/movie_model.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
+import 'package:movie_ticket_app/screens/pay_details.dart';
 
 import '../const.dart';
 
@@ -179,7 +180,7 @@ class _BuyTicketState extends State<BuyTicket> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MyHomePage(isUser: true)
+                                builder: (context) => PayDetailsPage()
                                 //should take movies[widget.index].id
                                 ),
                           );
