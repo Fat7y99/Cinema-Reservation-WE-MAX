@@ -1,5 +1,7 @@
 import 'package:movie_ticket_app/movie_model.dart';
 
+enum Users { customer, manager, guest }
+
 class UserModel {
   final int id;
 

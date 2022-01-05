@@ -8,6 +8,7 @@ import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'managers_approval.dart';
+import 'package:movie_ticket_app/user_model.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -128,8 +129,8 @@ class _LoginPageState extends State<LoginPage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => MyHomePage(
-                            isUser:
-                                false), //should take movies[widget.index].id
+                            isUser: Users.guest
+                                .index), //should take movies[widget.index].id
                       ),
                     );
 
@@ -191,8 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => MyHomePage(
-                          isUser: true,
-                        ), //should take movies[widget.index].id
+                            isUser: 0), //should take movies[widget.index].id
                       ),
                     );
 
