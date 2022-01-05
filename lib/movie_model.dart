@@ -91,6 +91,10 @@ void updateMovies(List<MovieModel> m2) {
   movies = m2;
 }
 
+void update(int id, MovieModel movie) {
+  movies[id] = movie;
+}
+
 MovieModel getMovieByID(int id) {
   for (MovieModel movie in movies) {
     if (movie.id == id) {
