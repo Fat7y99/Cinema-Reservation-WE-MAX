@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        LoginPage(), //should take movies[widget.index].id
+                        MovieInsertPage(), //should take movies[widget.index].id
                   ),
                 );
               },
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        MovieInsertPage(), //should take movies[widget.index].id
+                        LoginPage(), //should take movies[widget.index].id
                   ),
                 );
               },

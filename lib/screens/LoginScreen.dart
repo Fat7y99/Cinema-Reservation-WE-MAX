@@ -179,7 +179,8 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () async {
                     print(nameController.text);
                     print(passwordController.text);
-                    await FlickrRequestsAndResponses.logIn(
+                    RequestAndResponses.tempp();
+                    await RequestAndResponses.logIn(
                       nameController,
                       passwordController,
                     );

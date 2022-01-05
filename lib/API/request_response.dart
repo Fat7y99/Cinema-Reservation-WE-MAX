@@ -3,8 +3,18 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:movie_ticket_app/user_model.dart';
 
-class FlickrRequestsAndResponses {
+class RequestAndResponses {
   static final String _baseURL = 'https://api.qasaqees.tech';
+  static final String u = 'https://hidden-springs-36426.herokuapp.com/api/test';
+
+  static Future<http.Response> tempp() async {
+    var response = await http.get(
+      Uri.parse(u),
+      headers: {"Content-Type": "application/json"},
+    );
+    print(response.body);
+    return response;
+  }
 
   static Future<http.Response> logIn(final email, final password) async {
     const String baseURL =
