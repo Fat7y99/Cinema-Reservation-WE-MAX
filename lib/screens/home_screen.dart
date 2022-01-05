@@ -15,7 +15,7 @@ import 'LoginScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   int index = 1;
-  bool isUser = false;
+  int isUser;
 
   MyHomePage({required this.isUser});
   @override
@@ -194,6 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 callBack: () {
                                   setState(() {
                                     widget.index = index;
+                                    print(widget.isUser);
                                   });
                                 }),
                           );

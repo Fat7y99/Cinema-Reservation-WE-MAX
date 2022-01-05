@@ -254,8 +254,9 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                MyHomePage(isUser: true), //should take movies[widget.index].id
+                            builder: (context) => MyHomePage(
+                                isUser:
+                                    2), //should take movies[widget.index].id
                           ),
                         );
                         // Navigator.push();

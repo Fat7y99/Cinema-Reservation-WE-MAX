@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/components/movie_card.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
+import 'package:movie_ticket_app/user_model.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  String dropdownValue = 'Customer';
+
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -235,6 +238,24 @@ class _SignupPageState extends State<SignupPage> {
                     keyboardType: TextInputType.visiblePassword,
                   ),
                 ),
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.white70),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: <String>['Customer', 'Manager']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
                 Container(
                     width: MediaQuery.of(context).size.width / 2,
                     height: 50,
@@ -270,7 +291,16 @@ class _SignupPageState extends State<SignupPage> {
                       ),
 
                       onPressed: () {
-                        // Navigator.push();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyHomePage(
+                                isUser: dropdownValue == 'Customer'
+                                    ? Users.customer.index
+                                    : Users.manager
+                                        .index), //should take movies[widget.index].id
+                          ),
+                        );
                       },
                     )),
               ],
