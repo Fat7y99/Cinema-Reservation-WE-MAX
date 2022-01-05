@@ -3,21 +3,20 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/components/background_gradient_image.dart';
 import 'package:movie_ticket_app/components/dark_borderless_button.dart';
-import 'package:movie_ticket_app/components/movie_app_bar.dart';
 import 'package:movie_ticket_app/components/movie_card.dart';
 import 'package:movie_ticket_app/components/primary_rounder_button.dart';
 import 'package:movie_ticket_app/components/red_rounded_action_button.dart';
 import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/movie_model.dart';
-import 'package:movie_ticket_app/screens/buy_ticket.dart';
+import 'package:movie_ticket_app/screens/reservation_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
-import 'package:http/http.dart' as http;
 import 'package:movie_ticket_app/screens/movie_insert.dart';
 import 'LoginScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   int index = 1;
   bool isUser = false;
+
   MyHomePage({required this.isUser});
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -48,6 +47,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               icon: Icon(
+                Icons.supervised_user_circle_outlined,
+                color: kPimaryColor,
+              )),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        LoginPage(), //should take movies[widget.index].id
+                  ),
+                );
+              },
+              icon: Icon(
                 Icons.add,
                 color: kPimaryColor,
               )),
@@ -57,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        MovieInsertPage(), //should take movies[widget.index].id
+                        ReservationScreen(), //should take movies[widget.index].id
                   ),
                 );
               },
