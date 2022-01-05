@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/components/background_gradient_image.dart';
 import 'package:movie_ticket_app/components/dark_borderless_button.dart';
@@ -10,6 +12,7 @@ import 'package:movie_ticket_app/movie_model.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie_ticket_app/screens/movie_insert.dart';
 
 class MyHomePage extends StatefulWidget {
   int index = 1;
@@ -46,7 +49,30 @@ class _MyHomePageState extends State<MyHomePage> {
                 const Padding(padding: EdgeInsets.all(10.0)),
                 const MovieAppBar(),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 50.0)),
-                DarkBorderlessButton(text: title, callback: () {}),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DarkBorderlessButton(text: title, callback: () {}),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                MovieInsertPage(), //should take movies[widget.index].id
+                          ),
+                        );
+                      },
+                      child: Icon(Icons.add, color: Colors.white),
+                      style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(20),
+                        primary: Colors.blue, // <-- Button color
+                        onPrimary: Colors.white, // <-- Splash color
+                      ),
+                    ),
+                  ],
+                ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

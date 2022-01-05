@@ -8,9 +8,6 @@ import 'package:movie_ticket_app/screens/movie_details.dart';
 import '../movie_model.dart';
 
 class MovieInsertPage extends StatefulWidget {
-  final int id;
-
-  const MovieInsertPage({required this.id});
   @override
   _MovieInsertPageState createState() => _MovieInsertPageState();
 }
@@ -18,22 +15,19 @@ class MovieInsertPage extends StatefulWidget {
 class _MovieInsertPageState extends State<MovieInsertPage> {
   @override
   Widget build(BuildContext context) {
-    final String imageURL = getMovieByID(widget.id).imageURL;
-    final String title = getMovieByID(widget.id).title;
-    final String startTime = getMovieByID(widget.id).startTime;
-    final String endTime = getMovieByID(widget.id).endTime;
-    final String year = getMovieByID(widget.id).date.year.toString();
-    final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
+    // final String imageURL = getMovieByID(widget.id).imageURL;
+    // final String title = getMovieByID(widget.id).title;
+    // final String startTime = getMovieByID(widget.id).startTime;
+    // final String endTime = getMovieByID(widget.id).endTime;
+    // final String year = getMovieByID(widget.id).date.year.toString();
+    // final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
 
-    TextEditingController titleController = TextEditingController(text: title);
-    TextEditingController imageController =
-        TextEditingController(text: imageURL);
-    TextEditingController dateController = TextEditingController(text: year);
-    TextEditingController startController =
-        TextEditingController(text: startTime);
-    TextEditingController endController = TextEditingController(text: endTime);
-    TextEditingController screenController =
-        TextEditingController(text: screenRoom);
+    TextEditingController titleController = TextEditingController();
+    TextEditingController imageController = TextEditingController();
+    TextEditingController dateController = TextEditingController();
+    TextEditingController startController = TextEditingController();
+    TextEditingController endController = TextEditingController();
+    TextEditingController screenController = TextEditingController();
 
     return Scaffold(
       backgroundColor: Color(0xff302b35),

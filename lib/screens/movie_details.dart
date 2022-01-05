@@ -6,6 +6,7 @@ import 'package:movie_ticket_app/components/cienma_seat.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
 import 'package:movie_ticket_app/movie_model.dart';
+import 'package:movie_ticket_app/screens/movie_edit.dart';
 
 class MovieDetails extends StatefulWidget {
   final int id;
@@ -226,14 +227,21 @@ class _MovieDetailsState extends State<MovieDetails> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MovieEditPage(
+                                        id: widget.id,
+                                      ), //should take movies[widget.index].id
+                                    ),
+                                  );
                                 },
                                 child: Icon(Icons.edit, color: Colors.white),
                                 style: ElevatedButton.styleFrom(
                                   shape: CircleBorder(),
                                   padding: EdgeInsets.all(20),
-                                  primary: fill, // <-- Button color
-                                  onPrimary: Colors.red, // <-- Splash color
+                                  primary: Colors.blue, // <-- Button color
+                                  onPrimary: Colors.white, // <-- Splash color
                                 ),
                               ),
                             ],

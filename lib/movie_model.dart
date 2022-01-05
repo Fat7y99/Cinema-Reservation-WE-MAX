@@ -106,3 +106,7 @@ MovieModel getMovieByID(int id) {
   dummyMovie.title = 'Movie not found';
   return dummyMovie;
 }
+
+void update(int id, MovieModel movie) {
+  movies[id] = movie;
+}
