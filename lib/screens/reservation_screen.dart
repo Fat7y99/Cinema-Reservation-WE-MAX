@@ -43,9 +43,14 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   children: [
                     ListTile(
                       title: Text(getMovieByID(reservations[index].id).title,
-                          style: TextStyle(color: kPimaryColor)),
-                      subtitle: Text("${reservations[index].roomNumber}",
-                          style: TextStyle(color: kPimaryColor)),
+                          style: TextStyle(
+                              color: kPimaryColor,
+                              fontWeight: FontWeight.bold)),
+                      subtitle: Text(
+                          "Room Number: ${reservations[index].roomNumber}",
+                          style: TextStyle(
+                              color: kPimaryColor,
+                              fontWeight: FontWeight.bold)),
                       trailing: IconButton(
                         onPressed: () {
                           setState(() {
@@ -59,7 +64,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
                     Container(
                       padding: EdgeInsets.all(16.0),
                       alignment: Alignment.centerLeft,
-                      child: Text("${reservations[index].seatCount}",
+                      child: Text(
+                          " Reserved Seats: ${reservations[index].seatCount}",
                           style: TextStyle(color: kPimaryColor)),
                     ),
                   ],
