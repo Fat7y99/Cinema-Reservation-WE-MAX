@@ -178,7 +178,8 @@ class _BuyTicketState extends State<BuyTicket> {
                           print(countR());
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MyHomePage()
+                            MaterialPageRoute(
+                                builder: (context) => MyHomePage(isUser: true)
                                 //should take movies[widget.index].id
                                 ),
                           );

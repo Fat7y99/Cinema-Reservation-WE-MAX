@@ -24,7 +24,7 @@ class _MovieDetailsState extends State<MovieDetails> {
     final String title = getMovieByID(widget.id).title;
     final String startTime = getMovieByID(widget.id).startTime;
     final String endTime = getMovieByID(widget.id).endTime;
-    final String year = getMovieByID(widget.id).date.year.toString();
+    final String year = getMovieByID(widget.id).date.toString();
     final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
 
     final Color background = Color(0xff302b35);

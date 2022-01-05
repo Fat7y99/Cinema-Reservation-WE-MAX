@@ -3,7 +3,7 @@ class MovieModel {
 
   String title;
 
-  DateTime date;
+  String date;
 
   String startTime;
 
@@ -39,7 +39,7 @@ List<MovieModel> movies = [
   MovieModel(
     id: 1,
     title: 'The Irishman',
-    date: DateTime(2019),
+    date: '10-10-2021',
     startTime: '7:00 PM',
     endTime: '9:00 PM',
     screenRoom: 1,
@@ -49,7 +49,7 @@ List<MovieModel> movies = [
   MovieModel(
     id: 2,
     title: 'JOKER',
-    date: DateTime(2019),
+    date: '10-10-2021',
     startTime: '6:00 PM',
     endTime: '8:00 PM',
     screenRoom: 2,
@@ -59,7 +59,7 @@ List<MovieModel> movies = [
   MovieModel(
     id: 3,
     title: 'Avengers: Endgame',
-    date: DateTime(2019),
+    date: '10-10-2021',
     startTime: '5:00 PM',
     endTime: '7:00 PM',
     screenRoom: 3,
@@ -69,7 +69,7 @@ List<MovieModel> movies = [
   MovieModel(
     id: 4,
     title: 'Spider-Man: No Way Home',
-    date: DateTime(2021),
+    date: '10-10-2021',
     startTime: '5:00 PM',
     endTime: '7:00 PM',
     screenRoom: 1,

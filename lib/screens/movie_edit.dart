@@ -22,7 +22,7 @@ class _MovieEditPageState extends State<MovieEditPage> {
     final String title = getMovieByID(widget.id).title;
     final String startTime = getMovieByID(widget.id).startTime;
     final String endTime = getMovieByID(widget.id).endTime;
-    final String year = getMovieByID(widget.id).date.year.toString();
+    final String year = getMovieByID(widget.id).date.toString();
     final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
 
     TextEditingController titleController = TextEditingController(text: title);
