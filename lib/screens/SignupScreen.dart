@@ -8,6 +8,10 @@ import 'package:movie_ticket_app/screens/LoginScreen.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/Models/user_model.dart';
+import 'package:movie_ticket_app/API/request_response.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
+import '../const.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -20,7 +24,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
@@ -142,7 +146,7 @@ class _SignupPageState extends State<SignupPage> {
                   width: MediaQuery.of(context).size.width / 2,
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: emailController,
+                    controller: userNameController,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.transparent),
@@ -152,8 +156,9 @@ class _SignupPageState extends State<SignupPage> {
                           borderSide: BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                         ),
-                        prefixIcon: Icon(Icons.mail, color: Color(0xFF94ADEA)),
-                        hintText: 'Email',
+                        prefixIcon:
+                            Icon(Icons.person, color: Color(0xFF94ADEA)),
+                        hintText: 'UserName',
                         hintStyle: TextStyle(
                           color: Colors.white70,
                         ),
@@ -167,7 +172,7 @@ class _SignupPageState extends State<SignupPage> {
                   width: MediaQuery.of(context).size.width / 2,
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: phoneController,
+                    controller: emailController,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.transparent),
@@ -177,9 +182,8 @@ class _SignupPageState extends State<SignupPage> {
                           borderSide: BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                         ),
-                        prefixIcon:
-                            Icon(Icons.phone_iphone, color: Color(0xFF94ADEA)),
-                        hintText: 'Phone',
+                        prefixIcon: Icon(Icons.mail, color: Color(0xFF94ADEA)),
+                        hintText: 'Email',
                         hintStyle: TextStyle(
                           color: Colors.white70,
                         ),
@@ -291,17 +295,80 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ),
 
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                            // isUser: dropdownValue == 'Customer'
-                            //     ? Users.customer.index
-                            //     : Users.manager
-                            //     .index//should take movies[widget.index].id
-                          ),
-                        );
+                      onPressed: () async {
+                        var role;
+                        setState(() {
+                          role = dropdownValue == 'Customer'
+                              ? Users.customer.index
+                              : Users.manager.index;
+                        });
+                        int statusCode = await RequestAndResponses.signUp(
+                            userNameController.text.trim(),
+                            firstNameController.text.trim(),
+                            lastNameController.text.trim(),
+                            emailController.text.trim(),
+                            passwordController.text,
+                            role);
+
+                        if (statusCode == 200 || statusCode == 201) {
+                          Alert(
+                            context: context,
+                            title: "You are registered successfully",
+                            // desc: "Flutter is better with RFlutter Alert.",
+                            image: Image.asset(
+                              "assets/images/success.png",
+                              scale: 10,
+                            ),
+
+                            buttons: [
+                              DialogButton(
+                                child: Text(
+                                  "Ok",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                                color: kBackgroundColor,
+                                radius: BorderRadius.circular(0.0),
+                              ),
+                            ],
+                          ).show();
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(),
+                              // isUser: dropdownValue == 'Customer'
+                              //     ? Users.customer.index
+                              //     : Users.manager
+                              //     .index//should take movies[widget.index].id
+                            ),
+                          );
+                        } else {
+                          Alert(
+                            context: context,
+                            title:
+                                "Please check your input again", //TODO show the specified message
+                            // desc: "Flutter is better with RFlutter Alert.",
+                            image: Image.asset(
+                              "assets/images/failure.png",
+                              scale: 10,
+                            ),
+
+                            buttons: [
+                              DialogButton(
+                                child: Text(
+                                  "Ok",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                                color: kBackgroundColor,
+                                radius: BorderRadius.circular(0.0),
+                              ),
+                            ],
+                          ).show();
+                        }
                       },
                     )),
               ],

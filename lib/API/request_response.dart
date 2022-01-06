@@ -4,8 +4,7 @@ import 'dart:async';
 import 'package:movie_ticket_app/Models/user_model.dart';
 
 class RequestAndResponses {
-  static final String _baseURL =
-      'http://hidden-springs-36426.herokuapp.com/api';
+  static String _baseURL = 'http://hidden-springs-36426.herokuapp.com/api';
 
   // static Future<http.Response> tempp() async {
   //   var response = await http.get(
@@ -19,11 +18,11 @@ class RequestAndResponses {
 
   static Future<http.Response> logIn(final email, final password) async {
     var jso = {
-      "email": "${email.text.trim()}",
-      "password": "${password.text}",
+      "userName": email,
+      "password": password,
     };
 
-    var url = '$_baseURL/register/logIn';
+    var url = '$_baseURL/user/login';
     var response = await http.post(
       Uri.parse(url),
       headers: {"Content-Type": "application/json"},
@@ -31,14 +30,56 @@ class RequestAndResponses {
     );
     print(jsonEncode(response.body));
 
-    UserModel user = UserModel.fromJson(json.decode(response.body));
-    print("hi");
-    print(user.firstName);
-    print(user.email);
-    print(user.id);
-    print(user.lastName);
-    print(user.role);
+    print(json.decode(response.body)['token']);
+    // UserModel user = UserModel.fromJson(json.decode(response.body));
+
+    // print("hi");
+    // print(user.firstName);
+    // print(user.email);
+    // print(user.id);
+    // print(user.lastName);
+    // print(user.role);
 
     return response;
   }
+
+  static Future<int> signUp(
+    final userName,
+    final firstName,
+    final lastName,
+    final email,
+    final password,
+    int role,
+  ) async {
+    var jso = {
+      "id": 0,
+      "userName": userName,
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email,
+      "password": password,
+      "role": 0
+    };
+
+    var url = '$_baseURL/user/create';
+
+    var response = await http.post(
+      Uri.parse(url),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(jso),
+    );
+
+    print(response.body);
+
+    return response.statusCode;
+  }
 }
+
+// UserModel user = UserModel.fromJson(json.decode(response.body));
+//
+// print("hi");
+// print(user.firstName);
+// print(user.email);
+// print(user.id);
+// print(user.lastName);
+// print(user.role);

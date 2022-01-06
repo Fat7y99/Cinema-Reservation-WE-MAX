@@ -186,8 +186,8 @@ class _LoginPageState extends State<LoginPage> {
                     print(passwordController.text);
                     // RequestAndResponses.tempp();
                     await RequestAndResponses.logIn(
-                      emailController,
-                      passwordController,
+                      emailController.text.trim(),
+                      passwordController.text,
                     );
 
                     Navigator.push(
