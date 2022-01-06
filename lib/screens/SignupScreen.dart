@@ -19,7 +19,6 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
@@ -151,8 +150,9 @@ class _SignupPageState extends State<SignupPage> {
                           borderSide: BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                         ),
-                        prefixIcon: Icon(Icons.mail, color: Color(0xFF94ADEA)),
-                        hintText: 'Email',
+                        prefixIcon: Icon(Icons.supervised_user_circle,
+                            color: Color(0xFF94ADEA)),
+                        hintText: 'Username',
                         hintStyle: TextStyle(
                           color: Colors.white70,
                         ),
@@ -166,7 +166,7 @@ class _SignupPageState extends State<SignupPage> {
                   width: MediaQuery.of(context).size.width / 2,
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: phoneController,
+                    controller: emailController,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.transparent),
@@ -176,9 +176,8 @@ class _SignupPageState extends State<SignupPage> {
                           borderSide: BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                         ),
-                        prefixIcon:
-                            Icon(Icons.phone_iphone, color: Color(0xFF94ADEA)),
-                        hintText: 'Phone',
+                        prefixIcon: Icon(Icons.mail, color: Color(0xFF94ADEA)),
+                        hintText: 'Email',
                         hintStyle: TextStyle(
                           color: Colors.white70,
                         ),

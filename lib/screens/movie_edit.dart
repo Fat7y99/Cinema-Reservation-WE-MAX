@@ -54,6 +54,10 @@ class _MovieEditPageState extends State<MovieEditPage> {
                       // initialValue: title,
                       controller: titleController,
                       decoration: InputDecoration(
+                          hintText: 'Movie Title',
+                          hintStyle: TextStyle(
+                            color: Colors.white70,
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -81,6 +85,10 @@ class _MovieEditPageState extends State<MovieEditPage> {
                       // initialValue: imageURL,
                       controller: imageController,
                       decoration: InputDecoration(
+                          hintText: 'Image URL',
+                          hintStyle: TextStyle(
+                            color: Colors.white70,
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -108,6 +116,10 @@ class _MovieEditPageState extends State<MovieEditPage> {
                       // initialValue: startTime,
                       controller: startController,
                       decoration: InputDecoration(
+                          hintText: 'Start Time',
+                          hintStyle: TextStyle(
+                            color: Colors.white70,
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -135,6 +147,10 @@ class _MovieEditPageState extends State<MovieEditPage> {
                       // initialValue: endTime,
                       controller: endController,
                       decoration: InputDecoration(
+                          hintText: 'End Time',
+                          hintStyle: TextStyle(
+                            color: Colors.white70,
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -162,6 +178,10 @@ class _MovieEditPageState extends State<MovieEditPage> {
                       // initialValue: year,
                       controller: dateController,
                       decoration: InputDecoration(
+                          hintText: 'Release Year',
+                          hintStyle: TextStyle(
+                            color: Colors.white70,
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -189,6 +209,10 @@ class _MovieEditPageState extends State<MovieEditPage> {
                       // initialValue: screenRoom,
                       controller: screenController,
                       decoration: InputDecoration(
+                          hintText: 'Screen Room',
+                          hintStyle: TextStyle(
+                            color: Colors.white70,
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.all(Radius.circular(30)),
