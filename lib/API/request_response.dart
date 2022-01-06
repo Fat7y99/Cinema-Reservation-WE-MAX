@@ -5,7 +5,8 @@ import 'package:movie_ticket_app/user_model.dart';
 
 class RequestAndResponses {
   static final String _baseURL = 'https://api.qasaqees.tech';
-  static final String u = 'https://hidden-springs-36426.herokuapp.com/api/test';
+  static final String u =
+      'https://hidden-springs-36426.herokuapp.com/api/test2';
 
   static Future<http.Response> tempp() async {
     var response = await http.get(
@@ -13,7 +14,7 @@ class RequestAndResponses {
       headers: {"Content-Type": "application/json"},
     );
     print(response.body.runtimeType);
-    print(jsonEncode(response.body));
+    print(json.decode(response.body)['a']);
     return response;
   }
 
