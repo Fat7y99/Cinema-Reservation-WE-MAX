@@ -238,7 +238,7 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                           MovieModel movie = new MovieModel(
                               id: 7,
                               title: titleController.text,
-                              date: dateController.text,
+                              date: DateTime(int.parse(dateController.text)),
                               startTime: startController.text,
                               endTime: endController.text,
                               screenRoom: int.parse(screenController.text),

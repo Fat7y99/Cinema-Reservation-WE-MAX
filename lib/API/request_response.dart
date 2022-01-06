@@ -19,7 +19,7 @@ class RequestAndResponses {
 
   static Future<http.Response> logIn(final email, final password) async {
     var jso = {
-      "email": "${email.text.toString().trim()}",
+      "email": "${email.text.trim()}",
       "password": "${password.text}",
     };
 

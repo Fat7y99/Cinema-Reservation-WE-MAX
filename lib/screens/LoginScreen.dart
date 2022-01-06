@@ -185,10 +185,10 @@ class _LoginPageState extends State<LoginPage> {
                     print(emailController.text);
                     print(passwordController.text);
                     // RequestAndResponses.tempp();
-                    // await RequestAndResponses.logIn(
-                    //   emailController,
-                    //   passwordController,
-                    // );
+                    await RequestAndResponses.logIn(
+                      emailController,
+                      passwordController,
+                    );
 
                     Navigator.push(
                       context,
