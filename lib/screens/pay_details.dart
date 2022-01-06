@@ -23,8 +23,8 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
     // final String year = getMovieByID(widget.id).date.year.toString();
     // final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
 
-    TextEditingController cardno = TextEditingController();
-    TextEditingController pinno = TextEditingController();
+    TextEditingController cardNo = TextEditingController();
+    TextEditingController pinNo = TextEditingController();
 
     return Scaffold(
       backgroundColor: Color(0xff302b35),
@@ -42,10 +42,9 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
                     padding: EdgeInsets.all(10),
                     child: TextFormField(
                       // initialValue: title,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      ],
-                      controller: cardno,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: cardNo,
+                      validator: validateCardNo,
                       decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
@@ -72,10 +71,11 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
                     padding: EdgeInsets.all(10),
                     child: TextFormField(
                       // initialValue: imageURL,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      ],
-                      controller: pinno,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                      controller: pinNo,
+                      validator: validatePinNo,
+
                       decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
@@ -146,5 +146,31 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
         ),
       ),
     );
+  }
+
+  String? validateCardNo(String? value) {
+    RegExp regex = RegExp(r'^(?=.*?[0-9]).{16,}$');
+    if (value!.isEmpty) {
+      return 'Please enter a card number';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'It should be 16 digits';
+      } else {
+        return '';
+      }
+    }
+  }
+
+  String? validatePinNo(String? value) {
+    RegExp regex = RegExp(r'^(?=.*?[0-9]).{3,}$');
+    if (value!.isEmpty) {
+      return 'Enter a valid pin number';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'It should be 3 digits';
+      } else {
+        return '';
+      }
+    }
   }
 }

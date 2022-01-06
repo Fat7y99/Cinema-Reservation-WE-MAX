@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/components/movie_card.dart';
+import 'package:movie_ticket_app/screens/LoginScreen.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/user_model.dart';
@@ -294,11 +295,11 @@ class _SignupPageState extends State<SignupPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MyHomePage(
-                                isUser: dropdownValue == 'Customer'
-                                    ? Users.customer.index
-                                    : Users.manager
-                                        .index), //should take movies[widget.index].id
+                            builder: (context) => LoginPage(),
+                            // isUser: dropdownValue == 'Customer'
+                            //     ? Users.customer.index
+                            //     : Users.manager
+                            //     .index//should take movies[widget.index].id
                           ),
                         );
                       },

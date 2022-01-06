@@ -16,7 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: MediaQuery.of(context).size.width / 2,
                 padding: EdgeInsets.all(10),
                 child: TextField(
-                  controller: nameController,
+                  controller: emailController,
                   decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.transparent),
@@ -92,8 +92,10 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 width: MediaQuery.of(context).size.width / 2,
                 padding: EdgeInsets.all(10),
-                child: TextField(
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: passwordController,
+                  validator: validatePassword,
                   decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.transparent),
@@ -180,19 +182,19 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   onPressed: () async {
-                    print(nameController.text);
+                    print(emailController.text);
                     print(passwordController.text);
-                    RequestAndResponses.tempp();
-                    await RequestAndResponses.logIn(
-                      nameController,
-                      passwordController,
-                    );
+                    // RequestAndResponses.tempp();
+                    // await RequestAndResponses.logIn(
+                    //   emailController,
+                    //   passwordController,
+                    // );
 
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => MyHomePage(
-                            isUser: 0), //should take movies[widget.index].id
+                            isUser: 1), //should take movies[widget.index].id
                       ),
                     );
 
@@ -239,5 +241,18 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  String? validatePassword(String? value) {
+    RegExp regex = RegExp(r'^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$');
+    if (value!.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid password \nShould contain More than 8 characters \nShould contain at least 1 digit and 1 letter';
+      } else {
+        return '';
+      }
+    }
   }
 }
