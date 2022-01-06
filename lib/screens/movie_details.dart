@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/components/seat_component.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
+import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
 import 'package:movie_ticket_app/movie_model.dart';
 import 'package:movie_ticket_app/screens/movie_edit.dart';
@@ -46,6 +47,26 @@ class _MovieDetailsState extends State<MovieDetails> {
         'With Spider-Man\'s identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.';
 
     return Scaffold(
+      appBar: AppBar(actions: [
+        Visibility(
+          visible: widget.isUser == 1,
+          child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MovieEditPage(
+                      id: widget.id,
+                    ), //should take movies[widget.index].id
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.edit,
+                color: kPimaryColor,
+              )),
+        ),
+      ]),
       body: Container(
         color: fill,
         height: deviceHeight,
@@ -180,7 +201,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                           Column(
                             children: [
                               Visibility(
-                                visible: widget.isUser == 1,
+                                visible: widget.isUser != 2,
                                 child: Container(
                                   width: MediaQuery.of(context).size.width / 4,
                                   height: 50,
@@ -227,25 +248,6 @@ class _MovieDetailsState extends State<MovieDetails> {
                                       );
                                     },
                                   ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MovieEditPage(
-                                        id: widget.id,
-                                      ), //should take movies[widget.index].id
-                                    ),
-                                  );
-                                },
-                                child: Icon(Icons.edit, color: Colors.white),
-                                style: ElevatedButton.styleFrom(
-                                  shape: CircleBorder(),
-                                  padding: EdgeInsets.all(20),
-                                  primary: Colors.blue, // <-- Button color
-                                  onPrimary: Colors.white, // <-- Splash color
                                 ),
                               ),
                             ],

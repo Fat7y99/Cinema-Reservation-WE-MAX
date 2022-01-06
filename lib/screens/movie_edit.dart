@@ -37,6 +37,7 @@ class _MovieEditPageState extends State<MovieEditPage> {
 
     return Scaffold(
       backgroundColor: Color(0xff302b35),
+      appBar: AppBar(),
       body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
