@@ -245,14 +245,7 @@ class _MovieEditPageState extends State<MovieEditPage> {
                         //     endController,
                         //     screenController,
                         //     imageController);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MovieDetails(
-                              id: widget.id,
-                            ), //should take movies[widget.index].id
-                          ),
-                        );
+                        Navigator.pop(context);
                         // Navigator.push();
                       },
                     ),

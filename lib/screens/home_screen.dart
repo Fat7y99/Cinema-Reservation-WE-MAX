@@ -37,48 +37,57 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ManagerApproval(), //should take movies[widget.index].id
-                  ),
-                );
-              },
-              icon: Icon(
-                Icons.supervised_user_circle_outlined,
-                color: kPimaryColor,
-              )),
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        MovieInsertPage(), //should take movies[widget.index].id
-                  ),
-                );
-              },
-              icon: Icon(
-                Icons.add,
-                color: kPimaryColor,
-              )),
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ReservationScreen(), //should take movies[widget.index].id
-                  ),
-                );
-              },
-              icon: Icon(
-                Icons.tv,
-                color: kPimaryColor,
-              )),
+          Visibility(
+            visible: widget.isUser == 1,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ManagerApproval(), //should take movies[widget.index].id
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Icons.supervised_user_circle_outlined,
+                  color: kPimaryColor,
+                )),
+          ),
+          Visibility(
+            visible: widget.isUser == 1,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MovieInsertPage(), //should take movies[widget.index].id
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Icons.add,
+                  color: kPimaryColor,
+                )),
+          ),
+          Visibility(
+            visible: widget.isUser == 1,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ReservationScreen(), //should take movies[widget.index].id
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Icons.tv,
+                  color: kPimaryColor,
+                )),
+          ),
           IconButton(
               onPressed: () {
                 Navigator.push(
@@ -167,6 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialPageRoute(
                           builder: (context) => MovieDetails(
                             id: id,
+                            isUser: widget.isUser,
                           ), //should take movies[widget.index].id
                         ),
                       );

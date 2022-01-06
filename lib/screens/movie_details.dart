@@ -10,8 +10,9 @@ import 'package:movie_ticket_app/screens/movie_edit.dart';
 
 class MovieDetails extends StatefulWidget {
   final int id;
+  int isUser;
 
-  const MovieDetails({required this.id});
+  MovieDetails({required this.id, required this.isUser});
 
   @override
   _MovieDetailsState createState() => _MovieDetailsState();
@@ -178,51 +179,54 @@ class _MovieDetailsState extends State<MovieDetails> {
                           ),
                           Column(
                             children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width / 4,
-                                height: 50,
-                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                child: ElevatedButton(
-                                  // style: ElevatedButton.styleFrom(
-                                  //   primary: Colors.transparent, // background
-                                  // ),
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFD3A13B))),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      //   style: Theme.of(context).textTheme.body1,
-                                      children: [
-                                        WidgetSpan(
-                                          child: Icon(
-                                            Icons.airplane_ticket,
-                                            size: 25,
-                                            color: Colors.white,
+                              Visibility(
+                                visible: widget.isUser == 1,
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width / 4,
+                                  height: 50,
+                                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: ElevatedButton(
+                                    // style: ElevatedButton.styleFrom(
+                                    //   primary: Colors.transparent, // background
+                                    // ),
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color(0xFFD3A13B))),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        //   style: Theme.of(context).textTheme.body1,
+                                        children: [
+                                          WidgetSpan(
+                                            child: Icon(
+                                              Icons.airplane_ticket,
+                                              size: 25,
+                                              color: Colors.white,
+                                            ),
                                           ),
-                                        ),
-                                        TextSpan(
-                                          text: ' Buy Ticket ',
-                                          style: GoogleFonts.bioRhyme(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  // fontWeight: FontWeight.w500,
-                                                  fontSize: 20)),
-                                        ),
-                                      ],
+                                          TextSpan(
+                                            text: ' Buy Ticket ',
+                                            style: GoogleFonts.bioRhyme(
+                                                textStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    // fontWeight: FontWeight.w500,
+                                                    fontSize: 20)),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
 
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              BuyTicket(widget.id)
-                                          //should take movies[widget.index].id
-                                          ),
-                                    );
-                                  },
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                BuyTicket(widget.id)
+                                            //should take movies[widget.index].id
+                                            ),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                               ElevatedButton(

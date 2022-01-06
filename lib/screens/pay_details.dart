@@ -134,14 +134,7 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
                         //     endController,
                         //     screenController,
                         //     imageController);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MovieDetails(
-                              id: 4,
-                            ), //should take movies[widget.index].id
-                          ),
-                        );
+                        Navigator.pop(context);
                         // Navigator.push();
                       },
                     ),
