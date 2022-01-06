@@ -6,13 +6,15 @@ class SeatComponent extends StatefulWidget {
   bool isReserved;
   int id;
   bool isSelected;
+  Function reserve;
 
-  SeatComponent(
-      {Key? key,
-      required this.id,
-      this.isSelected = false,
-      this.isReserved = false})
-      : super(key: key);
+  SeatComponent({
+    Key? key,
+    required this.id,
+    this.isSelected = false,
+    this.isReserved = false,
+    required this.reserve,
+  }) : super(key: key);
 
   @override
   _SeatComponentState createState() => _SeatComponentState();
@@ -27,6 +29,7 @@ class _SeatComponentState extends State<SeatComponent> {
       onTap: () {
         setState(() {
           !widget.isReserved ? widget.isSelected = !widget.isSelected : null;
+          widget.reserve(widget.id);
         });
       },
       child: Container(
