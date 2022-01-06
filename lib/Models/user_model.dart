@@ -1,4 +1,4 @@
-import 'package:movie_ticket_app/movie_model.dart';
+import 'package:movie_ticket_app/Models/movie_model.dart';
 
 enum Users { customer, manager, guest }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/components/calendar_day.dart';
 import 'package:movie_ticket_app/components/seat_component.dart';
 import 'package:movie_ticket_app/components/show_time.dart';
-import 'package:movie_ticket_app/movie_model.dart';
+import 'package:movie_ticket_app/Models/movie_model.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/pay_details.dart';
 import 'package:movie_ticket_app/components/seat_data.dart';

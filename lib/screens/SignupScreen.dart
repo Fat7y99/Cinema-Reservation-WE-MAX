@@ -7,7 +7,7 @@ import 'package:movie_ticket_app/components/movie_card.dart';
 import 'package:movie_ticket_app/screens/LoginScreen.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
-import 'package:movie_ticket_app/user_model.dart';
+import 'package:movie_ticket_app/Models/user_model.dart';
 
 class SignupPage extends StatefulWidget {
   @override

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/const.dart';
-import 'package:movie_ticket_app/movie_model.dart';
-import 'package:movie_ticket_app/reservation_model.dart';
-import 'package:movie_ticket_app/user_model.dart';
-import 'package:movie_ticket_app/seat_model.dart';
-import 'package:movie_ticket_app/room_model.dart';
+import 'package:movie_ticket_app/Models/movie_model.dart';
+import 'package:movie_ticket_app/Models/reservation_model.dart';
+import 'package:movie_ticket_app/Models/user_model.dart';
+import 'package:movie_ticket_app/Models/seat_model.dart';
+import 'package:movie_ticket_app/Models/room_model.dart';
 
 class ReservationScreen extends StatefulWidget {
   @override

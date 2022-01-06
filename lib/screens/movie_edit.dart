@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 
-import '../movie_model.dart';
+import '../Models/movie_model.dart';
 
 class MovieEditPage extends StatefulWidget {
   final int id;

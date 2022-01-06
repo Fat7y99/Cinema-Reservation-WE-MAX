@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/const.dart';
-import 'package:movie_ticket_app/movie_model.dart';
-import 'package:movie_ticket_app/reservation_model.dart';
-import 'package:movie_ticket_app/user_model.dart';
+import 'package:movie_ticket_app/Models/movie_model.dart';
+import 'package:movie_ticket_app/Models/reservation_model.dart';
+import 'package:movie_ticket_app/Models/user_model.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ManagerApproval extends StatefulWidget {
