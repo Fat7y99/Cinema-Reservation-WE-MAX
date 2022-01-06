@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/components/calendar_day.dart';
-import 'package:movie_ticket_app/components/cienma_seat.dart';
+import 'package:movie_ticket_app/components/seat_component.dart';
 import 'package:movie_ticket_app/components/show_time.dart';
 import 'package:movie_ticket_app/movie_model.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
@@ -18,21 +18,21 @@ class BuyTicket extends StatefulWidget {
 
 class _BuyTicketState extends State<BuyTicket> {
   List<int> seatsIndex = [];
-  List<CienmaSeat> seats = [
-    CienmaSeat(id: 0),
-    CienmaSeat(id: 1),
-    CienmaSeat(id: 2),
-    CienmaSeat(id: 3),
-    CienmaSeat(id: 4),
-    CienmaSeat(id: 5),
-    CienmaSeat(id: 6),
-    CienmaSeat(id: 7),
-    CienmaSeat(id: 8),
-    CienmaSeat(id: 9),
-    CienmaSeat(id: 10),
-    CienmaSeat(id: 11),
-    CienmaSeat(id: 12),
-    CienmaSeat(id: 13),
+  List<SeatComponent> seats = [
+    SeatComponent(id: 0),
+    SeatComponent(id: 1),
+    SeatComponent(id: 2),
+    SeatComponent(id: 3),
+    SeatComponent(id: 4),
+    SeatComponent(id: 5),
+    SeatComponent(id: 6),
+    SeatComponent(id: 7),
+    SeatComponent(id: 8),
+    SeatComponent(id: 9),
+    SeatComponent(id: 10),
+    SeatComponent(id: 11),
+    SeatComponent(id: 12),
+    SeatComponent(id: 13),
   ];
   @override
   Widget build(BuildContext context) {
@@ -218,7 +218,7 @@ class _BuyTicketState extends State<BuyTicket> {
 
   int countR() {
     int count = 0;
-    for (CienmaSeat seat in seats) {
+    for (SeatComponent seat in seats) {
       if (seat.isSelected) {
         count++;
         if (seatsIndex.contains(seat.id)) {
