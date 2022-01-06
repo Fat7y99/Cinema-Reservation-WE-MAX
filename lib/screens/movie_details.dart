@@ -226,7 +226,9 @@ class _MovieDetailsState extends State<MovieDetails> {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: ' Buy Ticket ',
+                                            text: widget.isUser == 0
+                                                ? ' Buy Ticket '
+                                                : 'View Reserved',
                                             style: GoogleFonts.bioRhyme(
                                                 textStyle: TextStyle(
                                                     color: Colors.white,

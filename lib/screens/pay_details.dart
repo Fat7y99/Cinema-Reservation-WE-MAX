@@ -48,6 +48,9 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
                       validator: validateCardNo,
                       decoration: InputDecoration(
                           hintText: 'Card Number',
+                          hintStyle: TextStyle(
+                            color: Colors.white70,
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.all(Radius.circular(30)),
