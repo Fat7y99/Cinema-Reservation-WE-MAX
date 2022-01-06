@@ -7,7 +7,7 @@ import 'package:movie_ticket_app/components/movie_card.dart';
 import 'package:movie_ticket_app/components/primary_rounder_button.dart';
 import 'package:movie_ticket_app/components/red_rounded_action_button.dart';
 import 'package:movie_ticket_app/const.dart';
-import 'package:movie_ticket_app/movie_model.dart';
+import 'package:movie_ticket_app/Models/movie_model.dart';
 import 'package:movie_ticket_app/screens/reservation_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/screens/movie_insert.dart';

@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
-import 'package:movie_ticket_app/movie_model.dart';
-import '../movie_model.dart';
+import 'package:movie_ticket_app/Models/movie_model.dart';
+import '../Models/movie_model.dart';
 
 class MovieInsertPage extends StatefulWidget {
   @override
@@ -262,7 +262,7 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                           MovieModel movie = new MovieModel(
                               id: 7,
                               title: titleController.text,
-                              date: dateController.text,
+                              date: DateTime(int.parse(dateController.text)),
                               startTime: startController.text,
                               endTime: endController.text,
                               screenRoom: int.parse(screenController.text),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/const.dart';
-import 'package:movie_ticket_app/movie_model.dart';
-import 'package:movie_ticket_app/reservation_model.dart';
+import 'package:movie_ticket_app/Models/movie_model.dart';
+import 'package:movie_ticket_app/Models/reservation_model.dart';
+import 'package:movie_ticket_app/Models/user_model.dart';
+import 'package:movie_ticket_app/Models/seat_model.dart';
+import 'package:movie_ticket_app/Models/room_model.dart';
 
 class ReservationScreen extends StatefulWidget {
   @override
@@ -10,14 +13,10 @@ class ReservationScreen extends StatefulWidget {
 
 class _ReservationScreenState extends State<ReservationScreen> {
   List<ReservationModel> reservations = [
-    ReservationModel(
-        id: 1, movieId: 1, userId: 2, seatCount: 10, roomNumber: 3),
-    ReservationModel(
-        id: 2, movieId: 2, userId: 2, seatCount: 10, roomNumber: 3),
-    ReservationModel(
-        id: 3, movieId: 3, userId: 2, seatCount: 10, roomNumber: 3),
-    ReservationModel(
-        id: 4, movieId: 4, userId: 2, seatCount: 10, roomNumber: 3),
+    ReservationModel(id: 1, movie: movies[0], user: users[0], seat: seats[0]),
+    ReservationModel(id: 2, movie: movies[1], user: users[0], seat: seats[0]),
+    ReservationModel(id: 3, movie: movies[2], user: users[0], seat: seats[0]),
+    ReservationModel(id: 4, movie: movies[4], user: users[0], seat: seats[0]),
   ];
   @override
   Widget build(BuildContext context) {
@@ -43,12 +42,13 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text(getMovieByID(reservations[index].id).title,
+                      title: Text(
+                          getMovieByID(reservations[index].movie.id).title,
                           style: TextStyle(
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
                       subtitle: Text(
-                          "Room Number: ${reservations[index].roomNumber}",
+                          "Room Number: ${reservations[index].seat.room.roomNumber}",
                           style: TextStyle(
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
@@ -66,7 +66,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                       padding: EdgeInsets.all(16.0),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                          " Reserved Seats: ${reservations[index].seatCount}",
+                          " Reserved Seats: ${reservations[index].seat}",
                           style: TextStyle(color: kPimaryColor)),
                     ),
                   ],

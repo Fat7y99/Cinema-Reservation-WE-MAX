@@ -3,10 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'home_screen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 
-import '../movie_model.dart';
+import '../Models/movie_model.dart';
 
 class PayDetailsPage extends StatefulWidget {
   @override
@@ -81,10 +82,7 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
                       validator: validatePinNo,
 
                       decoration: InputDecoration(
-                          hintText: 'PIN Code',
-                          hintStyle: TextStyle(
-                            color: Colors.white70,
-                          ),
+                          hintText: 'Pin Number',
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -142,7 +140,14 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
                         //     endController,
                         //     screenController,
                         //     imageController);
-                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyHomePage(
+                                isUser:
+                                    1), //should take movies[widget.index].id
+                          ),
+                        );
                         // Navigator.push();
                       },
                     ),

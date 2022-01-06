@@ -8,7 +8,7 @@ import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'managers_approval.dart';
-import 'package:movie_ticket_app/user_model.dart';
+import 'package:movie_ticket_app/Models/user_model.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -185,10 +185,10 @@ class _LoginPageState extends State<LoginPage> {
                     print(emailController.text);
                     print(passwordController.text);
                     // RequestAndResponses.tempp();
-                    // await RequestAndResponses.logIn(
-                    //   emailController,
-                    //   passwordController,
-                    // );
+                    await RequestAndResponses.logIn(
+                      emailController,
+                      passwordController,
+                    );
 
                     Navigator.push(
                       context,

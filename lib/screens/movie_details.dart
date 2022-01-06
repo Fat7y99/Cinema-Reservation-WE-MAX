@@ -6,7 +6,7 @@ import 'package:movie_ticket_app/components/seat_component.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
 import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
-import 'package:movie_ticket_app/movie_model.dart';
+import 'package:movie_ticket_app/Models/movie_model.dart';
 import 'package:movie_ticket_app/screens/movie_edit.dart';
 
 class MovieDetails extends StatefulWidget {

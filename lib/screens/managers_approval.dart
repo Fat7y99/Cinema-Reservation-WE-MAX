@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/const.dart';
-import 'package:movie_ticket_app/movie_model.dart';
-import 'package:movie_ticket_app/reservation_model.dart';
-import 'package:movie_ticket_app/user_model.dart';
+import 'package:movie_ticket_app/Models/movie_model.dart';
+import 'package:movie_ticket_app/Models/reservation_model.dart';
+import 'package:movie_ticket_app/Models/user_model.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ManagerApproval extends StatefulWidget {
@@ -11,32 +11,6 @@ class ManagerApproval extends StatefulWidget {
 }
 
 class _ManagerApprovalState extends State<ManagerApproval> {
-  List<UserModel> users = [
-    UserModel(
-        id: 1,
-        firstName: 'Fathy0',
-        lastName: 'Nabil0',
-        email: 'Fathy.nabil2022@gmail.com',
-        role: 1),
-    UserModel(
-        id: 2,
-        firstName: 'Fathy1',
-        lastName: 'Nabil1',
-        email: 'Fathy.nabil2022@gmail.com',
-        role: 1),
-    UserModel(
-        id: 3,
-        firstName: 'Fathy2',
-        lastName: 'Nabil2',
-        email: 'Fathy.nabil2022@gmail.com',
-        role: 0),
-    UserModel(
-        id: 4,
-        firstName: 'Fathy3',
-        lastName: 'Nabil3',
-        email: 'Fathy.nabil2022@gmail.com',
-        role: 1),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'package:movie_ticket_app/user_model.dart';
+import 'package:movie_ticket_app/Models/user_model.dart';
 
 class RequestAndResponses {
   static final String _baseURL =
@@ -19,7 +19,7 @@ class RequestAndResponses {
 
   static Future<http.Response> logIn(final email, final password) async {
     var jso = {
-      "email": "${email.text.toString().trim()}",
+      "email": "${email.text.trim()}",
       "password": "${password.text}",
     };
 

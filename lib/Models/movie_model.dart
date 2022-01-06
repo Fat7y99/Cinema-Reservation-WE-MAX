@@ -3,7 +3,7 @@ class MovieModel {
 
   String title;
 
-  String date;
+  DateTime date;
 
   String startTime;
 
@@ -22,16 +22,48 @@ class MovieModel {
     required this.screenRoom,
     required this.imageURL,
   });
+
+  @override
+  String toString() {
+    return 'MovieModel[id=$id, title=$title, date=$date, startTime=$startTime, endTime=$endTime, screenRoom=$screenRoom, posterImage=$imageURL, ]';
+  }
+
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       id: json['id'],
       title: json['title'],
-      date: json['date'],
+      date: new DateTime(json['date']),
       startTime: json['startTime'],
       endTime: json['endTime'],
       screenRoom: json['screenRoom'],
       imageURL: json['posterImage'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'date': date,
+      'startTime': startTime,
+      'endTime': endTime,
+      'screenRoom': screenRoom,
+      'posterImage': imageURL
+    };
+  }
+
+  static List<MovieModel> listFromJson(List<dynamic> json) {
+    return json.map((value) => MovieModel.fromJson(value)).toList();
+  }
+
+  static Map<String, MovieModel> mapFromJson(
+      Map<String, Map<String, dynamic>> json) {
+    var map = Map<String, MovieModel>();
+    if (json != null && json.length > 0) {
+      json.forEach((String key, Map<String, dynamic> value) =>
+          map[key] = MovieModel.fromJson(value));
+    }
+    return map;
   }
 }
 
@@ -39,7 +71,7 @@ List<MovieModel> movies = [
   MovieModel(
     id: 1,
     title: 'The Irishman',
-    date: '10-10-2021',
+    date: DateTime(10 - 10 - 2021),
     startTime: '7:00 PM',
     endTime: '9:00 PM',
     screenRoom: 1,
@@ -49,7 +81,7 @@ List<MovieModel> movies = [
   MovieModel(
     id: 2,
     title: 'JOKER',
-    date: '10-10-2021',
+    date: DateTime(10 - 10 - 2021),
     startTime: '6:00 PM',
     endTime: '8:00 PM',
     screenRoom: 2,
@@ -59,7 +91,7 @@ List<MovieModel> movies = [
   MovieModel(
     id: 3,
     title: 'Avengers: Endgame',
-    date: '10-10-2021',
+    date: DateTime(10 - 10 - 2021),
     startTime: '5:00 PM',
     endTime: '7:00 PM',
     screenRoom: 3,
@@ -69,7 +101,7 @@ List<MovieModel> movies = [
   MovieModel(
     id: 4,
     title: 'Spider-Man: No Way Home',
-    date: '10-10-2021',
+    date: DateTime(10 - 10 - 2021),
     startTime: '5:00 PM',
     endTime: '7:00 PM',
     screenRoom: 1,
