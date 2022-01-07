@@ -19,8 +19,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  String dropdownValue = 'Customer';
-
+  String dropdownValue = 'User';
+  bool passOne = false;
+  bool passTwo = false;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -196,7 +197,8 @@ class _SignupPageState extends State<SignupPage> {
                 Container(
                   width: MediaQuery.of(context).size.width / 2,
                   padding: EdgeInsets.all(10),
-                  child: TextField(
+                  child: TextFormField(
+                    validator: validatePassword,
                     controller: passwordController,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -221,7 +223,8 @@ class _SignupPageState extends State<SignupPage> {
                 Container(
                   width: MediaQuery.of(context).size.width / 2,
                   padding: EdgeInsets.all(10),
-                  child: TextField(
+                  child: TextFormField(
+                    validator: validatePassword1,
                     controller: confirmPasswordController,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -253,7 +256,7 @@ class _SignupPageState extends State<SignupPage> {
                       dropdownValue = newValue!;
                     });
                   },
-                  items: <String>['Customer', 'Manager']
+                  items: <String>['User', 'Manager']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -298,76 +301,79 @@ class _SignupPageState extends State<SignupPage> {
                       onPressed: () async {
                         var role;
                         setState(() {
-                          role = dropdownValue == 'Customer'
-                              ? Users.customer.index
-                              : Users.manager.index;
+                          role = dropdownValue == 'User' ? 'user' : 'pending';
                         });
-                        int statusCode = await RequestAndResponses.signUp(
-                            userNameController.text.trim(),
-                            firstNameController.text.trim(),
-                            lastNameController.text.trim(),
-                            emailController.text.trim(),
-                            passwordController.text,
-                            role);
+                        if ((passOne && passTwo) &&
+                            (passwordController.text ==
+                                confirmPasswordController.text)) {
+                          int statusCode = await RequestAndResponses.signUp(
+                              userNameController.text.trim(),
+                              firstNameController.text.trim(),
+                              lastNameController.text.trim(),
+                              emailController.text.trim(),
+                              passwordController.text,
+                              role);
 
-                        if (statusCode == 200 || statusCode == 201) {
-                          Alert(
-                            context: context,
-                            title: "You are registered successfully",
-                            // desc: "Flutter is better with RFlutter Alert.",
-                            image: Image.asset(
-                              "assets/images/success.png",
-                              scale: 10,
-                            ),
-
-                            buttons: [
-                              DialogButton(
-                                child: Text(
-                                  "Ok",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                ),
-                                onPressed: () => Navigator.pop(context),
-                                color: kBackgroundColor,
-                                radius: BorderRadius.circular(0.0),
+                          if (statusCode == 200 || statusCode == 201) {
+                            Alert(
+                              context: context,
+                              title: "You are registered successfully",
+                              // desc: "Flutter is better with RFlutter Alert.",
+                              image: Image.asset(
+                                "assets/images/success.png",
+                                scale: 10,
                               ),
-                            ],
-                          ).show();
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(),
-                              // isUser: dropdownValue == 'Customer'
-                              //     ? Users.customer.index
-                              //     : Users.manager
-                              //     .index//should take movies[widget.index].id
-                            ),
-                          );
-                        } else {
-                          Alert(
-                            context: context,
-                            title:
-                                "Please check your input again", //TODO show the specified message
-                            // desc: "Flutter is better with RFlutter Alert.",
-                            image: Image.asset(
-                              "assets/images/failure.png",
-                              scale: 10,
-                            ),
-
-                            buttons: [
-                              DialogButton(
-                                child: Text(
-                                  "Ok",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "Ok",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LoginPage(),
+                                        // isUser: dropdownValue == 'Customer'
+                                        //     ? Users.customer.index
+                                        //     : Users.manager
+                                        //     .index//should take movies[widget.index].id
+                                      ),
+                                    );
+                                  },
+                                  color: kBackgroundColor,
+                                  radius: BorderRadius.circular(0.0),
                                 ),
-                                onPressed: () => Navigator.pop(context),
-                                color: kBackgroundColor,
-                                radius: BorderRadius.circular(0.0),
+                              ],
+                            ).show();
+                          } else {
+                            Alert(
+                              context: context,
+                              title: "Please check your input again",
+                              //TODO show the specified message
+                              // desc: "Flutter is better with RFlutter Alert.",
+                              image: Image.asset(
+                                "assets/images/failure.png",
+                                scale: 10,
                               ),
-                            ],
-                          ).show();
+
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "Ok",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () => Navigator.pop(context),
+                                  color: kBackgroundColor,
+                                  radius: BorderRadius.circular(0.0),
+                                ),
+                              ],
+                            ).show();
+                          }
                         }
                       },
                     )),
@@ -377,5 +383,37 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
+  }
+
+  String? validatePassword(String? value) {
+    RegExp regex = RegExp(r'^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$');
+    if (value!.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid password \nNot matched\nShould contain More than 8 characters \nShould contain at least 1 digit and 1 letter';
+      } else {
+        setState(() {
+          passOne = true;
+        });
+        return '';
+      }
+    }
+  }
+
+  String? validatePassword1(String? value) {
+    RegExp regex = RegExp(r'^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$');
+    if (value!.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid password \nNot matched\nShould contain More than 8 characters \nShould contain at least 1 digit and 1 letter';
+      } else {
+        setState(() {
+          passTwo = true;
+        });
+        return '';
+      }
+    }
   }
 }

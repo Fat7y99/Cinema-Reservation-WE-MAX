@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/components/background_gradient_image.dart';
 import 'package:movie_ticket_app/components/dark_borderless_button.dart';
 import 'package:movie_ticket_app/components/movie_card.dart';
@@ -89,7 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
           ),
           IconButton(
-              onPressed: () {
+              onPressed: () async {
+                await RequestAndResponses.logout();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

@@ -59,7 +59,7 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                           ),
                           onPressed: () {
                             setState(() {
-                              users[index].role = 2;
+                              users[index].role = 'manager';
                             });
                             Alert(
                               context: context,
@@ -117,7 +117,7 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                                   ),
                                 ],
                               ).show();
-                              users[index].role = 0;
+                              users[index].role = "user";
                             });
                           },
                         ),

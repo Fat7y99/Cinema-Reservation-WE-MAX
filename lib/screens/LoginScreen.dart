@@ -16,9 +16,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  bool pass = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: MediaQuery.of(context).size.width / 2,
                 padding: EdgeInsets.all(10),
                 child: TextField(
-                  controller: emailController,
+                  controller: userNameController,
                   decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.transparent),
@@ -182,21 +182,23 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   onPressed: () async {
-                    print(emailController.text);
+                    print(userNameController.text);
                     print(passwordController.text);
                     // RequestAndResponses.tempp();
-                    await RequestAndResponses.logIn(
-                      emailController.text.trim(),
-                      passwordController.text,
-                    );
+                    if (pass) {
+                      await RequestAndResponses.logIn(
+                        userNameController.text.trim(),
+                        passwordController.text,
+                      );
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MyHomePage(
-                            isUser: 1), //should take movies[widget.index].id
-                      ),
-                    );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyHomePage(
+                              isUser: 1), //should take movies[widget.index].id
+                        ),
+                      );
+                    }
 
                     // Navigator.push(
                     //   context,
@@ -251,6 +253,9 @@ class _LoginPageState extends State<LoginPage> {
       if (!regex.hasMatch(value)) {
         return 'Enter valid password \nShould contain More than 8 characters \nShould contain at least 1 digit and 1 letter';
       } else {
+        setState(() {
+          pass = true;
+        });
         return '';
       }
     }

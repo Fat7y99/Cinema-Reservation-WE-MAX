@@ -1,6 +1,6 @@
 import 'package:movie_ticket_app/Models/movie_model.dart';
 
-enum Users { customer, manager, guest }
+enum Users { customer, pending, manager, admin, guest }
 
 class UserModel {
   int id;
@@ -15,7 +15,7 @@ class UserModel {
 
   String password;
 
-  int role;
+  String role;
 
   UserModel({
     required this.id,
@@ -43,10 +43,20 @@ class UserModel {
     );
   }
 
+  // {id: 1,
+  // userName: qs,
+  // email: qs@gmail.com,
+  // email_verified_at: null,
+  // firstName: q,
+  // lastName: s,
+  // role: user,
+  // created_at: 2022-01-07T02:42:05.000000Z,
+  // updated_at: 2022-01-07T02:42:05.000000Z}
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'UserModelName': userName,
+      'UserName': userName,
       'firstName': firstName,
       'lastName': lastName,
       'email': email,
@@ -77,26 +87,26 @@ List<UserModel> users = [
       firstName: 'Fathy0',
       lastName: 'Nabil0',
       email: 'Fathy.nabil2022@gmail.com',
-      role: 1),
+      role: 'pending'),
   UserModel(
       id: 2,
       userName: 'Fatoo71',
       firstName: 'Fathy1',
       lastName: 'Nabil1',
       email: 'Fathy.nabil2022@gmail.com',
-      role: 1),
+      role: 'pending'),
   UserModel(
       id: 3,
       userName: 'Fatoo72',
       firstName: 'Fathy2',
       lastName: 'Nabil2',
       email: 'Fathy.nabil2022@gmail.com',
-      role: 0),
+      role: 'pending'),
   UserModel(
       id: 4,
       userName: 'Fatoo73',
       firstName: 'Fathy3',
       lastName: 'Nabil3',
       email: 'Fathy.nabil2022@gmail.com',
-      role: 1),
+      role: 'pending'),
 ];
