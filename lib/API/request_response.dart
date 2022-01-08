@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:movie_ticket_app/Models/movie_model.dart';
+import 'package:movie_ticket_app/Models/reserve_model.dart';
 import 'dart:async';
 import 'package:movie_ticket_app/Models/user_model.dart';
 import 'package:movie_ticket_app/Provider/provider.dart';
@@ -136,4 +138,131 @@ class RequestAndResponses {
   }
 ////////////////////////////////////////Movie///////////////////////////////////////////
 
+  static Future<int> createMovie(MovieModel movie) async {
+    var jso = movie.toJson();
+
+    var url = '$_baseURL/movie/create';
+
+    var response = await http.post(
+      Uri.parse(url),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ${Provider.token}'
+      },
+      body: jsonEncode(jso),
+    );
+    print("Creating Movie");
+
+    print(response.body);
+
+    return response.statusCode;
+  }
+
+  static Future<int> editMovie(MovieModel movie) async {
+    var jso = movie.toJson();
+
+    var url = '$_baseURL/movie/update';
+
+    var response = await http.put(
+      Uri.parse(url),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ${Provider.token}'
+      },
+      body: jsonEncode(jso),
+    );
+    print("Editing Movie");
+
+    print(response.body);
+
+    return response.statusCode;
+  }
+
+  static Future<MovieModel> getMovieId(int id) async {
+    print(id);
+    print(Provider.token);
+    var url = '$_baseURL/movie/findMovieByID?id=$id';
+
+    var response = await http.get(Uri.parse(url));
+
+    print(response.statusCode);
+    print(response.body);
+
+    print("Getting Movie");
+
+    MovieModel movie = MovieModel.fromJson(json.decode(response.body));
+
+    return movie;
+  }
+
+  static Future<List<MovieModel>> getAllMovies() async {
+    var url = '$_baseURL/movie/viewAllMovies';
+
+    var response = await http.get(Uri.parse(url));
+
+    print(response.body);
+    print("Getting Movies");
+
+    List<MovieModel> m =
+        MovieModel.listFromJson(json.decode(response.body)['movies']);
+
+    return m;
+  }
+
+  static Future<List<int>> getAllReservedSeats(int id) async {
+    var url = '$_baseURL/movie/$id/getAllReservedSeats';
+
+    var response = await http.get(Uri.parse(url));
+
+    print(response.body);
+    print("Getting Rseats");
+
+    List<int> s = (json.decode(response.body)['seats'] as List)
+        .map((item) => item as int)
+        .toList();
+
+    return s;
+  }
+
+  static Future<int> reserveSeats(int id, ReserveModel reserveModel) async {
+    var jso = reserveModel.toJson();
+
+    var url = '$_baseURL/movie/$id/reserveVacantSeats';
+
+    var response = await http.post(
+      Uri.parse(url),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(jso),
+    );
+    print("Reserving Seats");
+
+    print(response.body);
+
+    return response.statusCode;
+  }
+
+  ////////////////////////////Reservations/////////////////////////////////
+  static Future<int> deleteReservation(int id) async {
+    var url = '$_baseURL/reservation/cancel/$id';
+
+    print(token);
+    var response = await http.delete(Uri.parse(url),
+        headers: {'Authorization': 'Bearer ${Provider.token}'});
+    print(response.body);
+
+    print("deleteeeeeeeeeeeeee ${response.statusCode}");
+    return response.statusCode;
+  }
+
+  static Future<int> getAllReservations(int id) async {
+    var url = '$_baseURL/reservation/viewAllReservations';
+
+    print(token);
+    var response = await http.delete(Uri.parse(url),
+        headers: {'Authorization': 'Bearer ${Provider.token}'});
+    print(response.body);
+
+    print("deleteeeeeeeeeeeeee ${response.statusCode}");
+    return response.statusCode;
+  }
 }

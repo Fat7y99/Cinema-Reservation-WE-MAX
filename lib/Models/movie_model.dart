@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class MovieModel {
   int id;
 
@@ -40,8 +42,8 @@ class MovieModel {
     return {
       'id': id,
       'title': title,
-      'startTime': startTime.toUtc().toIso8601String(),
-      'endTime': endTime.toUtc().toIso8601String(),
+      'startTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(startTime),
+      'endTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(endTime),
       'screenRoom': screenRoom,
       'posterImage': imageURL
     };

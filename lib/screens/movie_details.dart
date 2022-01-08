@@ -24,12 +24,12 @@ class MovieDetails extends StatefulWidget {
 class _MovieDetailsState extends State<MovieDetails> {
   @override
   Widget build(BuildContext context) {
-    final String imageURL = getMovieByID(widget.id).imageURL;
-    final String title = getMovieByID(widget.id).title;
-    final DateTime startTime = getMovieByID(widget.id).startTime;
-    final DateTime endTime = getMovieByID(widget.id).endTime;
-    final String year = getMovieByID(widget.id).startTime.year.toString();
-    final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
+    final String imageURL = Provider.movies[widget.id].imageURL;
+    final String title = Provider.movies[widget.id].title;
+    final DateTime startTime = Provider.movies[widget.id].startTime;
+    final DateTime endTime = Provider.movies[widget.id].endTime;
+    final String year = Provider.movies[widget.id].startTime.year.toString();
+    final String screenRoom = Provider.movies[widget.id].screenRoom.toString();
 
     final Color background = Color(0xff302b35);
     final Color fill = Color(0xff252129);
