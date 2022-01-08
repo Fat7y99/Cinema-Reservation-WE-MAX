@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/components/calendar_day.dart';
 import 'package:movie_ticket_app/components/seat_component.dart';
 import 'package:movie_ticket_app/components/show_time.dart';
@@ -157,35 +158,39 @@ class _BuyTicketState extends State<BuyTicket> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          print(countR());
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PayDetailsPage()
-                                //should take movies[widget.index].id
+                      Visibility(
+                        visible: Provider.currentUser!.role == 'user',
+                        child: InkWell(
+                          onTap: () {
+                            print(countR());
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PayDetailsPage()
+                                  //should take movies[widget.index].id
+                                  ),
+                            );
+                          },
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 25.0, vertical: 25.0),
+                              decoration: const BoxDecoration(
+                                color: kPimaryColor,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(25.0),
+                                  topRight: Radius.circular(25.0),
                                 ),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 25.0, vertical: 25.0),
-                            decoration: const BoxDecoration(
-                              color: kPimaryColor,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25.0),
-                                topRight: Radius.circular(25.0),
                               ),
-                            ),
-                            child: const Text(
-                              'Pay',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.bold),
+                              child: const Text(
+                                'Pay',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),

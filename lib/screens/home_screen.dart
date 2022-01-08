@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         actions: [
           Visibility(
-            visible: widget.isUser == 1,
+            visible: Provider.currentUser!.role == 'manager',
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
           ),
           Visibility(
-            visible: widget.isUser == 1,
+            visible: Provider.currentUser!.role == 'user',
             child: IconButton(
                 onPressed: () {
                   Navigator.push(

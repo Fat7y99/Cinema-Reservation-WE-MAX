@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 
 import '../const.dart';
 
@@ -28,8 +29,12 @@ class _SeatComponentState extends State<SeatComponent> {
       highlightColor: Colors.transparent,
       onTap: () {
         setState(() {
-          !widget.isReserved ? widget.isSelected = !widget.isSelected : null;
-          widget.reserve(widget.id);
+          !widget.isReserved && Provider.currentUser!.role == 'user'
+              ? widget.isSelected = !widget.isSelected
+              : null;
+          Provider.currentUser!.role == 'user'
+              ? widget.reserve(widget.id)
+              : null;
         });
       },
       child: Container(

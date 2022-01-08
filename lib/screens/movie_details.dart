@@ -8,6 +8,7 @@ import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
 import 'package:movie_ticket_app/Models/movie_model.dart';
 import 'package:movie_ticket_app/screens/movie_edit.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 
 class MovieDetails extends StatefulWidget {
   final int id;
@@ -49,7 +50,7 @@ class _MovieDetailsState extends State<MovieDetails> {
     return Scaffold(
       appBar: AppBar(actions: [
         Visibility(
-          visible: widget.isUser == 1,
+          visible: Provider.currentUser!.role == 'manager',
           child: IconButton(
               onPressed: () {
                 Navigator.push(
@@ -201,7 +202,9 @@ class _MovieDetailsState extends State<MovieDetails> {
                           Column(
                             children: [
                               Visibility(
-                                visible: widget.isUser != 2,
+                                visible:
+                                    Provider.currentUser!.role == 'manager' ||
+                                        Provider.currentUser!.role == 'user',
                                 child: Container(
                                   width: MediaQuery.of(context).size.width / 4,
                                   height: 50,
@@ -226,9 +229,10 @@ class _MovieDetailsState extends State<MovieDetails> {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: widget.isUser == 0
-                                                ? ' Buy Ticket '
-                                                : 'View Reserved',
+                                            text: Provider.currentUser!.role ==
+                                                    'manager'
+                                                ? 'View Reserved'
+                                                : ' Buy Ticket ',
                                             style: GoogleFonts.bioRhyme(
                                                 textStyle: TextStyle(
                                                     color: Colors.white,

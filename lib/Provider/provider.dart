@@ -11,4 +11,5 @@ class Provider {
   static String token = '';
   static int? id;
   static List<UserModel> users = [];
+  static bool isGuest = false;
 }
