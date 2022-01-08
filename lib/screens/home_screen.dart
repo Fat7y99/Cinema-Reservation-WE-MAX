@@ -29,14 +29,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final int id = movies[widget.index].id;
-    final String imageURL = movies[widget.index].imageURL;
-    final String title = movies[widget.index].title;
-    final DateTime startTime = movies[widget.index].startTime;
-    final DateTime endTime = movies[widget.index].endTime;
-    final String year = movies[widget.index].startTime.year.toString();
-    final String screenRoom = movies[widget.index].screenRoom.toString();
-
+    final int id = Provider.movies[widget.index].id;
+    final String imageURL = Provider.movies[widget.index].imageURL;
+    final String title = Provider.movies[widget.index].title;
+    final DateTime startTime = Provider.movies[widget.index].startTime;
+    final DateTime endTime = Provider.movies[widget.index].endTime;
+    final String year = Provider.movies[widget.index].startTime.year.toString();
+    final String screenRoom =
+        Provider.movies[widget.index].screenRoom.toString();
+    print("done");
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -162,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => MovieDetails(
-                            id: id,
+                            id: widget.index,
                             isUser: widget.isUser,
                           ), //should take movies[widget.index].id
                         ),
@@ -174,20 +175,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-                        itemCount: movies.length,
+                        itemCount: Provider.movies.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 20.0, horizontal: 20.0),
                             child: MovieCard(
-                                title: movies[index].title,
-                                imageLink: movies[index].imageURL,
+                                title: Provider.movies[index].title,
+                                imageLink: Provider.movies[index].imageURL,
                                 active: index == widget.index ? true : false,
                                 height: MediaQuery.of(context).size.height *
-                                        (1 / movies.length) -
+                                        (1 / Provider.movies.length) -
                                     100.0,
                                 width: MediaQuery.of(context).size.height *
-                                        (1 / movies.length) -
+                                        (1 / Provider.movies.length) -
                                     50.0,
                                 callBack: () {
                                   setState(() {

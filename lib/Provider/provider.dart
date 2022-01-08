@@ -6,6 +6,7 @@ import 'package:movie_ticket_app/Models/user_model.dart';
 class Provider {
   static UserModel? currentUser;
   static MovieModel? currentMovie;
+  static List<MovieModel> movies = [];
   static RoomModel? currentRoom;
   static ReservationModel? userReservations;
   static String token = '';

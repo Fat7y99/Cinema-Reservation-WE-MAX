@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/Models/movie_model.dart';
@@ -258,14 +259,23 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                         ),
                       ),
                       onPressed: () async {
+                        MovieModel movie = MovieModel(
+                            id: 0,
+                            title: titleController.text,
+                            startTime: DateTime.parse(startController.text),
+                            endTime: DateTime.parse(endController.text),
+                            screenRoom: int.parse(screenController.text),
+                            imageURL: imageController.text);
+
+                        int statusCode =
+                            await RequestAndResponses.createMovie(movie);
+                        if (statusCode == 200) {
+                          Provider.movies =
+                              await RequestAndResponses.getAllMovies();
+                          print("Added successfully");
+                        }
+
                         setState(() {
-                          MovieModel movie = new MovieModel(
-                              id: 7,
-                              title: titleController.text,
-                              startTime: DateTime.parse(startController.text),
-                              endTime: DateTime.parse(endController.text),
-                              screenRoom: int.parse(screenController.text),
-                              imageURL: imageController.text);
                           insertMovies(movie);
                         });
                         // await FlickrRequestsAndResponses.logIn(

@@ -127,7 +127,16 @@ class _LoginPageState extends State<LoginPage> {
                     shape: const BeveledRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5))),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    Provider.movies = await RequestAndResponses.getAllMovies();
+                    print(Provider.movies);
+                    Provider.currentUser = UserModel(
+                        id: 5000,
+                        userName: "",
+                        firstName: "",
+                        lastName: "",
+                        email: "",
+                        role: "guest");
                     print("Aywa");
                     Navigator.push(
                       context,

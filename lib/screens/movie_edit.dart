@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 
 import '../Models/movie_model.dart';
@@ -264,6 +265,22 @@ class _MovieEditPageState extends State<MovieEditPage> {
                         ),
                       ),
                       onPressed: () async {
+                        MovieModel movie = MovieModel(
+                            id: 0,
+                            title: titleController.text,
+                            startTime: DateTime.parse(startController.text),
+                            endTime: DateTime.parse(endController.text),
+                            screenRoom: int.parse(screenController.text),
+                            imageURL: imageController.text);
+                        int statusCode =
+                            await RequestAndResponses.editMovie(movie);
+                        if (statusCode == 200) {
+                          Provider.movies =
+                              await RequestAndResponses.getAllMovies();
+                          print("updatedSuccessfully");
+                          // Navigator.pop(context);
+
+                        }
                         // await FlickrRequestsAndResponses.logIn(
                         //     titleController,
                         //     dateController,
@@ -271,7 +288,6 @@ class _MovieEditPageState extends State<MovieEditPage> {
                         //     endController,
                         //     screenController,
                         //     imageController);
-                        Navigator.pop(context);
                         // Navigator.push();
                       },
                     ),
