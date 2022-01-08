@@ -9,6 +9,7 @@ import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
 import 'package:movie_ticket_app/screens/LoginScreen.dart';
 import 'package:movie_ticket_app/screens/movie_edit.dart';
+import 'package:movie_ticket_app/screens/movie_insert.dart';
 import 'package:movie_ticket_app/screens/reservation_screen.dart';
 
 void main() => runApp(MyApp());
