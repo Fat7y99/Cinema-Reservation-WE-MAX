@@ -3,16 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 import 'home_screen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
-
+import 'package:movie_ticket_app/Provider/provider.dart';
 import '../Models/movie_model.dart';
 
 class PayDetailsPage extends StatefulWidget {
   @override
   _PayDetailsPageState createState() => _PayDetailsPageState();
 }
+
+bool p = false;
+bool p2 = false;
 
 class _PayDetailsPageState extends State<PayDetailsPage> {
   @override
@@ -141,14 +147,19 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
                         //     endController,
                         //     screenController,
                         //     imageController);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(
-                                isUser:
-                                    1), //should take movies[widget.index].id
-                          ),
-                        );
+                        if (p && p2) {
+                          Provider.reserveModel!.pinNum = pinNo.text;
+                          Provider.reserveModel!.cardNum = cardNo.text;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyHomePage(
+                                  isUser:
+                                      1), //should take movies[widget.index].id
+                            ),
+                          );
+                        }
+
                         // Navigator.push();
                       },
                     ),
@@ -170,6 +181,8 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
       if (!regex.hasMatch(value)) {
         return 'It should be 16 digits';
       } else {
+        p = true;
+
         return '';
       }
     }
@@ -183,6 +196,7 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
       if (!regex.hasMatch(value)) {
         return 'It should be 3 digits';
       } else {
+        p2 = true;
         return '';
       }
     }

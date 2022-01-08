@@ -20,28 +20,6 @@ class BuyTicket extends StatefulWidget {
 
 class _BuyTicketState extends State<BuyTicket> {
   List<int> seatsIndex = [];
-  List<SeatData> seats = [
-    SeatData(id: 1, isReserved: true),
-    SeatData(id: 2, isReserved: true),
-    SeatData(id: 3),
-    SeatData(id: 4),
-    SeatData(id: 5),
-    SeatData(id: 6),
-    SeatData(id: 7),
-    SeatData(id: 8, isReserved: true),
-    SeatData(id: 9),
-    SeatData(id: 10),
-    SeatData(id: 11),
-    SeatData(id: 12),
-    SeatData(id: 13),
-    SeatData(id: 14),
-    SeatData(id: 15),
-    SeatData(id: 16, isReserved: true),
-    SeatData(id: 17, isReserved: true),
-    SeatData(id: 18),
-    SeatData(id: 19),
-    SeatData(id: 20),
-  ];
 
   void reserveCallBack(int index) {
     if (seatsIndex.contains(seats[index].id)) {
@@ -150,13 +128,17 @@ class _BuyTicketState extends State<BuyTicket> {
 
   int countR() {
     int count = 0;
+    seatsIndex.clear();
+    seatsIndex.clear();
     for (SeatData seat in seats) {
       if (seat.isSelected) {
         count++;
       }
     }
     print(seatsIndex);
-    seatsIndex.clear();
+    if (Provider.reserveModel != null) {
+      Provider.reserveModel!.seats = seatsIndex;
+    }
     return count;
   }
 }
