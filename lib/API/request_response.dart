@@ -102,8 +102,10 @@ class RequestAndResponses {
 
   static Future<int> upgradeUser(int id) async {
     var url = '$_baseURL/user/$id';
+
     var response = await http.put(Uri.parse(url),
         headers: {'Authorization': 'Bearer ${Provider.token}'});
+    print(response.body);
     print("updattttttttttte ${response.statusCode}");
     return response.statusCode;
   }
@@ -113,6 +115,8 @@ class RequestAndResponses {
     print(token);
     var response = await http.delete(Uri.parse(url),
         headers: {'Authorization': 'Bearer ${Provider.token}'});
+    print(response.body);
+
     print("deleteeeeeeeeeeeeee ${response.statusCode}");
     return response.statusCode;
   }

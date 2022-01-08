@@ -21,12 +21,6 @@ class _ManagerApprovalState extends State<ManagerApproval> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context, false);
-          },
-          icon: Icon(Icons.arrow_back_ios),
-        ),
         title: Text("Admin Page", style: TextStyle(color: kPimaryColor)),
         actions: [
           IconButton(
@@ -76,46 +70,46 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                     ButtonBar(
                       children: [
                         TextButton(
-                          child: Text(
-                            'Upgrade To Manager',
-                            style: TextStyle(color: Colors.green[400]),
-                          ),
-                          onPressed: () async {
-                            int upg = await RequestAndResponses.upgradeUser(
-                                Provider.users[index].id);
-
-                            setState(() async {
-                              if (upg == 200)
+                            child: Text(
+                              'Upgrade To Manager',
+                              style: TextStyle(color: Colors.green[400]),
+                            ),
+                            onPressed: () async {
+                              int upg = await RequestAndResponses.upgradeUser(
+                                  Provider.users[index].id);
+                              if (upg == 200) {
                                 Provider.users =
                                     await RequestAndResponses.getAllUsers();
-                              //   Provider.users[index].role =
-                              //       'manager'; //TODO UPDATE USER
-                            });
-                            Alert(
-                              context: context,
-                              title:
-                                  "${Provider.users[index].firstName} is Upgraded successfully",
-                              // desc: "Flutter is better with RFlutter Alert.",
-                              image: Image.asset(
-                                "assets/images/success.png",
-                                scale: 10,
-                              ),
-
-                              buttons: [
-                                DialogButton(
-                                  child: Text(
-                                    "Ok",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
+                                setState(() {
+                                  Provider.users[index].role = 'manager';
+                                  //   Provider.users[index].role =
+                                  //       'manager'; //TODO UPDATE USER
+                                });
+                                Alert(
+                                  context: context,
+                                  title:
+                                      "${Provider.users[index].firstName} is Upgraded successfully",
+                                  // desc: "Flutter is better with RFlutter Alert.",
+                                  image: Image.asset(
+                                    "assets/images/success.png",
+                                    scale: 10,
                                   ),
-                                  onPressed: () => Navigator.pop(context),
-                                  color: kBackgroundColor,
-                                  radius: BorderRadius.circular(0.0),
-                                ),
-                              ],
-                            ).show();
-                          },
-                        ),
+
+                                  buttons: [
+                                    DialogButton(
+                                      child: Text(
+                                        "Ok",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                      onPressed: () => Navigator.pop(context),
+                                      color: kBackgroundColor,
+                                      radius: BorderRadius.circular(0.0),
+                                    ),
+                                  ],
+                                ).show();
+                              }
+                            }),
                         TextButton(
                           child: Text(
                             'Delete User',
@@ -148,12 +142,12 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                                   ),
                                 ],
                               ).show();
-                              setState(() async {
-                                Provider.users =
-                                    await RequestAndResponses.getAllUsers();
-                                Provider.users.remove(Provider
-                                    .users[index]); //TODO Delete user req
+                              setState(() {
+                                Provider.users.remove(Provider.users[index]);
+                                print(Provider.users); //TODO Delete user req
                               });
+                              Provider.users =
+                                  await RequestAndResponses.getAllUsers();
                             } else {
                               print("NOOOO");
                             }
