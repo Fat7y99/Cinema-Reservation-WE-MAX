@@ -86,7 +86,7 @@ List<MovieModel> movies = [
     title: 'Avengers: Endgame',
     startTime: DateTime(10 - 10 - 2021),
     endTime: DateTime(10 - 10 - 2021),
-    screenRoom: 3,
+    screenRoom: 2,
     imageURL:
         'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
   ),

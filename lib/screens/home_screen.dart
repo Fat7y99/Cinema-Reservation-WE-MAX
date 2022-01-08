@@ -18,7 +18,7 @@ import 'LoginScreen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 
 class MyHomePage extends StatefulWidget {
-  int index = 1;
+  int index = 0;
   int isUser;
 
   MyHomePage({required this.isUser});

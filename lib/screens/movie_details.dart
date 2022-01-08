@@ -6,6 +6,7 @@ import 'package:movie_ticket_app/components/seat_component.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
 import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
+import 'package:movie_ticket_app/screens/buy_ticket_2.dart';
 import 'package:movie_ticket_app/Models/movie_model.dart';
 import 'package:movie_ticket_app/screens/movie_edit.dart';
 import 'package:movie_ticket_app/Provider/provider.dart';
@@ -247,10 +248,12 @@ class _MovieDetailsState extends State<MovieDetails> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                BuyTicket(widget.id)
-                                            //should take movies[widget.index].id
-                                            ),
+                                          builder: (context) =>
+                                              int.parse(screenRoom) == 1
+                                                  ? BuyTicket(widget.id)
+                                                  : BuyTicket2(widget.id),
+                                          //should take movies[widget.index].id
+                                        ),
                                       );
                                     },
                                   ),
