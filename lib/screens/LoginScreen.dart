@@ -222,15 +222,16 @@ class _LoginPageState extends State<LoginPage> {
                                 ManagerApproval(), //should take movies[widget.index].id
                           ),
                         );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyHomePage(
+                                isUser:
+                                    log), //should take movies[widget.index].id
+                          ),
+                        );
                       }
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyHomePage(
-                              isUser:
-                                  log), //should take movies[widget.index].id
-                        ),
-                      );
                     }
                   },
                 ),

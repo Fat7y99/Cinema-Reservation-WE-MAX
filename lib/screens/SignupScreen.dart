@@ -18,10 +18,12 @@ class SignupPage extends StatefulWidget {
   _SignupPageState createState() => _SignupPageState();
 }
 
+bool passOne = false;
+bool passTwo = false;
+
 class _SignupPageState extends State<SignupPage> {
   String dropdownValue = 'User';
-  bool passOne = false;
-  bool passTwo = false;
+
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -198,6 +200,7 @@ class _SignupPageState extends State<SignupPage> {
                   width: MediaQuery.of(context).size.width / 2,
                   padding: EdgeInsets.all(10),
                   child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: validatePassword,
                     controller: passwordController,
                     decoration: InputDecoration(
@@ -224,6 +227,7 @@ class _SignupPageState extends State<SignupPage> {
                   width: MediaQuery.of(context).size.width / 2,
                   padding: EdgeInsets.all(10),
                   child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: validatePassword1,
                     controller: confirmPasswordController,
                     decoration: InputDecoration(
@@ -303,6 +307,12 @@ class _SignupPageState extends State<SignupPage> {
                         setState(() {
                           role = dropdownValue == 'User' ? 'user' : 'pending';
                         });
+                        print(passOne);
+                        print(passTwo);
+                        print(passwordController.text ==
+                            confirmPasswordController.text);
+                        print(passwordController.text);
+                        print(confirmPasswordController.text);
                         if ((passOne && passTwo) &&
                             (passwordController.text ==
                                 confirmPasswordController.text)) {
@@ -313,7 +323,7 @@ class _SignupPageState extends State<SignupPage> {
                               emailController.text.trim(),
                               passwordController.text,
                               role);
-
+                          print(statusCode);
                           if (statusCode == 200 || statusCode == 201) {
                             Alert(
                               context: context,
@@ -393,8 +403,8 @@ class _SignupPageState extends State<SignupPage> {
       if (!regex.hasMatch(value)) {
         return 'Enter valid password \nNot matched\nShould contain More than 8 characters \nShould contain at least 1 digit and 1 letter';
       } else {
+        print("Pass1");
         passOne = true;
-
         return '';
       }
     }
@@ -408,6 +418,7 @@ class _SignupPageState extends State<SignupPage> {
       if (!regex.hasMatch(value)) {
         return 'Enter valid password \nNot matched\nShould contain More than 8 characters \nShould contain at least 1 digit and 1 letter';
       } else {
+        print("Pass2");
         passTwo = true;
         return '';
       }

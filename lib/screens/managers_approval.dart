@@ -83,6 +83,7 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                           onPressed: () async {
                             int upg = await RequestAndResponses.upgradeUser(
                                 Provider.users[index].id);
+
                             setState(() async {
                               if (upg == 200)
                                 Provider.users =
