@@ -7,6 +7,10 @@ import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/Models/movie_model.dart';
 import '../Models/movie_model.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
+
+DateTime dates = DateTime.now();
 
 class MovieInsertPage extends StatefulWidget {
   @override
@@ -104,67 +108,165 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                       keyboardType: TextInputType.visiblePassword,
                     ),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      // initialValue: startTime,
-                      controller: startController,
-                      decoration: InputDecoration(
-                          hintText: 'Start Time',
-                          hintStyle: TextStyle(
-                            color: Colors.white70,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                          prefixIcon:
-                              Icon(Icons.timelapse, color: Color(0xFF94ADEA)),
-                          // hintText: 'Email',
-                          // hintStyle: TextStyle(
-                          //   color: Colors.white70,
-                          // ),
-                          filled: true,
-                          fillColor: Color(0xD000000)),
-                      style: TextStyle(color: Colors.white),
-                      keyboardType: TextInputType.visiblePassword,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        padding: EdgeInsets.all(10),
+                        child: TextFormField(
+                          // initialValue: startTime,
+                          controller: startController,
+                          decoration: InputDecoration(
+                              hintText: 'Start Time',
+                              hintStyle: TextStyle(
+                                color: Colors.white70,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                              prefixIcon: Icon(Icons.timelapse,
+                                  color: Color(0xFF94ADEA)),
+                              // hintText: 'Email',
+                              // hintStyle: TextStyle(
+                              //   color: Colors.white70,
+                              // ),
+                              filled: true,
+                              fillColor: Color(0xD000000)),
+                          style: TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.visiblePassword,
+                        ),
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            DatePicker.showDatePicker(context,
+                                showTitleActions: true,
+                                minTime: DateTime.now(),
+                                maxTime: DateTime(2023, 6, 7),
+                                onChanged: (date) {
+                              startController.text =
+                                  DateFormat("yyyy-MM-dd HH:mm:ss")
+                                      .format(date)
+                                      .toString();
+
+                              print('change $date');
+                            }, onConfirm: (date) {
+                              print('confirm $date');
+                              setState(() {
+                                // startController.text =
+                                //     DateFormat("yyyy-MM-dd HH:mm:ss")
+                                //         .format(date)
+                                //         .toString();
+
+                                print(startController.value);
+                              });
+                            },
+                                currentTime: DateTime.now(),
+                                locale: LocaleType.en);
+                          },
+                          child: RichText(
+                            text: TextSpan(
+                              children: const [
+                                WidgetSpan(
+                                  child: Icon(
+                                    Icons.date_range,
+                                    size: 15,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
+                    ],
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      // initialValue: endTime,
-                      controller: endController,
-                      decoration: InputDecoration(
-                          hintText: 'End Time',
-                          hintStyle: TextStyle(
-                            color: Colors.white70,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                          prefixIcon:
-                              Icon(Icons.timelapse, color: Color(0xFF94ADEA)),
-                          // hintText: 'Email',
-                          // hintStyle: TextStyle(
-                          //   color: Colors.white70,
-                          // ),
-                          filled: true,
-                          fillColor: Color(0xD000000)),
-                      style: TextStyle(color: Colors.white),
-                      keyboardType: TextInputType.visiblePassword,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        padding: EdgeInsets.all(10),
+                        child: TextFormField(
+                          // initialValue: endTime,
+                          controller: endController,
+                          decoration: InputDecoration(
+                              hintText: 'End Time',
+                              hintStyle: TextStyle(
+                                color: Colors.white70,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                              prefixIcon: Icon(Icons.timelapse,
+                                  color: Color(0xFF94ADEA)),
+                              // hintText: 'Email',
+                              // hintStyle: TextStyle(
+                              //   color: Colors.white70,
+                              // ),
+                              filled: true,
+                              fillColor: Color(0xD000000)),
+                          style: TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.visiblePassword,
+                        ),
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            DatePicker.showDatePicker(context,
+                                showTitleActions: true,
+                                minTime: DateTime.now(),
+                                maxTime: DateTime(2023, 6, 7),
+                                onChanged: (date) {
+                              endController.text =
+                                  DateFormat("yyyy-MM-dd HH:mm:ss")
+                                      .format(date)
+                                      .toString();
+
+                              print('change $date');
+                            }, onConfirm: (date) {
+                              print('confirm $date');
+                              setState(() {
+                                // startController.text =
+                                //     DateFormat("yyyy-MM-dd HH:mm:ss")
+                                //         .format(date)
+                                //         .toString();
+
+                                print(startController.value);
+                              });
+                            },
+                                currentTime: DateTime.now(),
+                                locale: LocaleType.en);
+                          },
+                          child: RichText(
+                            text: TextSpan(
+                              children: const [
+                                WidgetSpan(
+                                  child: Icon(
+                                    Icons.date_range,
+                                    size: 15,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
+                    ],
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width / 2,
