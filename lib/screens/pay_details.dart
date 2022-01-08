@@ -28,6 +28,7 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
     TextEditingController pinNo = TextEditingController();
 
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Color(0xff302b35),
       body: SafeArea(
         child: Stack(

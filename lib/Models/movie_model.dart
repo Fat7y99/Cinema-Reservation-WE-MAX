@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class MovieModel {
   int id;
 
@@ -40,8 +42,8 @@ class MovieModel {
     return {
       'id': id,
       'title': title,
-      'startTime': startTime.toUtc().toIso8601String(),
-      'endTime': endTime.toUtc().toIso8601String(),
+      'startDateTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(startTime),
+      'endDateTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(endTime),
       'screenRoom': screenRoom,
       'posterImage': imageURL
     };
@@ -86,7 +88,7 @@ List<MovieModel> movies = [
     title: 'Avengers: Endgame',
     startTime: DateTime(10 - 10 - 2021),
     endTime: DateTime(10 - 10 - 2021),
-    screenRoom: 3,
+    screenRoom: 2,
     imageURL:
         'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
   ),

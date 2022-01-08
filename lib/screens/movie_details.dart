@@ -6,6 +6,7 @@ import 'package:movie_ticket_app/components/seat_component.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
 import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/screens/buy_ticket.dart';
+import 'package:movie_ticket_app/screens/buy_ticket_2.dart';
 import 'package:movie_ticket_app/Models/movie_model.dart';
 import 'package:movie_ticket_app/screens/movie_edit.dart';
 import 'package:movie_ticket_app/Provider/provider.dart';
@@ -23,12 +24,12 @@ class MovieDetails extends StatefulWidget {
 class _MovieDetailsState extends State<MovieDetails> {
   @override
   Widget build(BuildContext context) {
-    final String imageURL = getMovieByID(widget.id).imageURL;
-    final String title = getMovieByID(widget.id).title;
-    final DateTime startTime = getMovieByID(widget.id).startTime;
-    final DateTime endTime = getMovieByID(widget.id).endTime;
-    final String year = getMovieByID(widget.id).startTime.year.toString();
-    final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
+    final String imageURL = Provider.movies[widget.id].imageURL;
+    final String title = Provider.movies[widget.id].title;
+    final DateTime startTime = Provider.movies[widget.id].startTime;
+    final DateTime endTime = Provider.movies[widget.id].endTime;
+    final String year = Provider.movies[widget.id].startTime.year.toString();
+    final String screenRoom = Provider.movies[widget.id].screenRoom.toString();
 
     final Color background = Color(0xff302b35);
     final Color fill = Color(0xff252129);
@@ -247,10 +248,12 @@ class _MovieDetailsState extends State<MovieDetails> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                BuyTicket(widget.id)
-                                            //should take movies[widget.index].id
-                                            ),
+                                          builder: (context) =>
+                                              int.parse(screenRoom) == 1
+                                                  ? BuyTicket(widget.id)
+                                                  : BuyTicket2(widget.id),
+                                          //should take movies[widget.index].id
+                                        ),
                                       );
                                     },
                                   ),
