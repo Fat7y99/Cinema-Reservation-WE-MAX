@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movie_ticket_app/Models/movie_model.dart';
+import 'package:movie_ticket_app/Models/reservation_model.dart';
 import 'package:movie_ticket_app/Models/reserve_model.dart';
 import 'dart:async';
 import 'package:movie_ticket_app/Models/user_model.dart';
@@ -254,15 +255,17 @@ class RequestAndResponses {
     return response.statusCode;
   }
 
-  static Future<int> getAllReservations(int id) async {
+  static Future<List<ReservationModel>> getAllReservations(int id) async {
     var url = '$_baseURL/reservation/viewAllReservations';
 
     print(token);
     var response = await http.delete(Uri.parse(url),
         headers: {'Authorization': 'Bearer ${Provider.token}'});
     print(response.body);
+    List<ReservationModel> r = ReservationModel.listFromJson(
+        json.decode(response.body)['reservations']);
 
-    print("deleteeeeeeeeeeeeee ${response.statusCode}");
-    return response.statusCode;
+    print("reservations ${response.statusCode}");
+    return r;
   }
 }

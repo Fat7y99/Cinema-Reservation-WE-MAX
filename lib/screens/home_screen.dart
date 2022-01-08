@@ -63,7 +63,11 @@ class _MyHomePageState extends State<MyHomePage> {
           Visibility(
             visible: Provider.currentUser!.role == 'user',
             child: IconButton(
-                onPressed: () {
+                onPressed: () async {
+                  Provider.reservations =
+                      await RequestAndResponses.getAllReservations(
+                          Provider.currentUser!.id);
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/components/seat_component.dart';
 import 'package:movie_ticket_app/components/movie_app_bar.dart';
 import 'package:movie_ticket_app/const.dart';
@@ -25,6 +26,7 @@ class _MovieDetailsState extends State<MovieDetails> {
   @override
   Widget build(BuildContext context) {
     final String imageURL = Provider.movies[widget.id].imageURL;
+    final int id = Provider.movies[widget.id].id;
     final String title = Provider.movies[widget.id].title;
     final DateTime startTime = Provider.movies[widget.id].startTime;
     final DateTime endTime = Provider.movies[widget.id].endTime;
@@ -244,7 +246,23 @@ class _MovieDetailsState extends State<MovieDetails> {
                                       ),
                                     ),
 
-                                    onPressed: () {
+                                    onPressed: () async {
+                                      Provider.seats = await RequestAndResponses
+                                          .getAllReservedSeats(id);
+                                      for (var i = 0; i < seats.length; i++) {
+                                        if (Provider.seats
+                                            .contains(seats[i].id)) {
+                                          seats[i].isReserved = true;
+                                        }
+                                      }
+
+                                      for (var i = 0; i < seats2.length; i++) {
+                                        if (Provider.seats
+                                            .contains(seats2[i].id)) {
+                                          seats2[i].isReserved = true;
+                                        }
+                                      }
+
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(

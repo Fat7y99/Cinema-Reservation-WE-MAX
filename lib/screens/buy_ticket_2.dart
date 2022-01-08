@@ -160,13 +160,17 @@ class _BuyTicket2State extends State<BuyTicket2> {
 
   int countR() {
     int count = 0;
+    seatsIndex.clear();
+    seatsIndex.clear();
     for (SeatData seat in seats) {
       if (seat.isSelected) {
         count++;
       }
     }
     print(seatsIndex);
-    seatsIndex.clear();
+    if (Provider.reserveModel != null) {
+      Provider.reserveModel!.seats = seatsIndex;
+    }
     return count;
   }
 }

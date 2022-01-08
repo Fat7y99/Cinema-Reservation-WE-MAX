@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movie_ticket_app/API/request_response.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/Models/movie_model.dart';
 import 'package:movie_ticket_app/Models/reservation_model.dart';
 import 'package:movie_ticket_app/Models/user_model.dart';
 import 'package:movie_ticket_app/Models/seat_model.dart';
 import 'package:movie_ticket_app/Models/room_model.dart';
+import 'package:movie_ticket_app/const.dart';
 
 class ReservationScreen extends StatefulWidget {
   @override
@@ -13,10 +16,10 @@ class ReservationScreen extends StatefulWidget {
 
 class _ReservationScreenState extends State<ReservationScreen> {
   List<ReservationModel> reservations = [
-    ReservationModel(id: 1, movie: movies[0], user: users[0], seats: seats),
-    ReservationModel(id: 2, movie: movies[1], user: users[0], seats: seats),
-    ReservationModel(id: 3, movie: movies[2], user: users[0], seats: seats),
-    ReservationModel(id: 4, movie: movies[4], user: users[0], seats: seats),
+    ReservationModel(id: 1, movie: movies[0], user: users[0], seats: []),
+    ReservationModel(id: 2, movie: movies[1], user: users[0], seats: []),
+    ReservationModel(id: 3, movie: movies[2], user: users[0], seats: []),
+    ReservationModel(id: 4, movie: movies[4], user: users[0], seats: []),
   ];
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
           title:
               Text("Your Reservations", style: TextStyle(color: kPimaryColor))),
       body: ListView.builder(
-          itemCount: reservations.length,
+          itemCount: Provider.reservations.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
                 color: const Color(0xff302b35),
@@ -43,19 +46,24 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   children: [
                     ListTile(
                       title: Text(
-                          getMovieByID(reservations[index].movie.id).title,
+                          getMovieByID(Provider.reservations[index].movie.id)
+                              .title,
                           style: TextStyle(
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
                       subtitle: Text(
-                          "Room Number: ${reservations[index].movie.screenRoom}",
+                          "Room Number: ${Provider.reservations[index].movie.screenRoom}",
                           style: TextStyle(
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
                       trailing: IconButton(
                         onPressed: () {
-                          setState(() {
-                            reservations.remove(reservations[index]);
+                          setState(() async {
+                            reservations.remove(Provider.reservations[index]);
+                            int statusCode =
+                                await RequestAndResponses.deleteReservation(
+                                    Provider.reservations[index].id);
+                            print("Deletedsuccessfully");
                           });
                         },
                         icon: Icon(Icons.cancel),
@@ -66,7 +74,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                       padding: EdgeInsets.all(16.0),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                          " Reserved Seats: ${reservations[index].seats.length}",
+                          " Reserved Seats: ${Provider.reservations[index].seats.length}",
                           style: TextStyle(color: kPimaryColor)),
                     ),
                   ],
