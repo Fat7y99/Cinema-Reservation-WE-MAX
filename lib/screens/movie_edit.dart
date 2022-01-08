@@ -154,7 +154,7 @@ class _MovieEditPageState extends State<MovieEditPage> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            DatePicker.showDatePicker(context,
+                            DatePicker.showDateTimePicker(context,
                                 showTitleActions: true,
                                 minTime: DateTime.now(),
                                 maxTime: DateTime(2023, 6, 7),
@@ -234,7 +234,7 @@ class _MovieEditPageState extends State<MovieEditPage> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            DatePicker.showDatePicker(context,
+                            DatePicker.showDateTimePicker(context,
                                 showTitleActions: true,
                                 minTime: DateTime.now(),
                                 maxTime: DateTime(2023, 6, 7),
