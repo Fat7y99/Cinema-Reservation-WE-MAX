@@ -51,7 +51,7 @@ class _BuyTicketState extends State<BuyTicket> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * .75,
                       child: Text(
-                        (getMovieByID(widget.id)).title,
+                        Provider.movies[widget.id].title,
                         style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w900,

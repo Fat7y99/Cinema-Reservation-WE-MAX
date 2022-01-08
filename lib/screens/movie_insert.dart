@@ -149,7 +149,7 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            DatePicker.showDatePicker(context,
+                            DatePicker.showDateTimePicker(context,
                                 showTitleActions: true,
                                 minTime: DateTime.now(),
                                 maxTime: DateTime(2023, 6, 7),
@@ -229,7 +229,7 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            DatePicker.showDatePicker(context,
+                            DatePicker.showDateTimePicker(context,
                                 showTitleActions: true,
                                 minTime: DateTime.now(),
                                 maxTime: DateTime(2023, 6, 7),
