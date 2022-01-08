@@ -16,6 +16,7 @@ import 'package:movie_ticket_app/screens/movie_insert.dart';
 import 'package:movie_ticket_app/screens/managers_approval.dart';
 import 'LoginScreen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
+import 'package:intl/intl.dart';
 
 class MyHomePage extends StatefulWidget {
   int index = 0;
@@ -32,8 +33,12 @@ class _MyHomePageState extends State<MyHomePage> {
     final int id = Provider.movies[widget.index].id;
     final String imageURL = Provider.movies[widget.index].imageURL;
     final String title = Provider.movies[widget.index].title;
-    final DateTime startTime = Provider.movies[widget.index].startTime;
-    final DateTime endTime = Provider.movies[widget.index].endTime;
+    DateTime dateTime = Provider.movies[widget.index].startTime;
+    final DateTime startTime =
+        DateFormat("yyyy-MM-dd HH:mm:ss").format(dateTime) as DateTime;
+    dateTime = Provider.movies[widget.index].endTime;
+    final DateTime endTime =
+        DateFormat("yyyy-MM-dd HH:mm:ss").format(dateTime) as DateTime;
     final String year = Provider.movies[widget.index].startTime.year.toString();
     final String screenRoom =
         Provider.movies[widget.index].screenRoom.toString();
