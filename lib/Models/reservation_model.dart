@@ -9,18 +9,18 @@ class ReservationModel {
 
   UserModel user;
 
-  SeatModel seat;
+  List<int> seats;
 
   ReservationModel({
     required this.id,
     required this.movie,
     required this.user,
-    required this.seat,
+    required this.seats,
   });
 
   @override
   String toString() {
-    return 'ReservationModel[id=$id, movie=$movie, user=$user, seat=$seat, ]';
+    return 'ReservationModel[id=$id, movie=$movie, user=$user, seat=$seats, ]';
   }
 
   factory ReservationModel.fromJson(Map<String, dynamic> json) {
@@ -28,12 +28,12 @@ class ReservationModel {
       id: json['id'],
       movie: MovieModel.fromJson(json['movie']),
       user: UserModel.fromJson(json['user']),
-      seat: SeatModel.fromJson(json['seat']),
+      seats: (json['seats'] as List).map((item) => item as int).toList(),
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id, 'movie': movie, 'user': user, 'seat': seat};
+    return {'id': id, 'movie': movie, 'user': user, 'seat': seats};
   }
 
   static List<ReservationModel> listFromJson(List<dynamic> json) {

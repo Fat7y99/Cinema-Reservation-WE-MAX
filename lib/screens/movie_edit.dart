@@ -20,9 +20,9 @@ class _MovieEditPageState extends State<MovieEditPage> {
   Widget build(BuildContext context) {
     final String imageURL = getMovieByID(widget.id).imageURL;
     final String title = getMovieByID(widget.id).title;
-    final String startTime = getMovieByID(widget.id).startTime;
-    final String endTime = getMovieByID(widget.id).endTime;
-    final String year = getMovieByID(widget.id).date.toString();
+    final DateTime startTime = getMovieByID(widget.id).startTime;
+    final DateTime endTime = getMovieByID(widget.id).endTime;
+    final String year = getMovieByID(widget.id).startTime.year.toString();
     final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
 
     TextEditingController titleController = TextEditingController(text: title);
@@ -30,8 +30,9 @@ class _MovieEditPageState extends State<MovieEditPage> {
         TextEditingController(text: imageURL);
     TextEditingController dateController = TextEditingController(text: year);
     TextEditingController startController =
-        TextEditingController(text: startTime);
-    TextEditingController endController = TextEditingController(text: endTime);
+        TextEditingController(text: startTime.toString()); //TODO DATETIME
+    TextEditingController endController =
+        TextEditingController(text: endTime.toString());
     TextEditingController screenController =
         TextEditingController(text: screenRoom);
 

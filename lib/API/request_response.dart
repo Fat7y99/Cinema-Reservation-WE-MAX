@@ -6,7 +6,7 @@ import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/const.dart';
 
 class RequestAndResponses {
-  static String _baseURL = 'http://hidden-springs-36426.herokuapp.com/api';
+  static String _baseURL = 'https://hidden-springs-36426.herokuapp.com/api';
 
 /////////////////////////////////////User//////////////////////////////////////////////
   static Future<http.Response> logIn(final email, final password) async {
@@ -31,7 +31,7 @@ class RequestAndResponses {
     print(json.decode(response.body)['id']);
     Provider.token = json.decode(response.body)['token'];
     print(Provider.token);
-    await getUserById(Provider.id!);
+    Provider.currentUser = await getUserById(Provider.id!);
 
     return response;
   }
@@ -71,8 +71,9 @@ class RequestAndResponses {
   static Future<int> logout() async {
     var url = '$_baseURL/user/logout';
 
-    var response = await http.get(Uri.parse(url),
+    var response = await http.post(Uri.parse(url),
         headers: {"Authorization": "Bearer ${Provider.token}"});
+
     print("logouttttttttttttttt");
     print(response.body);
     print(response.statusCode);
@@ -117,11 +118,13 @@ class RequestAndResponses {
   }
 
   static Future<List<UserModel>> getAllUsers() async {
-    var url = '$_baseURL/user/getAllUsers/';
-
+    var url = '$_baseURL/user/getAllUsers';
+    print("bas");
     var response = await http.get(Uri.parse(url),
         headers: {'Authorization': 'Bearer ${Provider.token}'});
-    List<UserModel> u = UserModel.listFromJson(json.decode(response.body));
+    print(response.body);
+    List<UserModel> u =
+        UserModel.listFromJson(json.decode(response.body)['users']);
     print("1----------${u[0].firstName}");
     print("2----------${u[1].firstName}");
     return u;

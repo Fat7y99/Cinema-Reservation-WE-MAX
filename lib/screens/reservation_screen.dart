@@ -13,10 +13,10 @@ class ReservationScreen extends StatefulWidget {
 
 class _ReservationScreenState extends State<ReservationScreen> {
   List<ReservationModel> reservations = [
-    ReservationModel(id: 1, movie: movies[0], user: users[0], seat: seats[0]),
-    ReservationModel(id: 2, movie: movies[1], user: users[0], seat: seats[0]),
-    ReservationModel(id: 3, movie: movies[2], user: users[0], seat: seats[0]),
-    ReservationModel(id: 4, movie: movies[4], user: users[0], seat: seats[0]),
+    ReservationModel(id: 1, movie: movies[0], user: users[0], seats: seats),
+    ReservationModel(id: 2, movie: movies[1], user: users[0], seats: seats),
+    ReservationModel(id: 3, movie: movies[2], user: users[0], seats: seats),
+    ReservationModel(id: 4, movie: movies[4], user: users[0], seats: seats),
   ];
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
                       subtitle: Text(
-                          "Room Number: ${reservations[index].seat.room.roomNumber}",
+                          "Room Number: ${reservations[index].movie.screenRoom}",
                           style: TextStyle(
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
@@ -66,7 +66,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                       padding: EdgeInsets.all(16.0),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                          " Reserved Seats: ${reservations[index].seat}",
+                          " Reserved Seats: ${reservations[index].seats.length}",
                           style: TextStyle(color: kPimaryColor)),
                     ),
                   ],

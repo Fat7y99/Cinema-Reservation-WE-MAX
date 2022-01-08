@@ -393,9 +393,8 @@ class _SignupPageState extends State<SignupPage> {
       if (!regex.hasMatch(value)) {
         return 'Enter valid password \nNot matched\nShould contain More than 8 characters \nShould contain at least 1 digit and 1 letter';
       } else {
-        setState(() {
-          passOne = true;
-        });
+        passOne = true;
+
         return '';
       }
     }
@@ -409,9 +408,7 @@ class _SignupPageState extends State<SignupPage> {
       if (!regex.hasMatch(value)) {
         return 'Enter valid password \nNot matched\nShould contain More than 8 characters \nShould contain at least 1 digit and 1 letter';
       } else {
-        setState(() {
-          passTwo = true;
-        });
+        passTwo = true;
         return '';
       }
     }

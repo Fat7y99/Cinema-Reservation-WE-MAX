@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/screens/SignupScreen.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
@@ -15,10 +16,11 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
+bool pass = false;
+
 class _LoginPageState extends State<LoginPage> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool pass = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,29 +187,51 @@ class _LoginPageState extends State<LoginPage> {
                     print(userNameController.text);
                     print(passwordController.text);
                     // RequestAndResponses.tempp();
+                    print(pass);
                     if (pass) {
+                      print("aywaaa");
                       await RequestAndResponses.logIn(
                         userNameController.text.trim(),
                         passwordController.text,
                       );
+                      var log;
+                      setState(() {
+                        if (Provider.currentUser!.role == 'user') {
+                          log = Users.user.index;
+                          print(Users.user);
+                        } else if (Provider.currentUser!.role == 'pending') {
+                          log = Users.pending.index;
+                          print(Users.pending);
+                        } else if (Provider.currentUser!.role == 'manager') {
+                          log = Users.manager.index;
+                          print(Users.manager);
+                        } else if (Provider.currentUser!.role == 'admin') {
+                          log = Users.admin.index;
+                          print(Users.admin);
+                        }
+                      });
+                      if (log == Users.admin.index) {
+                        print("Aw3aa");
+                        Provider.users =
+                            await RequestAndResponses.getAllUsers();
 
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ManagerApproval(), //should take movies[widget.index].id
+                          ),
+                        );
+                      }
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => MyHomePage(
-                              isUser: 1), //should take movies[widget.index].id
+                              isUser:
+                                  log), //should take movies[widget.index].id
                         ),
                       );
                     }
-
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => MyHomePage(
-                    //         isUser: true), //should take movies[widget.index].id
-                    //   ),
-                    // );
-                    // Navigator.push();
                   },
                 ),
               ),
@@ -253,9 +277,8 @@ class _LoginPageState extends State<LoginPage> {
       if (!regex.hasMatch(value)) {
         return 'Enter valid password \nShould contain More than 8 characters \nShould contain at least 1 digit and 1 letter';
       } else {
-        setState(() {
-          pass = true;
-        });
+        pass = true;
+
         return '';
       }
     }

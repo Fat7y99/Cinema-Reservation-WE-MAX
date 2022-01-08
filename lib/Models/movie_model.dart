@@ -3,11 +3,9 @@ class MovieModel {
 
   String title;
 
-  DateTime date;
+  DateTime startTime;
 
-  String startTime;
-
-  String endTime;
+  DateTime endTime;
 
   int screenRoom;
 
@@ -16,7 +14,6 @@ class MovieModel {
   MovieModel({
     required this.id,
     required this.title,
-    required this.date,
     required this.startTime,
     required this.endTime,
     required this.screenRoom,
@@ -25,16 +22,15 @@ class MovieModel {
 
   @override
   String toString() {
-    return 'MovieModel[id=$id, title=$title, date=$date, startTime=$startTime, endTime=$endTime, screenRoom=$screenRoom, posterImage=$imageURL, ]';
+    return 'MovieModel[id=$id, title=$title, startTime=$startTime, endTime=$endTime, screenRoom=$screenRoom, posterImage=$imageURL, ]';
   }
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       id: json['id'],
       title: json['title'],
-      date: new DateTime(json['date']),
-      startTime: json['startTime'],
-      endTime: json['endTime'],
+      startTime: DateTime.parse(json['startDateTime']),
+      endTime: DateTime.parse(json['endDateTime']),
       screenRoom: json['screenRoom'],
       imageURL: json['posterImage'],
     );
@@ -44,9 +40,8 @@ class MovieModel {
     return {
       'id': id,
       'title': title,
-      'date': date,
-      'startTime': startTime,
-      'endTime': endTime,
+      'startTime': startTime.toUtc().toIso8601String(),
+      'endTime': endTime.toUtc().toIso8601String(),
       'screenRoom': screenRoom,
       'posterImage': imageURL
     };
@@ -71,9 +66,8 @@ List<MovieModel> movies = [
   MovieModel(
     id: 1,
     title: 'The Irishman',
-    date: DateTime(10 - 10 - 2021),
-    startTime: '7:00 PM',
-    endTime: '9:00 PM',
+    startTime: DateTime(10 - 10 - 2021),
+    endTime: DateTime(10 - 10 - 2021),
     screenRoom: 1,
     imageURL:
         'https://lh6.googleusercontent.com/proxy/Q7IxHgbc0KPJJXyz3iG4YtLoZ2tujvlF4_NOHJWj54bnD133PH4LJQb_vyrUSQ45rL8XHe-doyHDp9SY9vA3pn43e-iQA236PQ',
@@ -81,9 +75,8 @@ List<MovieModel> movies = [
   MovieModel(
     id: 2,
     title: 'JOKER',
-    date: DateTime(10 - 10 - 2021),
-    startTime: '6:00 PM',
-    endTime: '8:00 PM',
+    startTime: DateTime(10 - 10 - 2021),
+    endTime: DateTime(10 - 10 - 2021),
     screenRoom: 2,
     imageURL:
         'https://mir-s3-cdn-cf.behance.net/project_modules/1400/c58b4681277211.5cfa6e54a6d3d.jpg',
@@ -91,9 +84,8 @@ List<MovieModel> movies = [
   MovieModel(
     id: 3,
     title: 'Avengers: Endgame',
-    date: DateTime(10 - 10 - 2021),
-    startTime: '5:00 PM',
-    endTime: '7:00 PM',
+    startTime: DateTime(10 - 10 - 2021),
+    endTime: DateTime(10 - 10 - 2021),
     screenRoom: 3,
     imageURL:
         'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
@@ -101,9 +93,8 @@ List<MovieModel> movies = [
   MovieModel(
     id: 4,
     title: 'Spider-Man: No Way Home',
-    date: DateTime(10 - 10 - 2021),
-    startTime: '5:00 PM',
-    endTime: '7:00 PM',
+    startTime: DateTime(10 - 10 - 2021),
+    endTime: DateTime(10 - 10 - 2021),
     screenRoom: 1,
     imageURL:
         'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/11/Spider-Man-No-Way-Home-new-poster.jpeg?q=50&fit=contain&w=960&h=500&dpr=1.5 ',

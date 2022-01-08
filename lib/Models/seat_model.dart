@@ -41,30 +41,4 @@ class SeatModel {
   }
 }
 
-List<SeatModel> seats = [
-  SeatModel(
-    id: 1,
-    seatNumber: 1,
-    room: RoomModel(id: 0, roomNumber: 1),
-  ),
-  SeatModel(
-    id: 1,
-    seatNumber: 1,
-    room: RoomModel(id: 0, roomNumber: 1),
-  ),
-  SeatModel(
-    id: 1,
-    seatNumber: 1,
-    room: RoomModel(id: 0, roomNumber: 1),
-  ),
-  SeatModel(
-    id: 1,
-    seatNumber: 1,
-    room: RoomModel(id: 0, roomNumber: 1),
-  ),
-  SeatModel(
-    id: 1,
-    seatNumber: 1,
-    room: RoomModel(id: 0, roomNumber: 1),
-  ),
-];
+List<int> seats = [1, 2, 3, 4, 5, 6, 7, 8, 9];

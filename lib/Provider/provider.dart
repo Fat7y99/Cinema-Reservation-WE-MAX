@@ -10,4 +10,5 @@ class Provider {
   static ReservationModel? userReservations;
   static String token = '';
   static int? id;
+  static List<UserModel> users = [];
 }

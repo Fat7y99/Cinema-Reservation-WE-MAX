@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movie_ticket_app/API/request_response.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/const.dart';
 import 'package:movie_ticket_app/Models/movie_model.dart';
 import 'package:movie_ticket_app/Models/reservation_model.dart';
 import 'package:movie_ticket_app/Models/user_model.dart';
+import 'package:movie_ticket_app/screens/LoginScreen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ManagerApproval extends StatefulWidget {
@@ -16,17 +19,35 @@ class _ManagerApprovalState extends State<ManagerApproval> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context, false);
-            },
-            icon: Icon(Icons.arrow_back_ios),
-          ),
-          title: Text("Admin Page", style: TextStyle(color: kPimaryColor))),
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context, false);
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+        title: Text("Admin Page", style: TextStyle(color: kPimaryColor)),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                await RequestAndResponses.logout();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        LoginPage(), //should take movies[widget.index].id
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.logout,
+                color: kPimaryColor,
+              )),
+        ],
+      ),
       body: ListView.builder(
-          itemCount: users.length,
+          itemCount: Provider.users.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
                 color: Color(0xff302b35), //const Color(0xFF94ADEA),
@@ -35,11 +56,13 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                   children: [
                     ListTile(
                       title: Text(
-                          users[index].firstName + ' ' + users[index].lastName,
+                          Provider.users[index].firstName +
+                              ' ' +
+                              Provider.users[index].lastName,
                           style: TextStyle(
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
-                      subtitle: Text("Email: ${users[index].email}",
+                      subtitle: Text("Email: ${Provider.users[index].email}",
                           style: TextStyle(
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
@@ -47,7 +70,7 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                     Container(
                       padding: EdgeInsets.all(16.0),
                       alignment: Alignment.centerLeft,
-                      child: Text(users[index].role == 0 ? 'User' : 'manager',
+                      child: Text(Provider.users[index].role,
                           style: TextStyle(color: kPimaryColor)),
                     ),
                     ButtonBar(
@@ -57,14 +80,20 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                             'Upgrade To Manager',
                             style: TextStyle(color: Colors.green[400]),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              users[index].role = 'manager';
+                          onPressed: () async {
+                            int upg = await RequestAndResponses.upgradeUser(
+                                Provider.users[index].id);
+                            setState(() async {
+                              if (upg == 200)
+                                Provider.users =
+                                    await RequestAndResponses.getAllUsers();
+                              //   Provider.users[index].role =
+                              //       'manager'; //TODO UPDATE USER
                             });
                             Alert(
                               context: context,
                               title:
-                                  "${users[index].firstName} is Upgraded successfully",
+                                  "${Provider.users[index].firstName} is Upgraded successfully",
                               // desc: "Flutter is better with RFlutter Alert.",
                               image: Image.asset(
                                 "assets/images/success.png",
@@ -88,18 +117,19 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                         ),
                         TextButton(
                           child: Text(
-                            'Disapprove',
-                            style: TextStyle(color: Colors.red[200]),
+                            'Delete User',
+                            style: TextStyle(color: Colors.red[400]),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              // users.remove(users[index]);
+                          onPressed: () async {
+                            int statusCode =
+                                await RequestAndResponses.deleteUser(
+                                    Provider.users[index].id);
+                            if (statusCode == 200) {
                               Alert(
                                 context: context,
                                 title:
-                                    "${users[index].firstName}'s request is disapproved successfully",
+                                    "${Provider.users[index].firstName} is deleted successfully",
                                 // desc: "Flutter is better with RFlutter Alert.",
-
                                 image: Image.asset(
                                   "assets/images/success.png",
                                   scale: 10,
@@ -117,41 +147,15 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                                   ),
                                 ],
                               ).show();
-                              users[index].role = "user";
-                            });
-                          },
-                        ),
-                        TextButton(
-                          child: Text(
-                            'Delete User',
-                            style: TextStyle(color: Colors.red[400]),
-                          ),
-                          onPressed: () {
-                            Alert(
-                              context: context,
-                              title:
-                                  "${users[index].firstName} is deleted successfully",
-                              // desc: "Flutter is better with RFlutter Alert.",
-                              image: Image.asset(
-                                "assets/images/success.png",
-                                scale: 10,
-                              ),
-                              buttons: [
-                                DialogButton(
-                                  child: Text(
-                                    "Ok",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  onPressed: () => Navigator.pop(context),
-                                  color: kBackgroundColor,
-                                  radius: BorderRadius.circular(0.0),
-                                ),
-                              ],
-                            ).show();
-                            setState(() {
-                              users.remove(users[index]);
-                            });
+                              setState(() async {
+                                Provider.users =
+                                    await RequestAndResponses.getAllUsers();
+                                Provider.users.remove(Provider
+                                    .users[index]); //TODO Delete user req
+                              });
+                            } else {
+                              print("NOOOO");
+                            }
                           },
                         ),
                       ],

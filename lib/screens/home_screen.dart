@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
+import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/components/background_gradient_image.dart';
 import 'package:movie_ticket_app/components/dark_borderless_button.dart';
 import 'package:movie_ticket_app/components/movie_card.dart';
@@ -14,6 +15,7 @@ import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/screens/movie_insert.dart';
 import 'package:movie_ticket_app/screens/managers_approval.dart';
 import 'LoginScreen.dart';
+import 'package:movie_ticket_app/API/request_response.dart';
 
 class MyHomePage extends StatefulWidget {
   int index = 1;
@@ -30,31 +32,14 @@ class _MyHomePageState extends State<MyHomePage> {
     final int id = movies[widget.index].id;
     final String imageURL = movies[widget.index].imageURL;
     final String title = movies[widget.index].title;
-    final String startTime = movies[widget.index].startTime;
-    final String endTime = movies[widget.index].endTime;
-    final String year = movies[widget.index].date.toString();
+    final DateTime startTime = movies[widget.index].startTime;
+    final DateTime endTime = movies[widget.index].endTime;
+    final String year = movies[widget.index].startTime.year.toString();
     final String screenRoom = movies[widget.index].screenRoom.toString();
 
     return Scaffold(
       appBar: AppBar(
         actions: [
-          Visibility(
-            visible: widget.isUser == 1,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ManagerApproval(), //should take movies[widget.index].id
-                    ),
-                  );
-                },
-                icon: Icon(
-                  Icons.supervised_user_circle_outlined,
-                  color: kPimaryColor,
-                )),
-          ),
           Visibility(
             visible: widget.isUser == 1,
             child: IconButton(
