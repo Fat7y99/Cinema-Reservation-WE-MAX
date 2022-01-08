@@ -160,7 +160,7 @@ class RequestAndResponses {
 
   static Future<int> editMovie(MovieModel movie) async {
     var jso = movie.toJson();
-
+    print(jso);
     var url = '$_baseURL/movie/update';
 
     var response = await http.put(

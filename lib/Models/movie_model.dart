@@ -42,8 +42,8 @@ class MovieModel {
     return {
       'id': id,
       'title': title,
-      'startTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(startTime),
-      'endTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(endTime),
+      'startDateTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(startTime),
+      'endDateTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(endTime),
       'screenRoom': screenRoom,
       'posterImage': imageURL
     };

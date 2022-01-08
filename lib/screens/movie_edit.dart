@@ -21,12 +21,13 @@ class MovieEditPage extends StatefulWidget {
 class _MovieEditPageState extends State<MovieEditPage> {
   @override
   Widget build(BuildContext context) {
-    final String imageURL = getMovieByID(widget.id).imageURL;
-    final String title = getMovieByID(widget.id).title;
-    final DateTime startTime = getMovieByID(widget.id).startTime;
-    final DateTime endTime = getMovieByID(widget.id).endTime;
-    final String year = getMovieByID(widget.id).startTime.year.toString();
-    final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
+    final int id = Provider.movies[widget.id].id;
+    final String imageURL = Provider.movies[widget.id].imageURL;
+    final String title = Provider.movies[widget.id].title;
+    final DateTime startTime = Provider.movies[widget.id].startTime;
+    final DateTime endTime = Provider.movies[widget.id].endTime;
+    final String year = Provider.movies[widget.id].startTime.year.toString();
+    final String screenRoom = Provider.movies[widget.id].screenRoom.toString();
 
     TextEditingController titleController = TextEditingController(text: title);
     TextEditingController imageController =
@@ -366,10 +367,10 @@ class _MovieEditPageState extends State<MovieEditPage> {
                       ),
                       onPressed: () async {
                         MovieModel movie = MovieModel(
-                            id: 0,
+                            id: id,
                             title: titleController.text,
-                            startTime: DateTime.parse(startController.text),
-                            endTime: DateTime.parse(endController.text),
+                            startTime: DateTime.parse('2022-01-08 17:01:01'),
+                            endTime: DateTime.parse('2022-01-08 19:01:01'),
                             screenRoom: int.parse(screenController.text),
                             imageURL: imageController.text);
                         int statusCode =

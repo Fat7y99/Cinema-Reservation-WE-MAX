@@ -193,6 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   onPressed: () async {
+                    Provider.movies = await RequestAndResponses.getAllMovies();
                     print(userNameController.text);
                     print(passwordController.text);
                     // RequestAndResponses.tempp();
