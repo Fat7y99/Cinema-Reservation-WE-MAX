@@ -17,7 +17,6 @@ import 'package:movie_ticket_app/screens/managers_approval.dart';
 import 'LoginScreen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:intl/intl.dart';
-import 'package:jiffy/jiffy.dart';
 
 class MyHomePage extends StatefulWidget {
   int index = 0;
