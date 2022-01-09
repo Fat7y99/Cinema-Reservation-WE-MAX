@@ -7,9 +7,12 @@ import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/Models/movie_model.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../Models/movie_model.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
+
+import '../const.dart';
 
 DateTime dates = DateTime.now();
 
@@ -19,6 +22,13 @@ class MovieInsertPage extends StatefulWidget {
 }
 
 class _MovieInsertPageState extends State<MovieInsertPage> {
+  TextEditingController titleController = TextEditingController();
+  TextEditingController imageController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController startController = TextEditingController();
+  TextEditingController endController = TextEditingController();
+  TextEditingController screenController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // final String imageURL = getMovieByID(widget.id).imageURL;
@@ -27,13 +37,6 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
     // final String endTime = getMovieByID(widget.id).endTime;
     // final String year = getMovieByID(widget.id).date.year.toString();
     // final String screenRoom = getMovieByID(widget.id).screenRoom.toString();
-
-    TextEditingController titleController = TextEditingController();
-    TextEditingController imageController = TextEditingController();
-    TextEditingController dateController = TextEditingController();
-    TextEditingController startController = TextEditingController();
-    TextEditingController endController = TextEditingController();
-    TextEditingController screenController = TextEditingController();
 
     return Scaffold(
       backgroundColor: Color(0xff302b35),
@@ -162,14 +165,18 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                               print('change $date');
                             }, onConfirm: (date) {
                               print('confirm $date');
-                              setState(() {
-                                // startController.text =
-                                //     DateFormat("yyyy-MM-dd HH:mm:ss")
-                                //         .format(date)
-                                //         .toString();
+                              startController.text =
+                                  DateFormat("yyyy-MM-dd HH:mm:ss")
+                                      .format(date)
+                                      .toString();
 
-                                print(startController.value);
-                              });
+                              // startController.text =
+                              //     DateFormat("yyyy-MM-dd HH:mm:ss")
+                              //         .format(date)
+                              //         .toString();
+
+                              print("Timmme$date");
+                              print(startController.text);
                             },
                                 currentTime: DateTime.now(),
                                 locale: LocaleType.en);
@@ -364,38 +371,79 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                         MovieModel movie = MovieModel(
                             id: 0,
                             title: titleController.text,
-                            startTime: DateTime.parse('2022-01-08 17:01:01'),
-                            endTime: DateTime.parse('2022-01-08 19:01:01'),
+                            startTime: DateTime.parse(startController.text),
+                            endTime: DateTime.parse(endController.text),
                             screenRoom: int.parse(screenController.text),
                             imageURL: imageController.text);
 
                         int statusCode =
                             await RequestAndResponses.createMovie(movie);
                         if (statusCode == 200) {
-                          Provider.movies =
-                              await RequestAndResponses.getAllMovies();
-                          print("Added successfully");
-                        }
+                          Alert(
+                            context: context,
+                            title: "Movie is created successfully",
+                            // desc: "Flutter is better with RFlutter Alert.",
+                            image: Image.asset(
+                              "assets/images/success.png",
+                              scale: 10,
+                            ),
 
-                        setState(() {
-                          insertMovies(movie);
-                        });
-                        // await FlickrRequestsAndResponses.logIn(
-                        //     titleController,
-                        //     dateController,
-                        //     startController,
-                        //     endController,
-                        //     screenController,
-                        //     imageController);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(
-                                isUser:
-                                    2), //should take movies[widget.index].id
-                          ),
-                        );
-                        // Navigator.push();
+                            buttons: [
+                              DialogButton(
+                                child: Text(
+                                  "Ok",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                                color: kBackgroundColor,
+                                radius: BorderRadius.circular(0.0),
+                              ),
+                            ],
+                          ).show();
+
+                          setState(() {
+                            insertMovies(movie);
+                          });
+                          // await FlickrRequestsAndResponses.logIn(
+                          //     titleController,
+                          //     dateController,
+                          //     startController,
+                          //     endController,
+                          //     screenController,
+                          //     imageController);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyHomePage(
+                                  isUser:
+                                      2), //should take movies[widget.index].id
+                            ),
+                          );
+                        } else {
+                          Alert(
+                            context: context,
+                            title: "Movie isn't created. Please try again!",
+                            // desc: "Flutter is better with RFlutter Alert.",
+                            image: Image.asset(
+                              "assets/images/failure.png",
+                              scale: 10,
+                            ),
+
+                            buttons: [
+                              DialogButton(
+                                child: Text(
+                                  "Ok",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                                color: kBackgroundColor,
+                                radius: BorderRadius.circular(0.0),
+                              ),
+                            ],
+                          ).show();
+                        } // Navigator.push();
                       },
                     ),
                   ),

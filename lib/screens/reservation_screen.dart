@@ -15,14 +15,9 @@ class ReservationScreen extends StatefulWidget {
 }
 
 class _ReservationScreenState extends State<ReservationScreen> {
-  List<ReservationModel> reservations = [
-    ReservationModel(id: 1, movie: movies[0], user: users[0], seats: []),
-    ReservationModel(id: 2, movie: movies[1], user: users[0], seats: []),
-    ReservationModel(id: 3, movie: movies[2], user: users[0], seats: []),
-    ReservationModel(id: 4, movie: movies[4], user: users[0], seats: []),
-  ];
   @override
   Widget build(BuildContext context) {
+    print("Lengthhhhhhhhhhhhhhhhhhhhhhhh ${Provider.reservations.length}");
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -39,15 +34,14 @@ class _ReservationScreenState extends State<ReservationScreen> {
       body: ListView.builder(
           itemCount: Provider.reservations.length,
           itemBuilder: (BuildContext context, int index) {
+            print("Index$index");
             return Card(
                 color: const Color(0xff302b35),
                 elevation: 10.0,
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text(
-                          getMovieByID(Provider.reservations[index].movie.id)
-                              .title,
+                      title: Text(Provider.reservations[index].movie.title,
                           style: TextStyle(
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
@@ -57,13 +51,15 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               color: kPimaryColor,
                               fontWeight: FontWeight.bold)),
                       trailing: IconButton(
-                        onPressed: () {
-                          setState(() async {
-                            reservations.remove(Provider.reservations[index]);
-                            int statusCode =
-                                await RequestAndResponses.deleteReservation(
-                                    Provider.reservations[index].id);
-                            print("Deletedsuccessfully");
+                        onPressed: () async {
+                          int statusCode =
+                              await RequestAndResponses.deleteReservation(
+                                  Provider.reservations[index].id);
+                          print("Deletedsuccessfully$statusCode");
+
+                          setState(() {
+                            Provider.reservations
+                                .remove(Provider.reservations[index]);
                           });
                         },
                         icon: Icon(Icons.cancel),

@@ -33,7 +33,7 @@ class _SeatComponentState extends State<SeatComponent> {
               ? widget.isSelected = !widget.isSelected
               : null;
           Provider.currentUser!.role == 'user'
-              ? widget.reserve(widget.id)
+              ? widget.reserve(widget.id >= 21 ? widget.id - 21 : widget.id)
               : null;
         });
       },
@@ -42,10 +42,10 @@ class _SeatComponentState extends State<SeatComponent> {
           width: MediaQuery.of(context).size.width / 15,
           height: MediaQuery.of(context).size.width / 15,
           decoration: BoxDecoration(
-              color: widget.isSelected
-                  ? kPimaryColor
-                  : widget.isReserved
-                      ? Colors.white
+              color: widget.isReserved
+                  ? Colors.white
+                  : widget.isSelected
+                      ? kPimaryColor
                       : null,
               border: !widget.isSelected && !widget.isReserved
                   ? Border.all(color: Colors.white, width: 1.0)

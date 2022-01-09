@@ -56,6 +56,9 @@ class _MovieDetailsState extends State<MovieDetails> {
           visible: Provider.currentUser!.role == 'manager',
           child: IconButton(
               onPressed: () {
+                setState(() {
+                  Provider.currentMovieId = widget.id;
+                });
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -165,7 +168,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Text(
-                                  "Start Time: $startTime",
+                                  "Start Time:  '${startTime.weekday} ${startTime.hour}:${startTime.minute} ",
                                   style: TextStyle(
                                     fontFamily: 'Arial',
                                     fontSize: 18,
@@ -178,7 +181,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Text(
-                                  "End Time: $endTime",
+                                  "End Time: ${endTime.weekday} ${endTime.hour}:${endTime.minute}",
                                   style: TextStyle(
                                     fontFamily: 'Arial',
                                     fontSize: 18,
@@ -207,7 +210,8 @@ class _MovieDetailsState extends State<MovieDetails> {
                               Visibility(
                                 visible:
                                     Provider.currentUser!.role == 'manager' ||
-                                        Provider.currentUser!.role == 'user',
+                                        Provider.currentUser!.role == 'user' ||
+                                        Provider.currentUser!.role == 'guest',
                                 child: Container(
                                   width: MediaQuery.of(context).size.width / 4,
                                   height: 50,
@@ -233,7 +237,10 @@ class _MovieDetailsState extends State<MovieDetails> {
                                           ),
                                           TextSpan(
                                             text: Provider.currentUser!.role ==
-                                                    'manager'
+                                                        'manager' ||
+                                                    Provider.currentUser!
+                                                            .role ==
+                                                        'guest'
                                                 ? 'View Reserved'
                                                 : ' Buy Ticket ',
                                             style: GoogleFonts.bioRhyme(
@@ -253,6 +260,9 @@ class _MovieDetailsState extends State<MovieDetails> {
                                         if (Provider.seats
                                             .contains(seats[i].id)) {
                                           seats[i].isReserved = true;
+                                        } else {
+                                          seats[i].isReserved = false;
+                                          seats[i].isSelected = false;
                                         }
                                       }
 
@@ -260,6 +270,9 @@ class _MovieDetailsState extends State<MovieDetails> {
                                         if (Provider.seats
                                             .contains(seats2[i].id)) {
                                           seats2[i].isReserved = true;
+                                        } else {
+                                          seats2[i].isReserved = false;
+                                          seats2[i].isSelected = false;
                                         }
                                       }
 

@@ -9,12 +9,16 @@ class Provider {
   static MovieModel? currentMovie;
   static List<MovieModel> movies = [];
   static RoomModel? currentRoom;
-  static ReservationModel? userReservations;
+  static ReservationModel? userReservations =
+      ReservationModel(id: 0, movie: movies[0], seats: []);
   static String token = '';
   static int? id;
   static List<UserModel> users = [];
   static bool isGuest = false;
   static List<int> seats = [];
-  static ReserveModel? reserveModel;
+  static ReserveModel reserveModel =
+      ReserveModel(cardNum: '', pinNum: '', seats: []);
   static List<ReservationModel> reservations = [];
+  static int? currentMovieId;
+  static int roomNo = 0;
 }

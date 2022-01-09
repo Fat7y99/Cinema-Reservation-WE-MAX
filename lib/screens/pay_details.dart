@@ -6,21 +6,25 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/Provider/provider.dart';
 import 'package:movie_ticket_app/Provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import '../const.dart';
 import 'home_screen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/screens/movie_details.dart';
 import 'package:movie_ticket_app/Provider/provider.dart';
 import '../Models/movie_model.dart';
 
-class PayDetailsPage extends StatefulWidget {
+class PayDetails extends StatefulWidget {
+  final int id;
+  PayDetails({required this.id});
   @override
-  _PayDetailsPageState createState() => _PayDetailsPageState();
+  _PayDetailsState createState() => _PayDetailsState();
 }
 
 bool p = false;
 bool p2 = false;
 
-class _PayDetailsPageState extends State<PayDetailsPage> {
+class _PayDetailsState extends State<PayDetails> {
   @override
   Widget build(BuildContext context) {
     // final String imageURL = getMovieByID(widget.id).imageURL;
@@ -35,7 +39,7 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
 
     return Scaffold(
       appBar: AppBar(),
-      backgroundColor: Color(0xff302b35),
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
@@ -106,7 +110,7 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
                           filled: true,
                           fillColor: Color(0xD000000)),
                       style: TextStyle(color: Colors.white),
-                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
                     ),
                   ),
 
@@ -148,16 +152,70 @@ class _PayDetailsPageState extends State<PayDetailsPage> {
                         //     screenController,
                         //     imageController);
                         if (p && p2) {
-                          Provider.reserveModel!.pinNum = pinNo.text;
-                          Provider.reserveModel!.cardNum = cardNo.text;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MyHomePage(
-                                  isUser:
-                                      1), //should take movies[widget.index].id
-                            ),
-                          );
+                          print("$pinNo+$cardNo");
+                          Provider.reserveModel.pinNum = pinNo.text;
+                          Provider.reserveModel.cardNum = cardNo.text;
+                          print(Provider.reserveModel);
+                          int statusCode =
+                              await RequestAndResponses.reserveSeats(
+                                  widget.id, Provider.reserveModel);
+                          if (statusCode == 200) {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MyHomePage(
+                                    isUser:
+                                        1), //should take movies[widget.index].id
+                              ),
+                            );
+                            Alert(
+                              context: context,
+                              title:
+                                  "Your reservation is reserved successfully",
+                              // desc: "Flutter is better with RFlutter Alert.",
+                              image: Image.asset(
+                                "assets/images/success.png",
+                                scale: 10,
+                              ),
+
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "Ok",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () => Navigator.pop(context),
+                                  color: kBackgroundColor,
+                                  radius: BorderRadius.circular(0.0),
+                                ),
+                              ],
+                            ).show();
+                          } else {
+                            Alert(
+                              context: context,
+                              title:
+                                  "Your reservation isn't reserved. Please try again!",
+                              // desc: "Flutter is better with RFlutter Alert.",
+                              image: Image.asset(
+                                "assets/images/success.png",
+                                scale: 10,
+                              ),
+
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "Ok",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () => Navigator.pop(context),
+                                  color: kBackgroundColor,
+                                  radius: BorderRadius.circular(0.0),
+                                ),
+                              ],
+                            ).show();
+                          }
                         }
 
                         // Navigator.push();

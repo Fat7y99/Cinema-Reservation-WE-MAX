@@ -8,6 +8,8 @@ import 'package:movie_ticket_app/screens/SignupScreen.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
 import 'package:movie_ticket_app/API/request_response.dart';
 import 'package:movie_ticket_app/screens/home_screen.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import '../const.dart';
 import 'managers_approval.dart';
 import 'package:movie_ticket_app/Models/user_model.dart';
 
@@ -130,13 +132,16 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () async {
                     Provider.movies = await RequestAndResponses.getAllMovies();
                     print(Provider.movies);
-                    Provider.currentUser = UserModel(
-                        id: 5000,
-                        userName: "",
-                        firstName: "",
-                        lastName: "",
-                        email: "",
-                        role: "guest");
+                    setState(() {
+                      Provider.currentUser = UserModel(
+                          id: 5000,
+                          userName: "",
+                          firstName: "",
+                          lastName: "",
+                          email: "",
+                          role: "guest");
+                    });
+
                     print("Aywa");
                     Navigator.push(
                       context,
@@ -200,48 +205,73 @@ class _LoginPageState extends State<LoginPage> {
                     print(pass);
                     if (pass) {
                       print("aywaaa");
-                      await RequestAndResponses.logIn(
+                      int stautsCode = await RequestAndResponses.logIn(
                         userNameController.text.trim(),
                         passwordController.text,
                       );
-                      var log;
-                      setState(() {
-                        if (Provider.currentUser!.role == 'user') {
-                          log = Users.user.index;
-                          print(Users.user);
-                        } else if (Provider.currentUser!.role == 'pending') {
-                          log = Users.pending.index;
-                          print(Users.pending);
-                        } else if (Provider.currentUser!.role == 'manager') {
-                          log = Users.manager.index;
-                          print(Users.manager);
-                        } else if (Provider.currentUser!.role == 'admin') {
-                          log = Users.admin.index;
-                          print(Users.admin);
-                        }
-                      });
-                      if (log == Users.admin.index) {
-                        print("Aw3aa");
-                        Provider.users =
-                            await RequestAndResponses.getAllUsers();
+                      if (stautsCode == 200) {
+                        var log;
+                        setState(() {
+                          if (Provider.currentUser!.role == 'user') {
+                            log = Users.user.index;
+                            print(Users.user);
+                          } else if (Provider.currentUser!.role == 'pending') {
+                            log = Users.pending.index;
+                            print(Users.pending);
+                          } else if (Provider.currentUser!.role == 'manager') {
+                            log = Users.manager.index;
+                            print(Users.manager);
+                          } else if (Provider.currentUser!.role == 'admin') {
+                            log = Users.admin.index;
+                            print(Users.admin);
+                          }
+                        });
+                        if (log == Users.admin.index) {
+                          print("Aw3aa");
+                          Provider.users =
+                              await RequestAndResponses.getAllUsers();
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ManagerApproval(), //should take movies[widget.index].id
-                          ),
-                        );
-                      } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(
-                                isUser:
-                                    log), //should take movies[widget.index].id
-                          ),
-                        );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ManagerApproval(), //should take movies[widget.index].id
+                            ),
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyHomePage(
+                                  isUser:
+                                      log), //should take movies[widget.index].id
+                            ),
+                          );
+                        }
                       }
+                    } else {
+                      Alert(
+                        context: context,
+                        title: "Wrong UserName/Password",
+                        // desc: "Flutter is better with RFlutter Alert.",
+                        image: Image.asset(
+                          "assets/images/wrong.png",
+                          scale: 10,
+                        ),
+
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "Ok",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            color: kBackgroundColor,
+                            radius: BorderRadius.circular(0.0),
+                          ),
+                        ],
+                      ).show();
                     }
                   },
                 ),

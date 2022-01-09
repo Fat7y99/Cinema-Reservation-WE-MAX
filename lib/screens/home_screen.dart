@@ -42,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print("done");
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Center(child: Text(title)),
         actions: [
           Visibility(
@@ -68,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Provider.reservations =
                       await RequestAndResponses.getAllReservations(
                           Provider.currentUser!.id);
-
+                  print(Provider.reservations);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -141,7 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       callback: () {},
                     ),
                     PrimaryRoundedButton(
-                      text: 'From $startTime to $endTime',
+                      text:
+                          'From ${startTime.weekday} ${startTime.hour}:${startTime.minute}  to ${endTime.weekday} ${endTime.hour}:${endTime.minute}',
                       callback: () {},
                     ),
                   ],

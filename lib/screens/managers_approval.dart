@@ -19,6 +19,7 @@ class _ManagerApprovalState extends State<ManagerApproval> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text("Admin Page", style: TextStyle(color: kPimaryColor)),
@@ -69,47 +70,52 @@ class _ManagerApprovalState extends State<ManagerApproval> {
                     ),
                     ButtonBar(
                       children: [
-                        TextButton(
-                            child: Text(
-                              'Upgrade To Manager',
-                              style: TextStyle(color: Colors.green[400]),
-                            ),
-                            onPressed: () async {
-                              int upg = await RequestAndResponses.upgradeUser(
-                                  Provider.users[index].id);
-                              if (upg == 200) {
-                                Provider.users =
-                                    await RequestAndResponses.getAllUsers();
-                                setState(() {
-                                  Provider.users[index].role = 'manager';
-                                  //   Provider.users[index].role =
-                                  //       'manager'; //TODO UPDATE USER
-                                });
-                                Alert(
-                                  context: context,
-                                  title:
-                                      "${Provider.users[index].firstName} is Upgraded successfully",
-                                  // desc: "Flutter is better with RFlutter Alert.",
-                                  image: Image.asset(
-                                    "assets/images/success.png",
-                                    scale: 10,
-                                  ),
-
-                                  buttons: [
-                                    DialogButton(
-                                      child: Text(
-                                        "Ok",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
+                        Provider.users[index].role == 'pending'
+                            ? TextButton(
+                                child: Text(
+                                  'Upgrade To Manager',
+                                  style: TextStyle(color: Colors.green[400]),
+                                ),
+                                onPressed: () async {
+                                  int upg =
+                                      await RequestAndResponses.upgradeUser(
+                                          Provider.users[index].id);
+                                  if (upg == 200) {
+                                    Provider.users =
+                                        await RequestAndResponses.getAllUsers();
+                                    setState(() {
+                                      Provider.users[index].role = 'manager';
+                                      //   Provider.users[index].role =
+                                      //       'manager'; //TODO UPDATE USER
+                                    });
+                                    Alert(
+                                      context: context,
+                                      title:
+                                          "${Provider.users[index].firstName} is Upgraded successfully",
+                                      // desc: "Flutter is better with RFlutter Alert.",
+                                      image: Image.asset(
+                                        "assets/images/success.png",
+                                        scale: 10,
                                       ),
-                                      onPressed: () => Navigator.pop(context),
-                                      color: kBackgroundColor,
-                                      radius: BorderRadius.circular(0.0),
-                                    ),
-                                  ],
-                                ).show();
-                              }
-                            }),
+
+                                      buttons: [
+                                        DialogButton(
+                                          child: Text(
+                                            "Ok",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          color: kBackgroundColor,
+                                          radius: BorderRadius.circular(0.0),
+                                        ),
+                                      ],
+                                    ).show();
+                                  }
+                                })
+                            : Container(),
                         TextButton(
                           child: Text(
                             'Delete User',

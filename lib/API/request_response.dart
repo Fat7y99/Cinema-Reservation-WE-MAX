@@ -12,7 +12,7 @@ class RequestAndResponses {
   static String _baseURL = 'https://hidden-springs-36426.herokuapp.com/api';
 
 /////////////////////////////////////User//////////////////////////////////////////////
-  static Future<http.Response> logIn(final email, final password) async {
+  static Future<int> logIn(final email, final password) async {
     var jso = {
       "userName": email,
       "password": password,
@@ -36,7 +36,7 @@ class RequestAndResponses {
     print(Provider.token);
     Provider.currentUser = await getUserById(Provider.id!);
 
-    return response;
+    return response.statusCode;
   }
 
   static Future<int> signUp(
@@ -232,7 +232,10 @@ class RequestAndResponses {
 
     var response = await http.post(
       Uri.parse(url),
-      headers: {"Content-Type": "application/json"},
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ${Provider.token}'
+      },
       body: jsonEncode(jso),
     );
     print("Reserving Seats");
@@ -259,7 +262,7 @@ class RequestAndResponses {
     var url = '$_baseURL/reservation/viewAllReservations';
 
     print(token);
-    var response = await http.delete(Uri.parse(url),
+    var response = await http.get(Uri.parse(url),
         headers: {'Authorization': 'Bearer ${Provider.token}'});
     print(response.body);
     List<ReservationModel> r = ReservationModel.listFromJson(

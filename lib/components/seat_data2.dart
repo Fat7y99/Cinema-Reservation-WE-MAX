@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket_app/components/seat_component.dart';
 
-class SeatData {
+class SeatData2 {
   bool isReserved;
   int id;
   bool isSelected;
 
-  SeatData({
+  SeatData2({
     required this.id,
     this.isSelected = false,
     this.isReserved = false,
   });
 }
 
-class Seats extends StatefulWidget {
-  List<SeatData> seats;
+class SeatsRoomTwo extends StatefulWidget {
+  List<SeatData2> seats;
   List<int> seatsIndex;
   Function reserveCallBack;
-  Seats({
+  SeatsRoomTwo({
     Key? key,
     required this.seats,
     required this.seatsIndex,
@@ -25,13 +25,14 @@ class Seats extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SeatsState createState() => _SeatsState();
+  _SeatsRoomTwoState createState() => _SeatsRoomTwoState();
 }
 
-class _SeatsState extends State<Seats> {
+class _SeatsRoomTwoState extends State<SeatsRoomTwo> {
   @override
   Widget build(BuildContext context) {
     int seatsNo = widget.seats.length;
+    print(seatsNo);
     List<Widget> mySeats = [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -114,6 +115,49 @@ class _SeatsState extends State<Seats> {
         ],
       ),
     ];
+
+    mySeats.add(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 10,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return SeatComponent(
+                  id: widget.seats[index + 20].id,
+                  isReserved: widget.seats[index + 20].isReserved,
+                  isSelected: widget.seats[index + 20].isSelected,
+                  reserve: widget.reserveCallBack,
+                );
+              },
+            ),
+          ),
+          SizedBox(
+            width: (MediaQuery.of(context).size.width / 20) * 2,
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 10,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return SeatComponent(
+                  id: widget.seats[index + 25].id,
+                  isReserved: widget.seats[index + 25].isReserved,
+                  isSelected: widget.seats[index + 25].isSelected,
+                  reserve: widget.reserveCallBack,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20.0),

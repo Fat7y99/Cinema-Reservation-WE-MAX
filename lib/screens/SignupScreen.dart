@@ -46,6 +46,10 @@ class _SignupPageState extends State<SignupPage> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          actions: [],
+          backgroundColor: Colors.transparent,
+        ),
         body: Padding(
           padding: EdgeInsets.all(10),
           child: SingleChildScrollView(
@@ -220,7 +224,7 @@ class _SignupPageState extends State<SignupPage> {
                         filled: true,
                         fillColor: Color(0xD000000)),
                     style: TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                   ),
                 ),
                 Container(
@@ -247,7 +251,7 @@ class _SignupPageState extends State<SignupPage> {
                         filled: true,
                         fillColor: Color(0xD000000)),
                     style: TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                   ),
                 ),
                 DropdownButton<String>(

@@ -85,7 +85,8 @@ class _BuyTicketState extends State<BuyTicket> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PayDetailsPage()
+                                    builder: (context) =>
+                                        PayDetails(id: widget.id)
                                     //should take movies[widget.index].id
                                     ),
                               );
@@ -128,17 +129,15 @@ class _BuyTicketState extends State<BuyTicket> {
 
   int countR() {
     int count = 0;
-    seatsIndex.clear();
-    seatsIndex.clear();
     for (SeatData seat in seats) {
       if (seat.isSelected) {
         count++;
       }
     }
     print(seatsIndex);
-    if (Provider.reserveModel != null) {
-      Provider.reserveModel!.seats = seatsIndex;
-    }
-    return count;
+    setState(() {
+      Provider.reserveModel.seats = seatsIndex;
+    });
+    return Provider.reserveModel.seats.length;
   }
 }
