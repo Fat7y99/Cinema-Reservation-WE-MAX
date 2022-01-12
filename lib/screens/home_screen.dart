@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     PrimaryRoundedButton(
                       text:
-                          'From ${startTime.weekday} ${startTime.hour}:${startTime.minute}  to ${endTime.weekday} ${endTime.hour}:${endTime.minute}',
+                          'From  ${startTime.hour}:${startTime.minute}   to   ${endTime.hour}:${endTime.minute}',
                       callback: () {},
                     ),
                   ],

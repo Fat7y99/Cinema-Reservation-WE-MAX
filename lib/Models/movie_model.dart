@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 class MovieModel {
-  int id;
+  int id = 90;
 
   String title;
 
@@ -14,12 +14,12 @@ class MovieModel {
   String imageURL;
 
   MovieModel({
-    required this.id,
     required this.title,
     required this.startTime,
     required this.endTime,
     required this.screenRoom,
     required this.imageURL,
+    this.id = 0,
   });
 
   @override

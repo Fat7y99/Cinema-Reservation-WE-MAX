@@ -147,7 +147,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                               width: MediaQuery.of(context).size.width * 0.5,
                               height: 100.0,
                               child: Text(
-                                descip,
+                                "",
                                 style: TextStyle(
                                   fontFamily: 'Arial',
                                   fontSize: 18,
@@ -168,7 +168,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Text(
-                                  "Start Time:  '${startTime.weekday} ${startTime.hour}:${startTime.minute} ",
+                                  "Start Time:  '${startTime.hour}:${startTime.minute} ",
                                   style: TextStyle(
                                     fontFamily: 'Arial',
                                     fontSize: 18,
@@ -181,7 +181,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Text(
-                                  "End Time: ${endTime.weekday} ${endTime.hour}:${endTime.minute}",
+                                  "End Time: ${endTime.hour}:${endTime.minute}",
                                   style: TextStyle(
                                     fontFamily: 'Arial',
                                     fontSize: 18,

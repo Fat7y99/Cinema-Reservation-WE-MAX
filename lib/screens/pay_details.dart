@@ -39,7 +39,7 @@ class _PayDetailsState extends State<PayDetails> {
 
     return Scaffold(
       appBar: AppBar(),
-      backgroundColor: Colors.transparent,
+      backgroundColor: Color(0xff302b35),
       body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
@@ -160,7 +160,7 @@ class _PayDetailsState extends State<PayDetails> {
                               await RequestAndResponses.reserveSeats(
                                   widget.id, Provider.reserveModel);
                           if (statusCode == 200) {
-                            Navigator.pushAndRemoveUntil(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => MyHomePage(
@@ -198,7 +198,7 @@ class _PayDetailsState extends State<PayDetails> {
                                   "Your reservation isn't reserved. Please try again!",
                               // desc: "Flutter is better with RFlutter Alert.",
                               image: Image.asset(
-                                "assets/images/success.png",
+                                "assets/images/failure.png",
                                 scale: 10,
                               ),
 

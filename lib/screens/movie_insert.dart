@@ -368,16 +368,12 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                         ),
                       ),
                       onPressed: () async {
-                        MovieModel movie = MovieModel(
-                            id: 0,
-                            title: titleController.text,
-                            startTime: DateTime.parse(startController.text),
-                            endTime: DateTime.parse(endController.text),
-                            screenRoom: int.parse(screenController.text),
-                            imageURL: imageController.text);
-
-                        int statusCode =
-                            await RequestAndResponses.createMovie(movie);
+                        int statusCode = await RequestAndResponses.createMovie(
+                            titleController.text,
+                            DateTime.parse(startController.text),
+                            DateTime.parse(endController.text),
+                            int.parse(screenController.text),
+                            imageController.text);
                         if (statusCode == 200) {
                           Alert(
                             context: context,
@@ -402,9 +398,9 @@ class _MovieInsertPageState extends State<MovieInsertPage> {
                             ],
                           ).show();
 
-                          setState(() {
-                            insertMovies(movie);
-                          });
+                          // setState(() {
+                          //   insertMovies(movie);
+                          // });
                           // await FlickrRequestsAndResponses.logIn(
                           //     titleController,
                           //     dateController,

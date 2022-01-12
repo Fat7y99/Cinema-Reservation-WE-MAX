@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:movie_ticket_app/Models/movie_model.dart';
 import 'package:movie_ticket_app/Models/reservation_model.dart';
 import 'package:movie_ticket_app/Models/reserve_model.dart';
@@ -139,8 +140,15 @@ class RequestAndResponses {
   }
 ////////////////////////////////////////Movie///////////////////////////////////////////
 
-  static Future<int> createMovie(MovieModel movie) async {
-    var jso = movie.toJson();
+  static Future<int> createMovie(
+      title, startTime, endTime, screenRoom, imageURL) async {
+    var jso = {
+      'title': title,
+      'startDateTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(startTime),
+      'endDateTime': DateFormat("yyyy-MM-dd HH:mm:ss").format(endTime),
+      'screenRoom': screenRoom,
+      'posterImage': imageURL
+    };
 
     var url = '$_baseURL/movie/create';
 
